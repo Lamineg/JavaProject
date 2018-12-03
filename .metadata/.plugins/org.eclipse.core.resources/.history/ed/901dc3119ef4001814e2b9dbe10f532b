@@ -1,0 +1,20 @@
+package MyPackage;
+
+public class Player {
+	
+	int x;
+	int y;
+	
+	// skill attributs
+	
+	// energy
+	
+	int energy;
+	
+	void goUp() {
+		
+		y = y+1;
+	
+	}
+
+}
