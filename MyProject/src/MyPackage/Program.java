@@ -5,14 +5,12 @@ public class Program {
 	public static void main(String[] args) {
 		
 		//create new player
-		Player player1 = new Player();
+		Player player1 = new Player(0,0);
 		
-		System.out.println("x = "+player1.x_pos+", y = "+ player1.y_pos);
-		
-		player1.move(1,4);
-		
-		System.out.println("x = "+player1.x_pos+", y = "+ player1.y_pos);
-		
+		System.out.println("The energy level is "+player1.energy+", the look skills are set to "
+				+ player1.looks+ " and the dancing skills are set to "+ player1.danceSkills);
+	
+			
 	}
 
 }
