@@ -9,7 +9,7 @@ public class Program {
 		
 		System.out.println("x = "+player1.x+", y = "+ player1.y);
 		
-		player1.move(1,4);
+		player1.move(1,3);
 		
 		System.out.println("x = "+player1.x+", y = "+ player1.y);
 		
