@@ -15,7 +15,7 @@ public class Player {
 	int energy;
 	
 	Player(){
-		x_pos = 0;
+		x_pos = 32;
 		y_pos = 0;
 		
 		looks = 10;
