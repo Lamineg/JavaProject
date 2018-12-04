@@ -35,10 +35,5 @@ public class Player {
 		x_pos = x_pos + x1;
 		y_pos = y_pos + y1;
 	}
-	
-	void loseEnergy() {
-		
-		energy--;
-	}
 
 }
