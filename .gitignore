@@ -58,7 +58,7 @@ pom.xml.tag
 
 .metadata
 bin/
-*.class
+*/*.class #here
 tmp/
 *.tmp
 *.bak
@@ -68,9 +68,6 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-
-# last update
-MyProject/bin/MyPackage/*.class
 
 # External tool builders
 .externalToolBuilders/
@@ -115,3 +112,11 @@ MyProject/bin/MyPackage/*.class
 .cache-main
 .scala_dependencies
 .worksheet
+
+#my modifs
+
+# last update
+MyProject/*/*/*.class
+/MyProject/*/*/*.class
+
+bin/*/*.class
