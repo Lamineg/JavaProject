@@ -9,16 +9,60 @@ public class Grid {
 	int trophy_x;// = 3;
 	int trophy_y;// = 3;
 	
-	BlindSpot myBlindSpot;// = new BlindSpot();
-	Juror myJuror;
-	SlipperyTile mySlipTile;
+	int n_Blind;
+	int n_Juror;
+	int n_Slip;
+	int n_Dancer;
 	
-	Grid(int x, int y){
-		x_dim = x;
-		y_dim = y;
+	BlindSpot [] myBlindSpot;// = new BlindSpot();
+	Juror [] myJuror;
+	SlipperyTile [] mySlipTile;
+	Dancer [] myDancer;
+	
+	Grid(int x_dim, int y_dim, int n_Blind, int n_Juror, int n_Slip, int n_Dancer){
+		this.x_dim = x_dim;
+		this.y_dim = y_dim;
+		this.n_Blind = n_Blind;
+		this.n_Juror = n_Juror;
+		this.n_Slip = n_Slip;
+		this.n_Dancer = n_Dancer;
 		
-		trophy_x = (int) (Math.random()*(x + 1));
-		trophy_y = (int) (Math.random()*(y + 1));
+		trophy_x = (int) (Math.random()*(x_dim + 1));
+		trophy_y = (int) (Math.random()*(y_dim + 1));
+		
+		myBlindSpot = new BlindSpot[n_Blind];
+		myJuror = new Juror[n_Juror];
+		mySlipTile = new SlipperyTile[n_Slip];
+		myDancer = new Dancer[n_Dancer];
+		
+		
+		int posX, posY;
+		for(int i = 0; i < n_Blind ; i++) {
+			
+			posX = (int) (Math.random()*(x_dim + 1));
+			posY = (int) (Math.random()*(y_dim + 1));
+			myBlindSpot[i] = new BlindSpot(posX,posY);
+		}
+		for(int i = 0; i < n_Blind ; i++) {
+			
+			posX = (int) (Math.random()*(x_dim + 1));
+			posY = (int) (Math.random()*(y_dim + 1));
+			myJuror[i] = new Juror(posX,posY);
+		}
+		for(int i = 0; i < n_Blind ; i++) {
+	
+			posX = (int) (Math.random()*(x_dim + 1));
+			posY = (int) (Math.random()*(y_dim + 1));
+			mySlipTile[i] = new SlipperyTile(posX,posY);
+		}
+		for(int i = 0; i < n_Blind ; i++) {
+			
+			posX = (int) (Math.random()*(x_dim + 1));
+			posY = (int) (Math.random()*(y_dim + 1));
+			myDancer[i] = new Dancer(posX,posY);
+		}
+		
+		
 	}
 
 }

@@ -15,7 +15,7 @@ public class Program {
 		
 		// TEST FOR GRID PART :
 		
-		Grid myGrid = new Grid(5,5);
+		Grid myGrid = new Grid(5,5,2,2,2,2);
 		
 		int [] positions_x = {2,2,-1};//new int [4];
 		int [] positions_y = {3,-1,1};//new int [4];
@@ -58,6 +58,11 @@ public class Program {
 			if (player1.energy <= 0) {
 				System.out.println("You run out of energy :'( ");
 			}
+			
+			
+			/*if(player1.x_pos == ) {
+				
+			}*/
 			i++;
 		}
 		
