@@ -2,10 +2,13 @@ package MyPackage;
 
 public class Grid {
 	
-
+<<<<<<< HEAD
 	int x_dim = 5;
 
-        int y_dim = 5;
+=======
+	int x_dim = 6;
+>>>>>>> d9077402583dcf59f762c4a877bdcbabf92fd0f4
+	int y_dim = 5;
 	
 	int trophy_x = 3;
 	int trophy_y = 4;
