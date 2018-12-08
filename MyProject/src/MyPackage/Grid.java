@@ -7,7 +7,7 @@ public class Grid {
 	int y_dim = 5;
 	
 	int trophy_x = 3;
-	int trophy_y = 4;
+	int trophy_y = 3;
 	
 	BlindSpot myBlindSpot = new BlindSpot();
 	Juror myJuror;

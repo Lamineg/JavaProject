@@ -15,13 +15,13 @@ public class Player {
 	int energy;
 	
 	Player(){
-		x_pos = 32;
+		x_pos = 0;
 		y_pos = 0;
 		
 		looks = 10;
 		danceSkills = 10;
 		
-		energy = 10;
+		energy = 50;
 		
 	}
 	
@@ -34,11 +34,12 @@ public class Player {
 	void move(int x1, int y1) {
 		x_pos = x_pos + x1;
 		y_pos = y_pos + y1;
+		loseEnergy(x1,y1);
 	}
 	
-	void loseEnergy() {
+	void loseEnergy(int x, int y) {
 		
-		energy--;
+		energy = energy - x - y ;
 	}
 
 }
