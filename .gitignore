@@ -58,6 +58,7 @@ pom.xml.tag
 
 .metadata
 bin/
+*.class
 tmp/
 *.tmp
 *.bak
