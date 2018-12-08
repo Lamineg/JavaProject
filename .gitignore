@@ -119,4 +119,4 @@ local.properties
 MyProject/*/*/*.class
 /MyProject/*/*/*.class
 
-bin/*/*.class
+MyProject/bin/
