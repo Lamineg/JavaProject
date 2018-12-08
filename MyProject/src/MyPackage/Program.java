@@ -13,6 +13,12 @@ public class Program {
 		
 		System.out.println("x = "+player1.x_pos+", y = "+ player1.y_pos);
 		
+		// TEST FOR GRID PART :
+		
+		Grid myGrid = new Grid();
+		
+		System.out.println("blind x = "+myGrid.myBlindSpot.x+", blind y = "+ myGrid.myBlindSpot.y);
+		
 	}
 
 }
