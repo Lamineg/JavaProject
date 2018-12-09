@@ -1,5 +1,7 @@
 package MyPackage;
 
+import java.util.*;
+
 public class Grid {
 	
 
@@ -35,12 +37,17 @@ public class Grid {
 		mySlipTile = new SlipperyTile[n_Slip];
 		myDancer = new Dancer[n_Dancer];
 		
+		List<Integer> listOfRandom = new ArrayList<Integer>();
 		
 		int posX, posY;
 		for(int i = 0; i < n_Blind ; i++) {
 			
-			posX = (int) (Math.random()*(x_dim + 1));
-			posY = (int) (Math.random()*(y_dim + 1));
+			do {
+				posX = (int) (Math.random()*(x_dim + 1));
+				posY = (int) (Math.random()*(y_dim + 1));
+			}
+			while(listOfRandom.contains(posX));
+			
 			myBlindSpot[i] = new BlindSpot(posX,posY);
 		}
 		for(int i = 0; i < n_Blind ; i++) {
