@@ -20,6 +20,9 @@ public class Player {
 	
 	int energy;
 	
+	//amount to lose or gain when confronts an obstacle
+	int amount;
+	
 	Player(int input_skills, int difficulty){
 		x_pos = 0;
 		y_pos = 0;
@@ -52,33 +55,33 @@ public class Player {
 		}
 	 }
 			
-	void gainEnergy() {
-		energy++;
+	void gainEnergy(int amount) {
+		energy = energy + amount;
 	}
 	 
-	void loseEnergy() {
+	void loseEnergy(int amount) {
 		
-		energy--;
+		energy= energy - amount;
 	}
 	
-	void loseDancingSkills() {
+	void loseDancingSkills(int amount) {
 		
-		danceSkills--;
+		danceSkills = danceSkills + amount;
 	}
 	
-	void gainDancingSkills() {
+	void gainDancingSkills(int amount) {
 		
-		danceSkills++;
+		danceSkills= danceSkills + amount;
 	}
 	
-	void loseLooks() {
+	void loseLooks(int amount) {
 		
-		looks--;
+		looks = looks - amount;
 	}
 	
-	void gainLooks() {
+	void gainLooks(int amount) {
 		
-		looks++;
+		looks = looks + amount;
 	}	
 	
 	//int is the type of return of this method, if not return then void
