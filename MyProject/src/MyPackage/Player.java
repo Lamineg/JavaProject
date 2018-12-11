@@ -7,13 +7,16 @@ public class Player {
 	//username of the player, can be used later for the highscores
 	String username;
 	
+	//create a high score for that player
+	int hs;
+	
 	//player position
 	int x_pos;
 	int y_pos;
 	
 	// skill attributes 
 	
-	static int looks = 40;
+	int looks;
 	int danceSkills;
 	
 	// energy
@@ -53,6 +56,8 @@ public class Player {
 			y_pos = y_pos + y1;
 			
 		}
+		 loseEnergy(1);
+		
 	 }
 			
 	void gainEnergy(int amount) {
@@ -94,6 +99,11 @@ public class Player {
 	int getLooks() {
 		return looks;
 	}
+	
+	void currentScore() {
+		hs = energy + looks + danceSkills;
+	}
+	
 }	
 
 
