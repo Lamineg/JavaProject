@@ -37,11 +37,8 @@ public class Player {
 		//will decrease. The scale goes from 0 (completely favors the looks) to 10 (completely 
 		//favors the dancing skills).
 
-		looksSkills = 10;
-		danceSkills = 10;
-
 		
-		lookSkills = 20 + 2*(10 - input_skills);
+		looksSkills = 20 + 2*(10 - input_skills);
 		danceSkills = 20 + 2*input_skills;
 		
 		//The neutral value for the energy is set to 30 and decreases as we increase the difficulty
