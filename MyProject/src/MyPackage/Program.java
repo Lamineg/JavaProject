@@ -11,7 +11,7 @@ public class Program {
 		
 		// TEST FOR GRID PART :
 		
-		Grid myGrid = new Grid(7,7,2,2,2,2);
+		Grid myGrid = new Grid(10,10,2,2,2,2);
 
 		
 		int [] positions_x = {2,2,-1};//new int [4];
