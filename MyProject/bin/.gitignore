@@ -1,6 +1,10 @@
 /MyPackage/
 
 
+# My changes
+
+MyPackage/**
+
 #
 # Project specific excludes
 #
