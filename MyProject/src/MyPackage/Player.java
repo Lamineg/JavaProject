@@ -7,7 +7,7 @@ public class Player {
 	
 	// skill attributs
 	
-	int looks;
+	int looksSkills;
 	int danceSkills;
 	
 	// energy
@@ -18,7 +18,7 @@ public class Player {
 		x_pos = 0;
 		y_pos = 0;
 		
-		looks = 10;
+		looksSkills = 10;
 		danceSkills = 10;
 		
 		energy = 50;
