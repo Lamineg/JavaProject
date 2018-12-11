@@ -3,6 +3,11 @@
 
 # My changes
 
+# Ignore `bin` dir
+bin/
+# or
+*/bin/*
+
 MyProject/bin/MyPackage/*.class
 MyProject/bin/MyPackage/Program.class
 #MyProject/bin/MyPackage/Program.class
