@@ -2,7 +2,6 @@
 # Project specific excludes
 #
 
-tomcat
 
 #
 # Default excludes
@@ -56,8 +55,9 @@ pom.xml.releaseBackup
 pom.xml.tag
 
 
-.metadata
+.metadata/
 bin/
+*/*.class #here
 tmp/
 *.tmp
 *.bak
@@ -66,7 +66,7 @@ tmp/
 local.properties
 .settings/
 .loadpath
-.recommenders
+.recommenders/
 
 # External tool builders
 .externalToolBuilders/
@@ -111,3 +111,11 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+#my modifs
+
+# last update
+MyProject/*/*/*.class
+/MyProject/*/*/*.class
+
+MyProject/bin/
