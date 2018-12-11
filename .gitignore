@@ -2,7 +2,12 @@
 # Project specific excludes
 #
 
-tomcat
+# My changes
+
+MyProject/bin/MyPackage/*.class
+MyProject/bin/MyPackage/Program.class
+#MyProject/bin/MyPackage/Program.class
+
 
 #
 # Default excludes
@@ -56,7 +61,7 @@ pom.xml.releaseBackup
 pom.xml.tag
 
 
-.metadata
+.metadata/
 bin/
 */*.class #here
 tmp/
@@ -67,7 +72,7 @@ tmp/
 local.properties
 .settings/
 .loadpath
-.recommenders
+.recommenders/
 
 # External tool builders
 .externalToolBuilders/

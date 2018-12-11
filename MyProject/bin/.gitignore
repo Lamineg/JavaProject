@@ -3,6 +3,12 @@
 
 # My changes
 
+MyProject/bin/MyPackage/*.class
+MyProject/bin/MyPackage/Program.class
+#MyProject/bin/MyPackage/Program.class
+
+
+
 MyPackage/**
 
 #
