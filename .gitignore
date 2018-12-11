@@ -11,9 +11,17 @@ bin/
 # or
 */bin/*
 
+MyProject/bin/
+MyProject/.settings/
+MyProject/.classpath
+MyProject/.project
+
 MyProject/bin/MyPackage/*.class
 MyProject/bin/MyPackage/Program.class
 #MyProject/bin/MyPackage/Program.class
+
+
+
 
 
 
@@ -34,6 +42,10 @@ MyProject/bin/MyPackage/Program.class
 *.ear
 *.sar
 *.class
+
+
+
+
 
 # Maven 
 target/
@@ -126,10 +138,3 @@ local.properties
 .scala_dependencies
 .worksheet
 
-#my modifs
-
-# last update
-MyProject/*/*/*.class
-/MyProject/*/*/*.class
-
-MyProject/bin/
