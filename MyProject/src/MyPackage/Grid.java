@@ -51,7 +51,7 @@ public class Grid {
 			//}
 			//while(listOfRandom.contains(posX));
 			
-			myBlindSpot[i] = new BlindSpot(posX,posY);
+			myBlindSpot[i] = new BlindSpot(posX,posY,1);
 		}
 		for(int i = 0; i < n_Juror ; i++) {
 			
@@ -63,7 +63,7 @@ public class Grid {
 	
 			posX = (int) (Math.random()*(x_dim + 1));
 			posY = (int) (Math.random()*(y_dim + 1));
-			mySlipTile[i] = new SlipperyTile(posX,posY);
+			mySlipTile[i] = new SlipperyTile(posX,posY,1);
 		}
 		for(int i = 0; i < n_Dancer ; i++) {
 			
