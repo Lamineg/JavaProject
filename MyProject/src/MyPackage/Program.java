@@ -9,9 +9,11 @@ public class Program {
 		
 		System.out.println("x = "+player1.x_pos+", y = "+ player1.y_pos);
 		
+
 		// TEST FOR GRID PART ;
 
 		Grid myGrid = new Grid(5,5,2,2,2,2);
+
 
 		int [] positions_x = {2,2,-1};//new int [4];
 		int [] positions_y = {3,-1,1};//new int [4];
