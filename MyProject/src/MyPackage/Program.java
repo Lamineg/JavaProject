@@ -64,14 +64,6 @@ public class Program {
 				
 			}
 			
-			for(int j = 0; j < myGrid.n_Juror ; j++) {
-				
-				if (myGrid.myJuror[j].x == player1.x_pos && myGrid.myJuror[j].y == player1.y_pos) {
-					System.out.println("You play against a juror !");
-				}
-				
-			}
-			
 			for(int j = 0; j < myGrid.n_Slip ; j++) {
 				
 				if (myGrid.mySlipTile[j].x == player1.x_pos && myGrid.mySlipTile[j].y == player1.y_pos) {
@@ -80,10 +72,42 @@ public class Program {
 				
 			}
 			
+			for(int j = 0; j < myGrid.n_Juror ; j++) {
+				
+				if (myGrid.myJuror[j].x == player1.x_pos && myGrid.myJuror[j].y == player1.y_pos) {
+					System.out.println("You play against a juror !");
+					if(judgeWon(player1,myGrid.myJuror[j])) {
+						System.out.println("You convinced a juror !");
+						//update looks, skills;
+						//remove the juror from grid;
+					}
+					else 
+					{
+						System.out.println("The juror was not convinced !");
+						//revenir position avant;
+						//NRJ;
+						
+					}
+				}
+				
+			}
+			
 			for(int j = 0; j < myGrid.n_Dancer ; j++) {
 				
 				if (myGrid.myDancer[j].x == player1.x_pos && myGrid.myDancer[j].y == player1.y_pos) {
 					System.out.println("You play against a dancer !");
+					if(danceWon(player1,myGrid.myDancer[j])) {
+						System.out.println("You won the dance battle !");
+						//update looks, skills;
+						
+						//remove the juror from grid;
+					}
+					else 
+					{
+						System.out.println("You lost the dance battle !");
+						//revenir position avant;
+						//NRJ;
+					}
 				}
 				
 			}
@@ -221,6 +245,32 @@ public class Program {
 		return true;
 	}
 	
+	public static boolean judgeWon(Player myPlayer, Juror myJuror) {
+		
+		int random;
+		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
+		
+		if(myPlayer.looksSkills >= myJuror.looksThreshold + random) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	
+	public static boolean danceWon(Player myPlayer, Dancer myDancer) {
+		
+		int random;
+		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
+		
+		if(myPlayer.danceSkills >= myDancer.danceThreshold + random) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 }
