@@ -85,42 +85,49 @@ public class Program {
 			
 			for(int j = 0; j < myGrid.n_Juror ; j++) {
 				
-				if (myGrid.myJuror[j].x == player1.x_pos && myGrid.myJuror[j].y == player1.y_pos) {
-					System.out.println("You play against a juror !");
-					if(judgeWon(player1,myGrid.myJuror[j])) {
-						System.out.println("You convinced a juror !");
-						//update looks, skills;
-						//remove the juror from grid;
-					}
-					else 
-					{
-						System.out.println("The juror was not convinced !");
-						//revenir position avant;
-						//NRJ;
-						
+				if(myGrid.myJuror[j].active) {
+					if (myGrid.myJuror[j].x == player1.x_pos && myGrid.myJuror[j].y == player1.y_pos) {
+						System.out.println("You play against a juror !");
+						if(judgeWon(player1,myGrid.myJuror[j])) {
+							System.out.println("You convinced a juror !");
+							//update looks, skills;
+							player1.gainLooks();;
+							System.out.println("looks skills = " + player1.looksSkills);
+							//remove the juror from grid;
+							myGrid.removeJuror(j);
+						}
+						else 
+						{
+							System.out.println("The juror was not convinced !");
+							//revenir position avant;
+							//NRJ;
+							
+						}
 					}
 				}
-				
 			}
 			
 			for(int j = 0; j < myGrid.n_Dancer ; j++) {
 				
-				if (myGrid.myDancer[j].x == player1.x_pos && myGrid.myDancer[j].y == player1.y_pos) {
-					System.out.println("You play against a dancer !");
-					if(danceWon(player1,myGrid.myDancer[j])) {
-						System.out.println("You won the dance battle !");
-						//update looks, skills;
-						
-						//remove the juror from grid;
-					}
-					else 
-					{
-						System.out.println("You lost the dance battle !");
-						//revenir position avant;
-						//NRJ;
+				if(myGrid.myDancer[j].active) {
+					if (myGrid.myDancer[j].x == player1.x_pos && myGrid.myDancer[j].y == player1.y_pos) {
+						System.out.println("You play against a dancer !");
+						if(danceWon(player1,myGrid.myDancer[j])) {
+							System.out.println("You won the dance battle !");
+							//update looks, skills; CHOICE SCANNER
+							player1.gainDancingSkills();
+							System.out.println("dance skills = " + player1.danceSkills);
+							//remove the juror from grid;
+							myGrid.removeDancer(j);
+						}
+						else 
+						{
+							System.out.println("You lost the dance battle !");
+							//revenir position avant;
+							//NRJ;
+						}
 					}
 				}
-				
 			}
 			
 			if (myGrid.trophy_x == player1.x_pos && myGrid.trophy_y == player1.y_pos) {
@@ -140,34 +147,38 @@ public class Program {
 		
 		for(int j = 0; j < myGrid.n_Dancer ; j++) {
 			
-			if (myGrid.myDancer[j].x == myPlayer.x_pos && myGrid.myDancer[j].y == myPlayer.y_pos + 1) {
-				System.out.print("Danceur en haut; ");
-			}
-			else if(myGrid.myDancer[j].x == myPlayer.x_pos && myGrid.myDancer[j].y == myPlayer.y_pos - 1){
-				System.out.print("Danceur en bas; ");
-			}
-			else if(myGrid.myDancer[j].x == myPlayer.x_pos + 1 && myGrid.myDancer[j].y == myPlayer.y_pos){
-				System.out.print("Danceur a droite; ");
-			}
-			else if(myGrid.myDancer[j].x == myPlayer.x_pos - 1 && myGrid.myDancer[j].y == myPlayer.y_pos){
-				System.out.print("Danceur a gauche; ");
+			if(myGrid.myDancer[j].active) {
+				if (myGrid.myDancer[j].x == myPlayer.x_pos && myGrid.myDancer[j].y == myPlayer.y_pos + 1) {
+					System.out.print("Danceur en haut; ");
+				}
+				else if(myGrid.myDancer[j].x == myPlayer.x_pos && myGrid.myDancer[j].y == myPlayer.y_pos - 1){
+					System.out.print("Danceur en bas; ");
+				}
+				else if(myGrid.myDancer[j].x == myPlayer.x_pos + 1 && myGrid.myDancer[j].y == myPlayer.y_pos){
+					System.out.print("Danceur a droite; ");
+				}
+				else if(myGrid.myDancer[j].x == myPlayer.x_pos - 1 && myGrid.myDancer[j].y == myPlayer.y_pos){
+					System.out.print("Danceur a gauche; ");
+				}
 			}
 			
 		}
 		
 		for(int j = 0; j < myGrid.n_Juror ; j++) {
 			
-			if (myGrid.myJuror[j].x == myPlayer.x_pos && myGrid.myJuror[j].y == myPlayer.y_pos + 1) {
-				System.out.print("Juge en haut; ");
-			}
-			else if(myGrid.myJuror[j].x == myPlayer.x_pos && myGrid.myJuror[j].y == myPlayer.y_pos - 1){
-				System.out.print("Juge en bas; ");
-			}
-			else if(myGrid.myJuror[j].x == myPlayer.x_pos + 1 && myGrid.myJuror[j].y == myPlayer.y_pos){
-				System.out.print("Juge a droite; ");
-			}
-			else if(myGrid.myJuror[j].x == myPlayer.x_pos - 1 && myGrid.myJuror[j].y == myPlayer.y_pos){
-				System.out.print("Juge a gauche;");
+			if(myGrid.myJuror[j].active) {
+				if (myGrid.myJuror[j].x == myPlayer.x_pos && myGrid.myJuror[j].y == myPlayer.y_pos + 1) {
+					System.out.print("Juge en haut; ");
+				}
+				else if(myGrid.myJuror[j].x == myPlayer.x_pos && myGrid.myJuror[j].y == myPlayer.y_pos - 1){
+					System.out.print("Juge en bas; ");
+				}
+				else if(myGrid.myJuror[j].x == myPlayer.x_pos + 1 && myGrid.myJuror[j].y == myPlayer.y_pos){
+					System.out.print("Juge a droite; ");
+				}
+				else if(myGrid.myJuror[j].x == myPlayer.x_pos - 1 && myGrid.myJuror[j].y == myPlayer.y_pos){
+					System.out.print("Juge a gauche;");
+				}
 			}
 			
 		}

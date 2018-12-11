@@ -16,7 +16,10 @@ public class Grid {
 	int n_Slip;
 	int n_Dancer;
 	
-	BlindSpot [] myBlindSpot;// = new BlindSpot();
+	BlindSpot [] myBlindSpot;
+	//List<Juror> myJurorList = new ArrayList<Juror>();
+	//myJurorlist.add(new Juror(1, 2, 3));
+	
 	Juror [] myJuror;
 	SlipperyTile [] mySlipTile;
 	Dancer [] myDancer;
@@ -54,7 +57,7 @@ public class Grid {
 			
 			posX = (int) (Math.random()*(x_dim + 1));
 			posY = (int) (Math.random()*(y_dim + 1));
-			myJuror[i] = new Juror(posX,posY);
+			myJuror[i] = new Juror(posX,posY,i,10);
 		}
 		for(int i = 0; i < n_Slip ; i++) {
 	
@@ -66,10 +69,18 @@ public class Grid {
 			
 			posX = (int) (Math.random()*(x_dim + 1));
 			posY = (int) (Math.random()*(y_dim + 1));
-			myDancer[i] = new Dancer(posX,posY);
+			myDancer[i] = new Dancer(posX,posY,i,10);
 		}
 		
 		
+	}
+	
+	void removeJuror(int id){
+		myJuror[id].active = false;
+	}
+	
+	void removeDancer(int id){
+		myDancer[id].active = false;
 	}
 
 }
