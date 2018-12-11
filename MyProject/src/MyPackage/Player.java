@@ -4,6 +4,8 @@ public class Player {
 	
 	int x_pos;
 	int y_pos;
+	int x_old;
+	int y_old;
 	
 	// skill attributs
 	
@@ -17,6 +19,8 @@ public class Player {
 	Player(){
 		x_pos = 0;
 		y_pos = 0;
+		x_old = 0;
+		y_old = 0;
 		
 		looksSkills = 10;
 		danceSkills = 10;
@@ -32,6 +36,8 @@ public class Player {
 	}
 	
 	void move(int x1, int y1) {
+		x_old = x_pos;
+		y_old = y_pos;
 		x_pos = x_pos + x1;
 		y_pos = y_pos + y1;
 		loseEnergy(x1,y1);
