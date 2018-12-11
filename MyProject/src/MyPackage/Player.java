@@ -10,6 +10,8 @@ public class Player {
 	//player position
 	int x_pos;
 	int y_pos;
+	int x_old;
+	int y_old;
 	
 	// skill attributes 
 	
@@ -29,6 +31,8 @@ public class Player {
 
 		x_pos = 0;
 		y_pos = 0;
+		x_old = 0;
+		y_old = 0;
 		
 
 		//The neutral value for looks and dancing skills is set to 20 and the value changes
@@ -86,6 +90,7 @@ public class Player {
 		looksSkills--;
 	}
 	
+
 	void gainLooks() {
 		
 		looks++;
@@ -99,6 +104,9 @@ public class Player {
 	}
 
 	void move1(int x1, int y1) {
+		x_old = x_pos;
+		y_old = y_pos;
+
 		x_pos = x_pos + x1;
 		y_pos = y_pos + y1;
 		loseEnergy1(x1,y1);
