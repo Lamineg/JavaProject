@@ -50,7 +50,7 @@ public class Program {
 			movX = (int) (Math.random()*(1 + 1 + 1)) - 1;
 			movY = (int) (Math.random()*(1 + 1 + 1)) - 1;
 			
-			player1.move(movX, movY);//LOST ENERGY ALREADY
+			player1.move1(movX, movY);//LOST ENERGY ALREADY
 			
 			if(player1.x_pos >= myGrid.x_dim) player1.x_pos = myGrid.x_dim - 1;
 			if(player1.x_pos < 0) player1.x_pos = 0;

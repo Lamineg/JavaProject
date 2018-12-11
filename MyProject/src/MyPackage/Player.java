@@ -14,9 +14,6 @@ public class Player {
 	int y_old;
 	
 	// skill attributes 
-	
-
-	static int looks = 40;
 
 	int looksSkills;
 
@@ -26,7 +23,6 @@ public class Player {
 	
 	int energy;
 	
-
 	Player(int input_skills, int difficulty){
 
 		x_pos = 0;
@@ -93,7 +89,7 @@ public class Player {
 
 	void gainLooks() {
 		
-		looks++;
+		looksSkills++;
 	}	
 	
 	//int is the type of return of this method, if not return then void
