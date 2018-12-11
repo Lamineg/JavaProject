@@ -9,8 +9,7 @@ public class Program {
 		
 		System.out.println("x = "+player1.x_pos+", y = "+ player1.y_pos);
 		
-		// TEST FOR GRID PART :
-		
+		// TEST FOR GRID PART ;
 
 		Grid myGrid = new Grid(4,4,2,2,2,2);
 
