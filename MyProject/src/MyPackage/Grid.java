@@ -50,19 +50,19 @@ public class Grid {
 			
 			myBlindSpot[i] = new BlindSpot(posX,posY);
 		}
-		for(int i = 0; i < n_Blind ; i++) {
+		for(int i = 0; i < n_Juror ; i++) {
 			
 			posX = (int) (Math.random()*(x_dim + 1));
 			posY = (int) (Math.random()*(y_dim + 1));
 			myJuror[i] = new Juror(posX,posY);
 		}
-		for(int i = 0; i < n_Blind ; i++) {
+		for(int i = 0; i < n_Slip ; i++) {
 	
 			posX = (int) (Math.random()*(x_dim + 1));
 			posY = (int) (Math.random()*(y_dim + 1));
 			mySlipTile[i] = new SlipperyTile(posX,posY);
 		}
-		for(int i = 0; i < n_Blind ; i++) {
+		for(int i = 0; i < n_Dancer ; i++) {
 			
 			posX = (int) (Math.random()*(x_dim + 1));
 			posY = (int) (Math.random()*(y_dim + 1));

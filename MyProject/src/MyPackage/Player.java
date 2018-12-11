@@ -13,7 +13,11 @@ public class Player {
 	
 	// skill attributes 
 	
+
 	static int looks = 40;
+
+	int looksSkills;
+
 	int danceSkills;
 	
 	// energy
@@ -26,13 +30,18 @@ public class Player {
 		x_pos = 0;
 		y_pos = 0;
 		
+
 		//The neutral value for looks and dancing skills is set to 20 and the value changes
 		//with the value that the player inputs on a scale that goes from looks to dancing skills.
 		//If the player favors the left side of the scale, the looks will increase and the dancing
 		//will decrease. The scale goes from 0 (completely favors the looks) to 10 (completely 
 		//favors the dancing skills).
+
+		looksSkills = 10;
+		danceSkills = 10;
+
 		
-		looks = 20 + 2*(10 - input_skills);
+		lookSkills = 20 + 2*(10 - input_skills);
 		danceSkills = 20 + 2*input_skills;
 		
 		//The neutral value for the energy is set to 30 and decreases as we increase the difficulty
@@ -77,7 +86,7 @@ public class Player {
 	
 	void loseLooks() {
 		
-		looks--;
+		looksSkills--;
 	}
 	
 	void gainLooks() {
@@ -105,7 +114,7 @@ public class Player {
 	}
 
 	int getLooks() {
-		return looks;
+		return looksSkills;
 	}
 }	
 
