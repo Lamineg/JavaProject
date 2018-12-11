@@ -90,18 +90,19 @@ public class Player {
 	
 	int getDance_skills() {
 		return danceSkills;
+	}
 
-	void move(int x1, int y1) {
+	void move1(int x1, int y1) {
 		x_pos = x_pos + x1;
 		y_pos = y_pos + y1;
-		loseEnergy(x1,y1);
+		loseEnergy1(x1,y1);
 	}
 	
-	/*void loseEnergy(int x, int y) {
+	void loseEnergy1(int x, int y) {
 		
 		energy = energy - x - y ;
 
-	}*/
+	}
 
 	int getLooks() {
 		return looks;
