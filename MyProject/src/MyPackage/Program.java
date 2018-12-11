@@ -101,6 +101,9 @@ public class Program {
 							System.out.println("The juror was not convinced !");
 							//revenir position avant;
 							//NRJ;
+							player1.x_pos = player1.x_old;
+							player1.y_pos = player1.y_old; 
+							player1.energy++;
 							
 						}
 					}
@@ -125,6 +128,9 @@ public class Program {
 							System.out.println("You lost the dance battle !");
 							//revenir position avant;
 							//NRJ;
+							player1.x_pos = player1.x_old;
+							player1.y_pos = player1.y_old; 
+							player1.energy++;
 						}
 					}
 				}
