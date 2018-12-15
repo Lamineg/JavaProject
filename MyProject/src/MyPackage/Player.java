@@ -1,11 +1,13 @@
 package MyPackage;
 
-import java.awt.SystemTray;
 
 public class Player {
 	
 	//username of the player, can be used later for the highscores
 	String username;
+	
+	//create a high score for that player
+	int hs;
 	
 	//player position
 	int x_pos;
@@ -14,6 +16,8 @@ public class Player {
 	int y_old;
 	
 	// skill attributes 
+	
+	int looks;
 
 	int looksSkills;
 
@@ -23,8 +27,13 @@ public class Player {
 	
 	int energy;
 	
-	Player(int input_skills, int difficulty){
-
+	//amount to lose or gain when confronts an obstacle
+	int amount;
+	
+	Player(String username, int input_skills, int difficulty){
+		
+		this.username = username+":";
+		
 		x_pos = 0;
 		y_pos = 0;
 		x_old = 0;
@@ -60,38 +69,40 @@ public class Player {
 			y_pos = y_pos + y1;
 			
 		}
+		 loseEnergy(1);
+		
 	 }
 			
-	void gainEnergy() {
-		energy++;
+	void gainEnergy(int amount) {
+		energy = energy + amount;
 	}
 	 
-	void loseEnergy() {
+	void loseEnergy(int amount) {
 		
-		energy--;
+		energy= energy - amount;
 	}
 	
-	void loseDancingSkills() {
+	void loseDancingSkills(int amount) {
 		
-		danceSkills--;
+		danceSkills = danceSkills + amount;
 	}
 	
-	void gainDancingSkills() {
+	void gainDancingSkills(int amount) {
 		
-		danceSkills++;
+		danceSkills= danceSkills + amount;
 	}
 	
-	void loseLooks() {
+	void loseLooks(int amount) {
 		
-		looksSkills--;
+		looks = looks - amount;
+	}
+	
+	void gainLooks(int amount) {
+		
+		looks = looks + amount;
 	}
 	
 
-	void gainLooks() {
-		
-		looksSkills++;
-	}	
-	
 	//int is the type of return of this method, if not return then void
 	
 	
@@ -105,7 +116,8 @@ public class Player {
 
 		x_pos = x_pos + x1;
 		y_pos = y_pos + y1;
-		loseEnergy1(x1,y1);
+		//loseEnergy1(x1,y1);
+		loseEnergy(1);
 	}
 	
 	void loseEnergy1(int x, int y) {
@@ -117,6 +129,11 @@ public class Player {
 	int getLooks() {
 		return looksSkills;
 	}
+	
+	void currentScore() {
+		hs = energy + looks + danceSkills;
+	}
+	
 }	
 
 

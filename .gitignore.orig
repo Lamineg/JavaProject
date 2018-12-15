@@ -2,8 +2,8 @@
 # Project specific excludes
 #
 
-<<<<<<< HEAD
-=======
+
+
 # My changes
 
 # Ignore `bin` dir
@@ -21,10 +21,6 @@ MyProject/bin/MyPackage/Program.class
 #MyProject/bin/MyPackage/Program.class
 
 
-
-
-
->>>>>>> grid
 
 #
 # Default excludes
