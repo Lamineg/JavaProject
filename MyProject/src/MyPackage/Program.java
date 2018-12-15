@@ -67,7 +67,9 @@ public class Program {
 			
 			System.out.println("x = "+player1.x_pos+", y = "+ player1.y_pos);
 			
-			for(int j = 0; j < myGrid.n_Blind ; j++) {
+			//MODIFY THAT PART TO CHECK NUMBER OF BLIND AND SLIP in area
+			
+			/*for(int j = 0; j < myGrid.n_Blind ; j++) {
 				
 				if (myGrid.myBlindSpot[j].x == player1.x_pos && myGrid.myBlindSpot[j].y == player1.y_pos) {
 					System.out.println("You are on a blind spot !");
@@ -81,17 +83,38 @@ public class Program {
 					System.out.println("You are on a slip tile !");
 				}
 				
+			}*/
+			int n_b = 0; 
+			int n_s = 0;
+			for(int j = 0; j < myGrid.n_Blind ; j++) {
+				
+				if (Math.abs(myGrid.myBlindSpot[j].x - player1.x_pos) <= myGrid.myBlindSpot[j].influenceRadius && Math.abs(myGrid.myBlindSpot[j].y - player1.y_pos) <= myGrid.myBlindSpot[j].influenceRadius) {
+					//System.out.println("You are in a blind spot zone!");
+					n_b++;
+				}
+				
 			}
+			
+			for(int j = 0; j < myGrid.n_Slip ; j++) {
+				
+				if (Math.abs(myGrid.mySlipTile[j].x - player1.x_pos) <= myGrid.mySlipTile[j].influenceRadius && Math.abs(myGrid.mySlipTile[j].x - player1.x_pos) <= myGrid.mySlipTile[j].influenceRadius) {
+					//System.out.println("You are in a slip tile area!");
+					n_s++;
+				}
+				
+			}
+			
+			//CHECK IF DANS ZONE INFLUENCE + nombre
 			
 			for(int j = 0; j < myGrid.n_Juror ; j++) {
 				
 				if(myGrid.myJuror[j].active) {
 					if (myGrid.myJuror[j].x == player1.x_pos && myGrid.myJuror[j].y == player1.y_pos) {
 						System.out.println("You play against a juror !");
-						if(judgeWon(player1,myGrid.myJuror[j])) {
+						if(judgeWon(player1,myGrid.myJuror[j],n_b)) {
 							System.out.println("You convinced a juror !");
 							//update looks, skills;
-							player1.gainLooks();;
+							player1.gainLooks();
 							System.out.println("looks skills = " + player1.looksSkills);
 							//remove the juror from grid;
 							myGrid.removeJuror(j);
@@ -115,7 +138,7 @@ public class Program {
 				if(myGrid.myDancer[j].active) {
 					if (myGrid.myDancer[j].x == player1.x_pos && myGrid.myDancer[j].y == player1.y_pos) {
 						System.out.println("You play against a dancer !");
-						if(danceWon(player1,myGrid.myDancer[j])) {
+						if(danceWon(player1,myGrid.myDancer[j],n_s)) {
 							System.out.println("You won the dance battle !");
 							//update looks, skills; CHOICE SCANNER
 							player1.gainDancingSkills();
@@ -137,7 +160,10 @@ public class Program {
 			}
 			
 			if (myGrid.trophy_x == player1.x_pos && myGrid.trophy_y == player1.y_pos) {
+				//Add condition to take the trophy
 				System.out.println("You found the trophy !");
+				//if fail, backtrack and energy++
+			
 			}
 			if (player1.energy <= 0) {
 				System.out.println("You run out of energy :'( ");
@@ -274,12 +300,13 @@ public class Program {
 		return true;
 	}
 	
-	public static boolean judgeWon(Player myPlayer, Juror myJuror) {
+	public static boolean judgeWon(Player myPlayer, Juror myJuror, int n_blind) { 
+		// add number of blindspots
 		
 		int random;
 		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
 		
-		if(myPlayer.looksSkills >= myJuror.looksThreshold + random) {
+		if(myPlayer.looksSkills - n_blind >= myJuror.looksThreshold + random) {
 			return true;
 		}
 		else
@@ -288,12 +315,13 @@ public class Program {
 		}
 	}
 	
-	public static boolean danceWon(Player myPlayer, Dancer myDancer) {
+	public static boolean danceWon(Player myPlayer, Dancer myDancer, int n_spot) {
+		//add number of slips
 		
 		int random;
 		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
 		
-		if(myPlayer.danceSkills >= myDancer.danceThreshold + random) {
+		if(myPlayer.danceSkills - n_spot >= myDancer.danceThreshold + random) {
 			return true;
 		}
 		else
