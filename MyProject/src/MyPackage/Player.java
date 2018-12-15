@@ -16,21 +16,17 @@ public class Player {
 	int y_old;
 	
 	// skill attributes 
-<<<<<<< HEAD
 	
 	int looks;
-=======
 
 	int looksSkills;
 
->>>>>>> f179397af6dd632c42a4a403c6edabfcd9eeec9f
 	int danceSkills;
 	
 	// energy
 	
 	int energy;
 	
-<<<<<<< HEAD
 	//amount to lose or gain when confronts an obstacle
 	int amount;
 	
@@ -38,10 +34,6 @@ public class Player {
 		
 		this.username = username+":";
 		
-=======
-	Player(int input_skills, int difficulty){
-
->>>>>>> f179397af6dd632c42a4a403c6edabfcd9eeec9f
 		x_pos = 0;
 		y_pos = 0;
 		x_old = 0;
@@ -102,24 +94,15 @@ public class Player {
 	
 	void loseLooks(int amount) {
 		
-<<<<<<< HEAD
 		looks = looks - amount;
 	}
 	
 	void gainLooks(int amount) {
 		
 		looks = looks + amount;
-=======
-		looksSkills--;
 	}
 	
 
-	void gainLooks() {
-		
-		looksSkills++;
->>>>>>> f179397af6dd632c42a4a403c6edabfcd9eeec9f
-	}	
-	
 	//int is the type of return of this method, if not return then void
 	
 	
@@ -133,7 +116,8 @@ public class Player {
 
 		x_pos = x_pos + x1;
 		y_pos = y_pos + y1;
-		loseEnergy1(x1,y1);
+		//loseEnergy1(x1,y1);
+		loseEnergy(1);
 	}
 	
 	void loseEnergy1(int x, int y) {
