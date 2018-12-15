@@ -1,6 +1,5 @@
 package MyPackage;
 
-import java.awt.SystemTray;
 
 public class Player {
 	
@@ -26,7 +25,10 @@ public class Player {
 	//amount to lose or gain when confronts an obstacle
 	int amount;
 	
-	Player(int input_skills, int difficulty){
+	Player(String username, int input_skills, int difficulty){
+		
+		this.username = username+":";
+		
 		x_pos = 0;
 		y_pos = 0;
 		
