@@ -10,33 +10,40 @@ public class Program {
 
 	// main method is the first method that the program will run
 	public static void main(String[] args) throws IOException {
-
-		Player player1 = new Player("Aymeric", 0, 0);
-
+		
+		//Initialization of a scanner to get the username, the difficulty and the skills of the player
+		Scanner question = new Scanner(System.in);
+		System.out.println("Username: ");
+		String username = question.nextLine();
+		System.out.println("Level of difficulty (from 0 to 10): ");
+		int difficulty = question.nextInt();
+		System.out.println("Balance between Looks and Dance (0 favors Looks, "
+				+ "5 is same for both and 10 favors Dance: ");
+		int input_skills = question.nextInt();
+		
+		Player player1 = new Player(username, input_skills, difficulty);
+		
+		
 		// player1.move(2, 1);
 
-		// System.out.println(player1.x_pos + ", " + player1.y_pos);
 
 		// create new player
-		// Player player1 = new Player();
 
-		// System.out.println("x = "+player1.x_pos+", y = "+ player1.y_pos);
 
 		// TEST FOR GRID PART ;
 
-		Grid myGrid = new Grid(5, 5, 2, 2, 2, 2);
+		Grid myGrid = new Grid(difficulty);
+		//Grid myGrid = new Grid();
 
-		int[] positions_x = { 2, 2, -1 };// new int [4];
-		int[] positions_y = { 3, -1, 1 };// new int [4];
+		//int[] positions_x = { 2, 2, -1 };// new int [4];
+		//int[] positions_y = { 3, -1, 1 };// new int [4];
 
 		// System.out.println("blind x = "+myGrid.myBlindSpot.x+", blind y = "+
 		// myGrid.myBlindSpot.y);
 
-
-
 		// int i = 0;
-		int movX, movY;
-
+		int movX;
+		int movY;
 		while (player1.energy > 0 && (myGrid.trophy_x != player1.x_pos || myGrid.trophy_y != player1.y_pos)) {
 
 			// player1.move(positionsx[i], positions_y[i]);
@@ -46,11 +53,18 @@ public class Program {
 			// movX = (int) (Math.random()*(4 + 4 + 1)) - 4;
 			// movY = (int) (Math.random()*(4 + 4 + 1)) - 4;
 
-			movX = (int) (Math.random() * (1 + 1 + 1)) - 1;
-			movY = (int) (Math.random() * (1 + 1 + 1)) - 1;
+			//movX = (int) (Math.random() * (1 + 1 + 1)) - 1;
+			//movY = (int) (Math.random() * (1 + 1 + 1)) - 1;
+			
+			//Ask the player for the next move
+			System.out.println("What is your next move?");
+			System.out.print("x: ");
+			movX = question.nextInt();
+			System.out.print("y: ");
+			movY = question.nextInt();
 
 			player1.move1(movX, movY);// LOST ENERGY ALREADY
-
+			
 			if (player1.x_pos >= myGrid.x_dim)
 				player1.x_pos = myGrid.x_dim - 1;
 			if (player1.x_pos < 0)
@@ -124,26 +138,31 @@ public class Program {
 
 			if (myGrid.trophy_x == player1.x_pos && myGrid.trophy_y == player1.y_pos) {
 				System.out.println("You found the trophy !");
+				// calculate the current score of the player
+				player1.currentScore();
+				System.out.println("Score = "+player1.hs);
 			}
 			if (player1.energy <= 0) {
 				System.out.println("You run out of energy :'( ");
+				// calculate the current score of the player
+				player1.hs=0;
+				System.out.println("Score = "+player1.hs);				
 			}
 
 			// i++;
 			System.out.println("energy = " + player1.energy);
 		}
 		
-		//calculate the current score of the player
-		player1.currentScore();
+		//move.close();
+		question.close();
 
 		// File test = new File("High Scores.txt");
 
 		// count the lines
 		Scanner count = new Scanner(new File("High Scores.txt"));
 		int countLines = 0;
-		
-		while(count.hasNextLine())
-		{
+
+		while (count.hasNextLine()) {
 			countLines++;
 			count.nextLine();
 		}
@@ -155,51 +174,43 @@ public class Program {
 
 		Scanner scanner = new Scanner(new File("High Scores.txt"));
 
-		for(
-		int i = 0;i<countLines;i++)
-		{
+		for (int i = 0; i < countLines; i++) {
 			score[i] = new Highscore(scanner.next(), scanner.nextInt());
 		}
 
 		scanner.close();
 
-		score[countLines]=new Highscore(player1.username,player1.hs);
-
-		for(int x = 0 ; x<countLines+1 ; x++)
-		{
+		score[countLines] = new Highscore(player1.username, player1.hs);
+		/*
+		for (int x = 0; x < countLines + 1; x++) {
 			System.out.println(score[x].username + score[x].hs);
 		}
-
+		*/
 		// Arrays.sort(score, new SortbyScore());
-		Arrays.sort(score,new SortByScore());
-
-		for(
-		int x = 0;x<countLines+1;x++)
-		{
+		Arrays.sort(score, new SortByScore());
+		
+		/*
+		for (int x = 0; x < countLines + 1; x++) {
 			System.out.println(score[x].username + score[x].hs);
 		}
+		*/
 
 		PrintWriter writer = new PrintWriter("High Scores.txt");
 
-		if(score.length>10)
-		{
+		if (score.length > 10) {
 			for (int z = 0; z < 10; z++) {
 				writer.println(score[z].username + " " + score[z].hs);
 			}
 		}
 
-		else
-		{
+		else {
 			for (int z = 0; z < score.length; z++) {
 				writer.println(score[z].username + " " + score[z].hs);
 			}
-		
 
-		}writer.close();
+		}
+		writer.close();
 	}
-
-
-	
 
 	public static void visibility(Grid myGrid, Player myPlayer) {
 
@@ -330,5 +341,3 @@ public class Program {
 		}
 	}
 }
-	
-	

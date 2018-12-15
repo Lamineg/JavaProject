@@ -21,13 +21,14 @@ public class Grid {
 	SlipperyTile [] mySlipTile;
 	Dancer [] myDancer;
 	
-	Grid(int x_dim, int y_dim, int n_Blind, int n_Juror, int n_Slip, int n_Dancer){
-		this.x_dim = x_dim;
-		this.y_dim = y_dim;
-		this.n_Blind = n_Blind;
-		this.n_Juror = n_Juror;
-		this.n_Slip = n_Slip;
-		this.n_Dancer = n_Dancer;
+	Grid(int difficulty){
+	//Grid(int x_dim, int y_dim, int n_Blind, int n_Juror, int n_Slip, int n_Dancer){
+		this.x_dim = difficulty+5;
+		this.y_dim = difficulty+5;
+		this.n_Blind = difficulty+1;
+		this.n_Juror = difficulty+1;
+		this.n_Slip = difficulty+1;
+		this.n_Dancer = difficulty+1;
 		
 		trophy_x = (int) (Math.random()*(x_dim + 1));
 		trophy_y = (int) (Math.random()*(y_dim + 1));
