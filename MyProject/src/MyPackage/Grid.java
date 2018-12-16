@@ -16,7 +16,10 @@ public class Grid {
 	int n_Slip;
 	int n_Dancer;
 	
-	BlindSpot [] myBlindSpot;// = new BlindSpot();
+	BlindSpot [] myBlindSpot;
+	//List<Juror> myJurorList = new ArrayList<Juror>();
+	//myJurorlist.add(new Juror(1, 2, 3));
+	
 	Juror [] myJuror;
 	SlipperyTile [] mySlipTile;
 	Dancer [] myDancer;
@@ -80,7 +83,7 @@ public class Grid {
 			posX = unique.get(random).posX;
 			posY = unique.get(random).posY;
 			
-			myBlindSpot[i] = new BlindSpot(posX,posY);
+			myBlindSpot[i] = new BlindSpot(posX,posY,1);
 			
 			unique.remove(random);
 
@@ -96,7 +99,7 @@ public class Grid {
 			posX = unique.get(random).posX;
 			posY = unique.get(random).posY;
 			
-			myJuror[i] = new Juror(posX,posY);
+			myJuror[i] = new Juror(posX,posY,i,10);
 			
 			unique.remove(random);
 
@@ -110,7 +113,7 @@ public class Grid {
 			posX = unique.get(random).posX;
 			posY = unique.get(random).posY;
 			
-			mySlipTile[i] = new SlipperyTile(posX,posY);
+			mySlipTile[i] = new SlipperyTile(posX,posY,1);
 			
 			unique.remove(random);
 		}
@@ -125,7 +128,7 @@ public class Grid {
 			posX = unique.get(random).posX;
 			posY = unique.get(random).posY;
 			
-			myDancer[i] = new Dancer(posX,posY);
+			myDancer[i] = new Dancer(posX,posY,i,10);
 			
 			unique.remove(random);
 			
@@ -141,4 +144,12 @@ public class Grid {
 	public int getY_dim() {
 		return y_dim;
 	}
+	void removeJuror(int id){
+		myJuror[id].active = false;
+	}
+	
+	void removeDancer(int id){
+		myDancer[id].active = false;
+	}
+
 }

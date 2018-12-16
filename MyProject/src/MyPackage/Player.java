@@ -32,7 +32,7 @@ public class Player {
 	
 	Player(String username, int input_skills, int difficulty){
 		
-		this.username = username+":";
+		this.username = username + ":";
 		
 		x_pos = 0;
 		y_pos = 0;
@@ -94,12 +94,12 @@ public class Player {
 	
 	void loseLooks(int amount) {
 		
-		looks = looks - amount;
+		looksSkills = looksSkills - amount;
 	}
 	
 	void gainLooks(int amount) {
 		
-		looks = looks + amount;
+		looksSkills = looksSkills + amount;
 	}
 	
 
@@ -131,7 +131,7 @@ public class Player {
 	}
 	
 	void currentScore() {
-		hs = energy + looks + danceSkills;
+		hs = energy + looksSkills + danceSkills;
 	}
 	
 }	
