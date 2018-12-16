@@ -30,47 +30,115 @@ public class Grid {
 		this.n_Slip = difficulty+1;
 		this.n_Dancer = difficulty+1;
 		
+		/*
 		trophy_x = (int) (Math.random()*(x_dim + 1));
 		trophy_y = (int) (Math.random()*(y_dim + 1));
+		*/
 		
 		myBlindSpot = new BlindSpot[n_Blind];
 		myJuror = new Juror[n_Juror];
 		mySlipTile = new SlipperyTile[n_Slip];
 		myDancer = new Dancer[n_Dancer];
 		
-		//List<Integer> listOfRandom = new ArrayList<Integer>();
+		//create an array of unique position that the obstacles can have and delete when position
+		//is taken
+		ArrayList<UniquePosition> unique = new ArrayList<UniquePosition>();
+		for (int i = 1; i < x_dim + 1; i++) {
+			for (int j = 1; j < y_dim + 1; j++) {
+
+				unique.add(new UniquePosition(i, j));
+
+			}
+		}
 		
-		int posX, posY;
+		//cannot have anything on positon (1,1), which is the player starting postion
+		unique.remove(1);
+		
+		int posX;
+		int posY;
+		
+		//chose a random position in the array of unique position
+		int random = (int) (Math.random()*(unique.size()));
+		
+		//assign the x and y of the unique position to the object
+		trophy_x = unique.get(random).posX;
+		trophy_y = unique.get(random).posY;
+		
+		//delete that unique position to avoid duplicate positions
+		unique.remove(random);
+		
 		for(int i = 0; i < n_Blind ; i++) {
 			
-			//do {
+			/*do {
+				
 				posX = (int) (Math.random()*(x_dim + 1));
 				posY = (int) (Math.random()*(y_dim + 1));
 			//}
 			//while(listOfRandom.contains(posX));
+			*/
+			random = (int) (Math.random()*(unique.size()));
+			posX = unique.get(random).posX;
+			posY = unique.get(random).posY;
 			
 			myBlindSpot[i] = new BlindSpot(posX,posY);
-		}
-		for(int i = 0; i < n_Juror ; i++) {
 			
+			unique.remove(random);
+
+		}
+		
+		for(int i = 0; i < n_Juror ; i++) {
+			/*
 			posX = (int) (Math.random()*(x_dim + 1));
 			posY = (int) (Math.random()*(y_dim + 1));
+			*/
+			
+			random = (int) (Math.random()*(unique.size()));
+			posX = unique.get(random).posX;
+			posY = unique.get(random).posY;
+			
 			myJuror[i] = new Juror(posX,posY);
+			
+			unique.remove(random);
+
 		}
 		for(int i = 0; i < n_Slip ; i++) {
-	
+			/*
 			posX = (int) (Math.random()*(x_dim + 1));
 			posY = (int) (Math.random()*(y_dim + 1));
+			*/
+			random = (int) (Math.random()*(unique.size()));
+			posX = unique.get(random).posX;
+			posY = unique.get(random).posY;
+			
 			mySlipTile[i] = new SlipperyTile(posX,posY);
+			
+			unique.remove(random);
 		}
 		for(int i = 0; i < n_Dancer ; i++) {
 			
+			/*
 			posX = (int) (Math.random()*(x_dim + 1));
 			posY = (int) (Math.random()*(y_dim + 1));
+			*/
+			
+			random = (int) (Math.random()*(unique.size()));
+			posX = unique.get(random).posX;
+			posY = unique.get(random).posY;
+			
 			myDancer[i] = new Dancer(posX,posY);
+			
+			unique.remove(random);
+			
 		}
 		
 		
 	}
-
+	
+	public int getX_dim() {
+		return x_dim;
+	}
+	
+	public int getY_dim() {
+		return y_dim;
+	}
 }

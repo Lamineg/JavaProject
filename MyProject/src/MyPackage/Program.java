@@ -3,6 +3,7 @@ package MyPackage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -10,33 +11,32 @@ public class Program {
 
 	// main method is the first method that the program will run
 	public static void main(String[] args) throws IOException {
-		
-		//Initialization of a scanner to get the username, the difficulty and the skills of the player
+
+		// Initialization of a scanner to get the username, the difficulty and the
+		// skills of the player
 		Scanner question = new Scanner(System.in);
 		System.out.println("Username: ");
 		String username = question.nextLine();
 		System.out.println("Level of difficulty (from 0 to 10): ");
 		int difficulty = question.nextInt();
-		System.out.println("Balance between Looks and Dance (0 favors Looks, "
-				+ "5 is same for both and 10 favors Dance: ");
+		System.out.println(
+				"Balance between Looks and Dance (0 favors Looks, " + "5 is same for both and 10 favors Dance: ");
 		int input_skills = question.nextInt();
-		
+
 		Player player1 = new Player(username, input_skills, difficulty);
-		
-		
+
 		// player1.move(2, 1);
 
-
 		// create new player
-
 
 		// TEST FOR GRID PART ;
 
 		Grid myGrid = new Grid(difficulty);
-		//Grid myGrid = new Grid();
 
-		//int[] positions_x = { 2, 2, -1 };// new int [4];
-		//int[] positions_y = { 3, -1, 1 };// new int [4];
+		// Grid myGrid = new Grid();
+
+		// int[] positions_x = { 2, 2, -1 };// new int [4];
+		// int[] positions_y = { 3, -1, 1 };// new int [4];
 
 		// System.out.println("blind x = "+myGrid.myBlindSpot.x+", blind y = "+
 		// myGrid.myBlindSpot.y);
@@ -53,10 +53,10 @@ public class Program {
 			// movX = (int) (Math.random()*(4 + 4 + 1)) - 4;
 			// movY = (int) (Math.random()*(4 + 4 + 1)) - 4;
 
-			//movX = (int) (Math.random() * (1 + 1 + 1)) - 1;
-			//movY = (int) (Math.random() * (1 + 1 + 1)) - 1;
-			
-			//Ask the player for the next move
+			// movX = (int) (Math.random() * (1 + 1 + 1)) - 1;
+			// movY = (int) (Math.random() * (1 + 1 + 1)) - 1;
+
+			// Ask the player for the next move
 			System.out.println("What is your next move?");
 			System.out.print("x: ");
 			movX = question.nextInt();
@@ -64,7 +64,7 @@ public class Program {
 			movY = question.nextInt();
 
 			player1.move1(movX, movY);// LOST ENERGY ALREADY
-			
+
 			if (player1.x_pos >= myGrid.x_dim)
 				player1.x_pos = myGrid.x_dim - 1;
 			if (player1.x_pos < 0)
@@ -140,20 +140,19 @@ public class Program {
 				System.out.println("You found the trophy !");
 				// calculate the current score of the player
 				player1.currentScore();
-				System.out.println("Score = "+player1.hs);
+				System.out.println("Score = " + player1.hs);
 			}
 			if (player1.energy <= 0) {
 				System.out.println("You run out of energy :'( ");
 				// calculate the current score of the player
-				player1.hs=0;
-				System.out.println("Score = "+player1.hs);				
+				player1.hs = 0;
+				System.out.println("Score = " + player1.hs);
 			}
 
 			// i++;
 			System.out.println("energy = " + player1.energy);
 		}
-		
-		//move.close();
+
 		question.close();
 
 		// File test = new File("High Scores.txt");
@@ -182,18 +181,16 @@ public class Program {
 
 		score[countLines] = new Highscore(player1.username, player1.hs);
 		/*
-		for (int x = 0; x < countLines + 1; x++) {
-			System.out.println(score[x].username + score[x].hs);
-		}
-		*/
+		 * for (int x = 0; x < countLines + 1; x++) {
+		 * System.out.println(score[x].username + score[x].hs); }
+		 */
 		// Arrays.sort(score, new SortbyScore());
 		Arrays.sort(score, new SortByScore());
-		
+
 		/*
-		for (int x = 0; x < countLines + 1; x++) {
-			System.out.println(score[x].username + score[x].hs);
-		}
-		*/
+		 * for (int x = 0; x < countLines + 1; x++) {
+		 * System.out.println(score[x].username + score[x].hs); }
+		 */
 
 		PrintWriter writer = new PrintWriter("High Scores.txt");
 
