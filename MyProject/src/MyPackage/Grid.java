@@ -4,81 +4,83 @@ import java.util.*;
 
 public class Grid {
 	
-
-	int x_dim;// = 5;
-	int y_dim;// = 5;
+	//dimensions of the grid
+	int x_dim;
+	int y_dim;
 	
-	int trophy_x;// = 3;
-	int trophy_y;// = 3;
+	//position of the trophy
+	int trophy_x;
+	int trophy_y;
 	
+	//number of objects for the penalties and bonuses
 	int n_Blind;
 	int n_Juror;
 	int n_Slip;
 	int n_Dancer;
 	
+	//lists of objects
 	BlindSpot [] myBlindSpot;
-	//List<Juror> myJurorList = new ArrayList<Juror>();
-	//myJurorlist.add(new Juror(1, 2, 3));
-	
 	Juror [] myJuror;
 	SlipperyTile [] mySlipTile;
 	Dancer [] myDancer;
 	
+	//method to construct the grid using the difficulty chosen by the player. 
 	Grid(int difficulty){
-	//Grid(int x_dim, int y_dim, int n_Blind, int n_Juror, int n_Slip, int n_Dancer){
-		this.x_dim = difficulty+5;
-		this.y_dim = difficulty+5;
+		
+		//set the dimensions at 15, whatever the difficulty
+		this.x_dim = 15;
+		this.y_dim = 15;
+		
+		//set the number of blinding spotlights at difficulty + 1
 		this.n_Blind = difficulty+1;
+		
+		//set the number of jurors at difficulty + 1
 		this.n_Juror = difficulty+1;
+		
+		//set the number of slippery tiles at difficulty +1
 		this.n_Slip = difficulty+1;
+		
+		//set the number of dancers at difficulty + 1
 		this.n_Dancer = difficulty+1;
 		
-		/*
-		trophy_x = (int) (Math.random()*(x_dim + 1));
-		trophy_y = (int) (Math.random()*(y_dim + 1));
-		*/
-		
+		//create list of objects of size equal to the number of objects of that class
 		myBlindSpot = new BlindSpot[n_Blind];
 		myJuror = new Juror[n_Juror];
 		mySlipTile = new SlipperyTile[n_Slip];
 		myDancer = new Dancer[n_Dancer];
 		
-		//create an array of unique position that the obstacles can have and delete when position
-		//is taken
+		//create an array of unique position that the obstacles can have and delete the position when the position
+		//is selected
 		ArrayList<UniquePosition> unique = new ArrayList<UniquePosition>();
-		for (int i = 1; i < x_dim + 1; i++) {
-			for (int j = 1; j < y_dim + 1; j++) {
+		for (int i = 0; i < x_dim; i++) {
+			for (int j = 0; j < y_dim; j++) {
 
 				unique.add(new UniquePosition(i, j));
 
 			}
 		}
 		
-		//cannot have anything on positon (1,1), which is the player starting postion
-		unique.remove(1);
+		//cannot have anything on position (0,0), which is the player starting position
+		unique.remove(0);
 		
+		//will store the positions of each bonus/penalty
 		int posX;
 		int posY;
 		
 		//chose a random position in the array of unique position
 		int random = (int) (Math.random()*(unique.size()));
 		
-		//assign the x and y of the unique position to the object
+		//assign a random x and y to the trophy
 		trophy_x = unique.get(random).posX;
 		trophy_y = unique.get(random).posY;
 		
 		//delete that unique position to avoid duplicate positions
 		unique.remove(random);
 		
+		//each of the blinding spotlights will get its unique random position and that position will then be removed
+		//from the arraylist
 		for(int i = 0; i < n_Blind ; i++) {
 			
-			/*do {
-				
-				posX = (int) (Math.random()*(x_dim + 1));
-				posY = (int) (Math.random()*(y_dim + 1));
-			//}
-			//while(listOfRandom.contains(posX));
-			*/
 			random = (int) (Math.random()*(unique.size()));
 			posX = unique.get(random).posX;
 			posY = unique.get(random).posY;
@@ -89,11 +91,9 @@ public class Grid {
 
 		}
 		
+		//each of the jurors will get its unique random position and that position will then be removed
+		//from the arraylist
 		for(int i = 0; i < n_Juror ; i++) {
-			/*
-			posX = (int) (Math.random()*(x_dim + 1));
-			posY = (int) (Math.random()*(y_dim + 1));
-			*/
 			
 			random = (int) (Math.random()*(unique.size()));
 			posX = unique.get(random).posX;
@@ -104,11 +104,11 @@ public class Grid {
 			unique.remove(random);
 
 		}
+		
+		//each of the slippery tiles will get its unique random position and that position will then be removed
+		//from the arraylist
 		for(int i = 0; i < n_Slip ; i++) {
-			/*
-			posX = (int) (Math.random()*(x_dim + 1));
-			posY = (int) (Math.random()*(y_dim + 1));
-			*/
+
 			random = (int) (Math.random()*(unique.size()));
 			posX = unique.get(random).posX;
 			posY = unique.get(random).posY;
@@ -117,12 +117,10 @@ public class Grid {
 			
 			unique.remove(random);
 		}
+		
+		//each of the dancers will get its unique random position and that position will then be removed
+		//from the arraylist
 		for(int i = 0; i < n_Dancer ; i++) {
-			
-			/*
-			posX = (int) (Math.random()*(x_dim + 1));
-			posY = (int) (Math.random()*(y_dim + 1));
-			*/
 			
 			random = (int) (Math.random()*(unique.size()));
 			posX = unique.get(random).posX;
@@ -137,17 +135,22 @@ public class Grid {
 		
 	}
 	
+	//getter for x_dim
 	public int getX_dim() {
 		return x_dim;
 	}
 	
+	//getter for y_dim
 	public int getY_dim() {
 		return y_dim;
 	}
+	
+	//method to remove the juror, will be used after a confrontation succeeds with a juror
 	void removeJuror(int id){
 		myJuror[id].active = false;
 	}
 	
+	//method to remove a dancer, will be used when we beat another dancer
 	void removeDancer(int id){
 		myDancer[id].active = false;
 	}

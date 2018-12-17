@@ -3,7 +3,7 @@ package MyPackage;
 public class Win {
 
 	public static boolean judgeWon(Player myPlayer, Juror myJuror, int n_blind) { 
-		// add number of blindspots
+		// add number of blinding spotlights
 		
 		int random;
 		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1

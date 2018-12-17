@@ -3,37 +3,36 @@ package MyPackage;
 
 public class Player {
 	
-	//username of the player, can be used later for the highscores
+	//username of the player, can be used later when we display the highscores
 	String username;
 	
-	//create a high score for that player
+	//variable high score
 	int hs;
 	
-	//player position
+	//position of the player in t and in (t-1)
 	int x_pos;
 	int y_pos;
 	int x_old;
 	int y_old;
 	
-	// skill attributes 
-	
-	int looks;
-
+	// the skills of the player 
 	int looksSkills;
-
 	int danceSkills;
 	
 	// energy
-	
 	int energy;
 	
-	//amount to lose or gain when confronts an obstacle
+	//amount that will be lost or gain when encountering a penalty/bonus
 	int amount;
 	
+	//constructor method for the object of class player, takes as argument a username, the balance between looks and dancing skills
+	// and the level of difficulty chosen by the player. 
 	Player(String username, int input_skills, int difficulty){
 		
+		//adds a ":" to the username to correctly display it one the score board afterwards
 		this.username = username + ":";
 		
+		//initial position of the player
 		x_pos = 0;
 		y_pos = 0;
 		x_old = 0;
@@ -53,83 +52,69 @@ public class Player {
 		//The neutral value for the energy is set to 30 and decreases as we increase the difficulty
 		//times two
 		energy = 30 - (2*difficulty) ;
-
-		//energy = 50;
-		
 	}
 	
-	//method to move the player in any direction but maximum of 1 step
-	 void move(int x1, int y1) {
-		 
-		 if(Math.abs(x1)>1 || (Math.abs(y1)>1)) {
-				System.out.println("Unreachable");
-			}
-		else {
-			x_pos = x_pos + x1;
-			y_pos = y_pos + y1;
-			
-		}
-		 loseEnergy(1);
-		
-	 }
-			
+	
+	//method that makes the player gain a certain amount of energy
 	void gainEnergy(int amount) {
 		energy = energy + amount;
 	}
 	 
+	//method that makes the player loose a certain amount of energy
 	void loseEnergy(int amount) {
 		
 		energy= energy - amount;
 	}
 	
+	//method that makes the player loose a certain amount of dancing skills
 	void loseDancingSkills(int amount) {
 		
 		danceSkills = danceSkills + amount;
 	}
 	
+	//method that makes the player gain a certain amount of dancing skills
 	void gainDancingSkills(int amount) {
 		
 		danceSkills= danceSkills + amount;
 	}
 	
+	//method that makes the player loose a certain amount of looks
 	void loseLooks(int amount) {
 		
 		looksSkills = looksSkills - amount;
 	}
 	
+	//method that makes the player gain a certain amount of looks
 	void gainLooks(int amount) {
 		
 		looksSkills = looksSkills + amount;
 	}
 	
 
-	//int is the type of return of this method, if not return then void
-	
-	
+	//getter for dancing skills
 	int getDance_skills() {
 		return danceSkills;
 	}
-
+	
+	//method that takes two distances as argument to make the player move. It first updates the old position as the current position
+	//before moving and then updates the new current position by summing the distances x1 and y1. Finally, the player looses energy
 	void move1(int x1, int y1) {
 		x_old = x_pos;
 		y_old = y_pos;
 
 		x_pos = x_pos + x1;
 		y_pos = y_pos + y1;
-		//loseEnergy1(x1,y1);
+		//the player looses energy, elsewhere we have implemented a way for the player to regain its energy if the move 
+		//is not valid
 		loseEnergy(1);
 	}
 	
-	void loseEnergy1(int x, int y) {
-		
-		energy = energy - x - y ;
-
-	}
-
+	//getter for looks
 	int getLooks() {
 		return looksSkills;
 	}
 	
+	//method to calculate the current score
 	void currentScore() {
 		hs = energy + looksSkills + danceSkills;
 	}
