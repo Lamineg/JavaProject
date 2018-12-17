@@ -9,16 +9,6 @@ public class Program {
 		
 
 	Player player1 = new Player(0,0);
-	
-	//player1.move(2, 1);
-	
-	//System.out.println(player1.x_pos + ", " + player1.y_pos);
-			
-
-		//create new player
-		//Player player1 = new Player();
-		
-		//System.out.println("x = "+player1.x_pos+", y = "+ player1.y_pos);
 		
 
 		// TEST FOR GRID PART ;
