@@ -4,24 +4,27 @@ package MyPackage;
 public class Player {
 	
 	//username of the player, can be used later when we display the highscores
-	String username;
+	final String username;
 	
 	//variable high score
-	int hs;
+	private int hs;
 	
 	//position of the player in t and in (t-1)
-	int x_pos;
-	int y_pos;
-	int x_old;
-	int y_old;
+	private int x_pos;
+	private int y_pos;
+
+	private int x_old;
+	private int y_old;
 	
 	// the skills of the player 
-	int looksSkills;
-	int danceSkills;
+	private int looksSkills;
+	private int danceSkills;
 	
 	// energy
-	int energy;
+	private int energy;
 	
+
+
 	//amount that will be lost or gain when encountering a penalty/bonus
 	int amount;
 	
@@ -35,8 +38,8 @@ public class Player {
 		//initial position of the player
 		x_pos = 0;
 		y_pos = 0;
-		x_old = 0;
-		y_old = 0;
+		setX_old(0);
+		setY_old(0);
 		
 
 		//The neutral value for looks and dancing skills is set to 20 and the value changes
@@ -99,8 +102,8 @@ public class Player {
 	//method that takes two distances as argument to make the player move. It first updates the old position as the current position
 	//before moving and then updates the new current position by summing the distances x1 and y1. Finally, the player looses energy
 	void move1(int x1, int y1) {
-		x_old = x_pos;
-		y_old = y_pos;
+		setX_old(x_pos);
+		setY_old(y_pos);
 
 		x_pos = x_pos + x1;
 		y_pos = y_pos + y1;
@@ -116,9 +119,62 @@ public class Player {
 	
 	//method to calculate the current score
 	void currentScore() {
-		hs = energy + looksSkills + danceSkills;
+		setHs(energy + looksSkills + danceSkills);
+	}
+
+
+	public int getHs() {
+		return hs;
+	}
+
+
+	public void setHs(int hs) {
+		this.hs = hs;
+	}
+
+
+	public int getX_old() {
+		return x_old;
+	}
+
+
+	public void setX_old(int x_old) {
+		this.x_old = x_old;
+	}
+
+
+	public int getY_old() {
+		return y_old;
+	}
+
+
+	public void setY_old(int y_old) {
+		this.y_old = y_old;
+	}
+	public int getX_pos() {
+		return x_pos;
+	}
+
+
+	public void setX_pos(int x_pos) {
+		this.x_pos = x_pos;
+	}
+	public int getY_pos() {
+		return y_pos;
 	}
 	
+	
+	public void setY_pos(int y_pos) {
+		this.y_pos = y_pos;
+	}
+	public int getEnergy() {
+		return energy;
+	}
+	
+	
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
 }	
 
 

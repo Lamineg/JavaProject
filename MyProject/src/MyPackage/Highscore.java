@@ -8,9 +8,10 @@ import java.util.Scanner;
 
 public class Highscore {
 	
-	String username;
-	int hs;
+	private String username;
+	private int hs;
 	
+
 	public Highscore (String username, int hs) {
 		this.username = username;
 		this.hs = hs;
@@ -39,7 +40,7 @@ public class Highscore {
 
 		scanner.close();
 
-		score[countLines] = new Highscore(player1.username, player1.hs);
+		score[countLines] = new Highscore(player1.username, player1.getHs());
 		/*
 		 * for (int x = 0; x < countLines + 1; x++) {
 		 * System.out.println(score[x].username + score[x].hs); }
@@ -69,6 +70,13 @@ public class Highscore {
 
 	}
 	
+	public int getHs() {
+		return hs;
+	}
+	
+	public void setHs(int hs) {
+		this.hs = hs;
+	}
 	
 	
 }

@@ -5,18 +5,20 @@ import java.util.*;
 public class Grid {
 	
 	//dimensions of the grid
-	int x_dim;
-	int y_dim;
+	private int x_dim;
+
+	private int y_dim;
 	
 	//position of the trophy
-	int trophy_x;
-	int trophy_y;
+	private int trophy_x;
+	private int trophy_y;
 	
 	//number of objects for the penalties and bonuses
-	int n_Blind;
-	int n_Juror;
-	int n_Slip;
-	int n_Dancer;
+	private int n_Blind;
+
+	private int n_Juror;
+	private int n_Slip;
+	private int n_Dancer;
 	
 	//lists of objects
 	BlindSpot [] myBlindSpot;
@@ -71,8 +73,8 @@ public class Grid {
 		int random = (int) (Math.random()*(unique.size()));
 		
 		//assign a random x and y to the trophy
-		trophy_x = unique.get(random).posX;
-		trophy_y = unique.get(random).posY;
+		trophy_x = unique.get(random).getPosX();
+		trophy_y = unique.get(random).getPosY();
 		
 		//delete that unique position to avoid duplicate positions
 		unique.remove(random);
@@ -82,8 +84,8 @@ public class Grid {
 		for(int i = 0; i < n_Blind ; i++) {
 			
 			random = (int) (Math.random()*(unique.size()));
-			posX = unique.get(random).posX;
-			posY = unique.get(random).posY;
+			posX = unique.get(random).getPosX();
+			posY = unique.get(random).getPosY();
 			
 			myBlindSpot[i] = new BlindSpot(posX,posY,1);
 			
@@ -96,8 +98,8 @@ public class Grid {
 		for(int i = 0; i < n_Juror ; i++) {
 			
 			random = (int) (Math.random()*(unique.size()));
-			posX = unique.get(random).posX;
-			posY = unique.get(random).posY;
+			posX = unique.get(random).getPosX();
+			posY = unique.get(random).getPosY();
 			
 			myJuror[i] = new Juror(posX,posY,i,10);
 			
@@ -110,8 +112,8 @@ public class Grid {
 		for(int i = 0; i < n_Slip ; i++) {
 
 			random = (int) (Math.random()*(unique.size()));
-			posX = unique.get(random).posX;
-			posY = unique.get(random).posY;
+			posX = unique.get(random).getPosX();
+			posY = unique.get(random).getPosY();
 			
 			mySlipTile[i] = new SlipperyTile(posX,posY,1);
 			
@@ -123,8 +125,8 @@ public class Grid {
 		for(int i = 0; i < n_Dancer ; i++) {
 			
 			random = (int) (Math.random()*(unique.size()));
-			posX = unique.get(random).posX;
-			posY = unique.get(random).posY;
+			posX = unique.get(random).getPosX();
+			posY = unique.get(random).getPosY();
 			
 			myDancer[i] = new Dancer(posX,posY,i,10);
 			
@@ -147,12 +149,67 @@ public class Grid {
 	
 	//method to remove the juror, will be used after a confrontation succeeds with a juror
 	void removeJuror(int id){
-		myJuror[id].active = false;
+		myJuror[id].setActive(false);
 	}
 	
 	//method to remove a dancer, will be used when we beat another dancer
 	void removeDancer(int id){
-		myDancer[id].active = false;
+		myDancer[id].setActive(false);
 	}
 
+public int getTrophy_x() {
+	return trophy_x;
+}
+
+public void setTrophy_x(int trophy_x) {
+	this.trophy_x = trophy_x;
+}
+
+public int getTrophy_y() {
+	return trophy_y;
+}
+
+public void setTrophy_y(int trophy_y) {
+	this.trophy_y = trophy_y;
+}
+
+public void setX_dim(int x_dim) {
+	this.x_dim = x_dim;
+}
+
+public void setY_dim(int y_dim) {
+	this.y_dim = y_dim;
+}
+
+public int getN_Blind() {
+	return n_Blind;
+}
+
+public void setN_Blind(int n_Blind) {
+	this.n_Blind = n_Blind;
+}
+
+public int getN_Juror() {
+	return n_Juror;
+}
+
+public void setN_Juror(int n_Juror) {
+	this.n_Juror = n_Juror;
+}
+
+public int getN_Slip() {
+	return n_Slip;
+}
+
+public void setN_Slip(int n_Slip) {
+	this.n_Slip = n_Slip;
+}
+
+public int getN_Dancer() {
+	return n_Dancer;
+}
+
+public void setN_Dancer(int n_Dancer) {
+	this.n_Dancer = n_Dancer;
+}
 }

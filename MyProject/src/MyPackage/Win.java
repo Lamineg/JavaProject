@@ -8,7 +8,7 @@ public class Win {
 		int random;
 		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
 		
-		if(myPlayer.looksSkills - n_blind >= myJuror.looksThreshold + random) {
+		if(myPlayer.getLooks()- n_blind >= myJuror.getLooksThreshold() + random) {
 
 			return true;
 		
@@ -25,7 +25,7 @@ public class Win {
 		int random;
 		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
 		
-		if(myPlayer.danceSkills - n_spot >= myDancer.danceThreshold + random) {
+		if(myPlayer.getDance_skills() - n_spot >= myDancer.getDanceThreshold() + random) {
 
 			return true;
 		
