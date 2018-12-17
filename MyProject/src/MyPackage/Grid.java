@@ -46,8 +46,6 @@ public class Grid extends JPanel {
 	int n_Dancer;
 	
 	BlindSpot [] myBlindSpot;
-	//List<Juror> myJurorList = new ArrayList<Juror>();
-	//myJurorlist.add(new Juror(1, 2, 3));
 	
 	Juror [] myJuror;
 	SlipperyTile [] mySlipTile;
@@ -68,9 +66,6 @@ public class Grid extends JPanel {
 		this.n_Slip = n_Slip;
 		this.n_Dancer = n_Dancer;
 		
-		//trophy_x = (int) (Math.random()*(x_dim + 1));
-		//trophy_y = (int) (Math.random()*(y_dim + 1));
-		
 		myBlindSpot = new BlindSpot[n_Blind];
 		myJuror = new Juror[n_Juror];
 		mySlipTile = new SlipperyTile[n_Slip];
@@ -90,7 +85,6 @@ public class Grid extends JPanel {
 		this.setDoubleBuffered(true);
         this.addMouseListener(new GameAdapter());
         
-        this.initCells();
         this.newGame();
 		
 		//List<Integer> listOfRandom = new ArrayList<Integer>();
@@ -148,6 +142,8 @@ public class Grid extends JPanel {
                 this.cells[i][j] = new Cell(j,i);
             }
         }
+        
+        this.cells[0][0].setPlayer(true);
     }
 	
 	public void newGame () {
@@ -155,19 +151,35 @@ public class Grid extends JPanel {
 
         random = new Random();
 
-        //this.inGame = true;
+        this.inGame = true;
         //this.remainderMines = totalMines;
 
-        //this.initCells();
+        this.initCells();
         //this.statusBar.setText(Integer.toString(this.remainderMines));
 
+        int randX, randY;
+        int remainder = 1; //1 trophy
+        while(remainder >= 1) {
+        	randY = random.nextInt(this.y_dim);
+        	randX = random.nextInt(this.x_dim);
+        	
+        	Cell cell = this.cells[randY][randX];
+        	if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy() && !cell.isPlayer()) {
+                cell.setTrophy(true);
+                remainder--;
+            }
+        }
+        
+
+        
+        
         int remainderBlind = n_Blind;
         while (remainderBlind >= 0) {
-            int randX = random.nextInt(this.y_dim);
-            int randY = random.nextInt(this.x_dim);
+            randY = random.nextInt(this.y_dim);
+            randX = random.nextInt(this.x_dim);
 
-            Cell cell = this.cells[randX][randY];
-            if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy()) {
+            Cell cell = this.cells[randY][randX];
+            if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy() && !cell.isPlayer()) {
                 cell.setBlindSpot(true);
                 remainderBlind--;
             }
@@ -175,11 +187,11 @@ public class Grid extends JPanel {
         
         int remainderSlip = n_Slip;
         while (remainderSlip >= 0) {
-            int randX = random.nextInt(this.y_dim);
-            int randY = random.nextInt(this.x_dim);
+            randY = random.nextInt(this.y_dim);
+            randX = random.nextInt(this.x_dim);
 
-            Cell cell = this.cells[randX][randY];
-            if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy()) {
+            Cell cell = this.cells[randY][randX];
+            if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy() && !cell.isPlayer()) {
                 cell.setSlipTile(true);
                 remainderSlip--;
             }
@@ -187,11 +199,11 @@ public class Grid extends JPanel {
         
         int remainderDancer = n_Dancer;
         while (remainderDancer >= 0) {
-            int randX = random.nextInt(this.y_dim);
-            int randY = random.nextInt(this.x_dim);
+            randY = random.nextInt(this.y_dim);
+            randX = random.nextInt(this.x_dim);
 
-            Cell cell = this.cells[randX][randY];
-            if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy()) {
+            Cell cell = this.cells[randY][randX];
+            if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy() && !cell.isPlayer()) {
                 cell.setDancer(true);
                 remainderDancer--;
             }
@@ -199,11 +211,11 @@ public class Grid extends JPanel {
         
         int remainderJuror = n_Juror;
         while (remainderJuror >= 0) {
-            int randX = random.nextInt(this.y_dim);
-            int randY = random.nextInt(this.x_dim);
+            randY = random.nextInt(this.y_dim);
+            randX = random.nextInt(this.x_dim);
 
-            Cell cell = this.cells[randX][randY];
-            if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy()) {
+            Cell cell = this.cells[randY][randX];
+            if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy() && !cell.isPlayer()) {
                 cell.setJuror(true);
                 remainderJuror--;
             }
@@ -222,15 +234,15 @@ public class Grid extends JPanel {
                 int imageType;
                 int xPosition, yPosition;
 
-                if (cell.isCovered()) {
+                /*if (cell.isCovered()) {
                     coveredCells++;
-                }
+                }*/
 
-                if (inGame) {
+                /*if (inGame) {
                     if (cell.isMine() && !cell.isCovered()) {
                         inGame = false;
                     }
-                }
+                }*/
 
                 imageType = this.decideImageType(cell);
 
@@ -241,12 +253,12 @@ public class Grid extends JPanel {
             }
         }
 
-        if (coveredCells == 0 && inGame) {
+        /*if (coveredCells == 0 && inGame) {
             inGame = false;
             statusBar.setText("Game Won");
         } else if (!inGame) {
             statusBar.setText("Game Lost");
-        }
+        }*/
     }
 	
 	private int decideImageType(Cell cell) {
@@ -274,8 +286,24 @@ public class Grid extends JPanel {
         	
         	if(cell.isPlayer()) {
         		imageType = IMAGE_PLAYER;
-        	} else if(cell.isVisible()) {
-            	
+        	} else if(cell.isVisible(myPlayer)) {
+        		
+        		if(cell.isBlindSpot()) { //replace by a case ?
+            		imageType = IMAGE_BLINDSPOT;
+            	} else if(cell.isSlipTile()) {
+            		imageType = IMAGE_SLIPTILE;
+            	} else if(cell.isDancer()) {
+            		imageType = IMAGE_DANCER;
+            	} else if(cell.isJuror()) {
+            		imageType = IMAGE_JUROR;
+            	} else if(cell.isTrophy()) {
+            		imageType = IMAGE_TROPHY;
+            	} else {
+            		imageType = IMAGE_WHITE;
+            	}
+        		
+            } else {
+            	imageType = IMAGE_BLACK;
             }
         }
 
@@ -330,12 +358,16 @@ public class Grid extends JPanel {
 
                 doRepaint = true;
 
-                pressedCell.uncover();
+                
+                
+                /*pressedCell.uncover();
                 if (pressedCell.isMine()) {
                     inGame = false;
                 } else if (pressedCell.isEmpty()) {
                     findEmptyCells(pressedRow, pressedCol, 0);
-                }
+                }*/
+                
+                
             }
 
             if (doRepaint) {

@@ -17,7 +17,7 @@ public class Game extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
-        setTitle("Minesweeper");
+        setTitle("Become a Star");
 
         statusbar = new JLabel("");
         add(statusbar, BorderLayout.SOUTH);

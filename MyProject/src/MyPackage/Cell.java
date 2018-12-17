@@ -24,6 +24,7 @@ public class Cell {
         this.slipTile  = false;
         this.blindSpot  = false;
         this.trophy = false;
+        this.player = false;
         
         this.x = x;
         this.y = y;
@@ -35,7 +36,7 @@ public class Cell {
         return this.value;
     }
 
-    public void uncover() {
+    /*public void uncover() {
         this.cover = false;
     }
 
@@ -77,7 +78,7 @@ public class Cell {
 
     public void clearChecked() {
         this.checked = false;
-    }
+    }*/
 
     public void setAroundMines(int count) {
         this.value = count;
@@ -113,8 +114,29 @@ public class Cell {
         return this.player;
     }
     
-    public boolean isVisible() {
-        return this.visible;
+    public boolean isVisible(Player myPlayer) {
+        
+    	if (x == myPlayer.x_pos && y == myPlayer.y_pos + 1) {
+			
+    		return true;
+    		
+		} else if(x == myPlayer.x_pos && y == myPlayer.y_pos - 1){
+			
+			return true;
+			
+		} else if(x == myPlayer.x_pos + 1 && y == myPlayer.y_pos){
+			
+			return true;
+			
+		} else if(x == myPlayer.x_pos - 1 && y == myPlayer.y_pos){
+			
+			return true;
+			
+		} else {
+			
+			return false;
+		}
+
     }
     
     public boolean isReachable(Player myPlayer) {
