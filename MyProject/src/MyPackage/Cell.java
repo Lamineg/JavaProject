@@ -6,20 +6,27 @@ public class Cell {
     private boolean slipTile;
     private boolean blindSpot;
     private boolean trophy;
+    private boolean player;
     
-    private boolean cover;
+    private int x;
+    private int y;
+    
+    private boolean visible;
 
     private int value;
 
-    public Cell() {
+    public Cell(int x, int y) {
     	
-        this.cover = true;
+        this.visible = false;
         
         this.dancer  = false;
         this.juror  = false;
         this.slipTile  = false;
         this.blindSpot  = false;
         this.trophy = false;
+        
+        this.x = x;
+        this.y = y;
         
         this.value = 0;
     }
@@ -102,6 +109,26 @@ public class Cell {
         return this.trophy;
     }
     
+    public boolean isPlayer() {
+        return this.player;
+    }
+    
+    public boolean isVisible() {
+        return this.visible;
+    }
+    
+    public boolean isReachable(Player myPlayer) {
+		
+		if(Math.abs(x - myPlayer.x_pos) <= 1 && Math.abs(y - myPlayer.x_pos) <= 1) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+    }
+    
     public void setBlindSpot(boolean blindSpot) {
         this.blindSpot = blindSpot;
     }
@@ -120,6 +147,14 @@ public class Cell {
     
     public void setTrophy(boolean trophy) {
         this.trophy = trophy;
+    }
+    
+    public void setPlayer(boolean player) {
+        this.player = player;
+    }
+    
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
     
 }

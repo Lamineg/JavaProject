@@ -16,11 +16,23 @@ public class Grid extends JPanel {
 	
 	private final int CELL_SIZE  = 15;//to fix
     private final int NUM_IMAGES = 13;// to fix
-	
+    
+    private final int IMAGE_BLINDSPOT       = 1;
+    private final int IMAGE_SLIPTILE      = 2;
+    private final int IMAGE_PLAYER       = 3;
+    private final int IMAGE_DANCER	 = 4;
+    
+    private final int IMAGE_JUROR       = 5;
+    private final int IMAGE_TROPHY      = 6;
+    private final int IMAGE_WHITE       = 7;
+    private final int IMAGE_BLACK = 8;
+    
 	private JLabel statusBar;
 	
 	private Cell[][] cells;
 	private Image[] img;
+	
+	private boolean inGame;
 
 	int x_dim;// = 5;
 	int y_dim;// = 5;
@@ -40,6 +52,8 @@ public class Grid extends JPanel {
 	Juror [] myJuror;
 	SlipperyTile [] mySlipTile;
 	Dancer [] myDancer;
+	
+	Player myPlayer;
 	
 	Grid(int x_dim, int y_dim, int n_Blind, int n_Juror, int n_Slip, int n_Dancer){
 		
@@ -61,6 +75,8 @@ public class Grid extends JPanel {
 		myJuror = new Juror[n_Juror];
 		mySlipTile = new SlipperyTile[n_Slip];
 		myDancer = new Dancer[n_Dancer];
+		
+		myPlayer = new Player(0,0);
 		
 		/*  */
 		
@@ -129,7 +145,7 @@ public class Grid extends JPanel {
 
         for (int i = 0; i < this.y_dim; ++i) {
             for (int j = 0; j < this.x_dim; ++j) {
-                this.cells[i][j] = new Cell();
+                this.cells[i][j] = new Cell(j,i);
             }
         }
     }
@@ -195,7 +211,77 @@ public class Grid extends JPanel {
 
         //this.setMineCounts();
     }
+	
 
+	public void paint(Graphics g) {
+        int coveredCells = 0;
+
+        for (int i = 0; i < this.y_dim; i++) {
+            for (int j = 0; j < this.x_dim; j++) {
+                Cell cell = this.cells[i][j];
+                int imageType;
+                int xPosition, yPosition;
+
+                if (cell.isCovered()) {
+                    coveredCells++;
+                }
+
+                if (inGame) {
+                    if (cell.isMine() && !cell.isCovered()) {
+                        inGame = false;
+                    }
+                }
+
+                imageType = this.decideImageType(cell);
+
+                xPosition = (j * CELL_SIZE);
+                yPosition = (i * CELL_SIZE);
+
+                g.drawImage(img[imageType], xPosition, yPosition, this);
+            }
+        }
+
+        if (coveredCells == 0 && inGame) {
+            inGame = false;
+            statusBar.setText("Game Won");
+        } else if (!inGame) {
+            statusBar.setText("Game Lost");
+        }
+    }
+	
+	private int decideImageType(Cell cell) {
+        int imageType = cell.getValue();
+
+        if (!inGame) {
+            
+        	if(cell.isBlindSpot()) { //replace by a case ?
+        		imageType = IMAGE_BLINDSPOT;
+        	} else if(cell.isSlipTile()) {
+        		imageType = IMAGE_SLIPTILE;
+        	} else if(cell.isPlayer()) {
+        		imageType = IMAGE_PLAYER;
+        	} else if(cell.isDancer()) {
+        		imageType = IMAGE_DANCER;
+        	} else if(cell.isJuror()) {
+        		imageType = IMAGE_JUROR;
+        	} else if(cell.isTrophy()) {
+        		imageType = IMAGE_TROPHY;
+        	} else {
+        		imageType = IMAGE_WHITE;
+        	}
+        	
+        } else {
+        	
+        	if(cell.isPlayer()) {
+        		imageType = IMAGE_PLAYER;
+        	} else if(cell.isVisible()) {
+            	
+            }
+        }
+
+        return imageType;
+    }
+	
 	class GameAdapter extends MouseAdapter {
         
 		public void mousePressed(MouseEvent e) {
@@ -210,15 +296,17 @@ public class Grid extends JPanel {
                 repaint();
             }
 
-            if ((pressedCol < 0 || pressedCol >= columns)
-                || (pressedRow < 0 || pressedRow >= rows)) {
+            if ((pressedCol < 0 || pressedCol >= x_dim)
+                || (pressedRow < 0 || pressedRow >= y_dim)) {
                 return;
             }
 
             pressedCell = cells[pressedRow][pressedCol];
 
             if (e.getButton() == MouseEvent.BUTTON3) {
-                doRepaint = true;
+                
+            	return;
+            	/*doRepaint = true;
 
                 if (!pressedCell.isCovered()) {
                     return;
@@ -234,8 +322,9 @@ public class Grid extends JPanel {
                 }
 
                 statusBar.setText(Integer.toString(remainderMines));
+                */
             } else {
-                if (pressedCell.isMarked() || !pressedCell.isCovered()) {
+                if (pressedCell.isBlindSpot() || pressedCell.isSlipTile() || !pressedCell.isReachable(myPlayer)) {
                     return;
                 }
 

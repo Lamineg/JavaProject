@@ -7,21 +7,18 @@ public class Program {
 	//main method is the first method that the program will run
 	public static void main(String[] args) {
 		
+		new Game();
 
-	Player player1 = new Player(0,0);
+		Player player1 = new Player(0,0);
 		
 
 		// TEST FOR GRID PART ;
 
 		Grid myGrid = new Grid(5,5,2,2,2,2);
 
-
 		int [] positions_x = {2,2,-1};//new int [4];
 		int [] positions_y = {3,-1,1};//new int [4];
 		
-		//System.out.println("blind x = "+myGrid.myBlindSpot.x+", blind y = "+ myGrid.myBlindSpot.y);
-		
-		//
 		
 		System.out.println("energy = "+player1.energy);
 		
@@ -34,8 +31,6 @@ public class Program {
 			visibility(myGrid, player1);
 			
 			/* Replace this part by a scanner  or GUI*/
-			//movX = (int) (Math.random()*(4 + 4 + 1)) - 4;
-			//movY = (int) (Math.random()*(4 + 4 + 1)) - 4;
 			
 			movX = (int) (Math.random()*(1 + 1 + 1)) - 1;
 			movY = (int) (Math.random()*(1 + 1 + 1)) - 1;
@@ -87,7 +82,7 @@ public class Program {
 			
 			for(int j = 0; j < myGrid.n_Slip ; j++) {
 				
-				if (Math.abs(myGrid.mySlipTile[j].x - player1.x_pos) <= myGrid.mySlipTile[j].influenceRadius && Math.abs(myGrid.mySlipTile[j].x - player1.x_pos) <= myGrid.mySlipTile[j].influenceRadius) {
+				if (Math.abs(myGrid.mySlipTile[j].x - player1.x_pos) <= myGrid.mySlipTile[j].influenceRadius && Math.abs(myGrid.mySlipTile[j].y - player1.y_pos) <= myGrid.mySlipTile[j].influenceRadius) {
 					//System.out.println("You are in a slip tile area!");
 					n_s++;
 				}
