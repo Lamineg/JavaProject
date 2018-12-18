@@ -15,8 +15,8 @@ import java.util.*;
 
 public class Grid extends JPanel {
 	
-	private final int CELL_SIZE  = 50;//to fix
-    private final int NUM_IMAGES = 8;// to fix
+	private final int CELL_SIZE  = 50;
+    private final int NUM_IMAGES = 8;
     
     private final int IMAGE_BLINDSPOT       = 1;
     private final int IMAGE_SLIPTILE      = 2;
@@ -33,7 +33,6 @@ public class Grid extends JPanel {
 	private Cell[][] cells;
 	private Image[] img;
 	
-
 	private boolean inGame;
 
 	//dimensions of the grid
@@ -41,8 +40,8 @@ public class Grid extends JPanel {
 	private int y_dim;
 	
 	//position of the trophy
-	private int trophy_x;
-	private int trophy_y;
+	//private int trophy_x;
+	//private int trophy_y;
 	
 	//number of objects for the penalties and bonuses
 	private int n_Blind;
@@ -56,13 +55,10 @@ public class Grid extends JPanel {
 	SlipperyTile [] mySlipTile;
 	Dancer [] myDancer;
 	
-
 	Player myPlayer;
 	
 	//method to construct the grid using the difficulty chosen by the player. 
 	Grid(int difficulty, String username, int input_skills, JLabel statusBar){
-
-        /*   */
 		
         //set the dimensions at 15, whatever the difficulty
 		this.x_dim = 16;
@@ -81,16 +77,12 @@ public class Grid extends JPanel {
 		this.n_Dancer = difficulty+1;
 		
 		//create list of objects of size equal to the number of objects of that class
-
 		myBlindSpot = new BlindSpot[n_Blind];
 		myJuror = new Juror[n_Juror];
 		mySlipTile = new SlipperyTile[n_Slip];
-		myDancer = new Dancer[n_Dancer];
-		
+		myDancer = new Dancer[n_Dancer];	
 
 		myPlayer = new Player(username,input_skills,difficulty);
-		
-		/*  */
 		
 		this.statusBar = statusBar;
 		this.img = new Image[NUM_IMAGES];
@@ -100,10 +92,10 @@ public class Grid extends JPanel {
 		for (int i = 0; i < NUM_IMAGES; i++) {
 	            String path = "img/m" + i + ".gif";
         	    img[i] = new ImageIcon(path).getImage();
-        	}
+        }
 		
 		
-	this.setDoubleBuffered(true);
+		this.setDoubleBuffered(true);
         this.addMouseListener(new GameAdapter());
         
         this.newGame();
@@ -120,18 +112,6 @@ public class Grid extends JPanel {
 		return y_dim;
 	}
 	
-	//method to remove the juror, will be used after a confrontation succeeds with a juror
-	void removeJuror(int id){
-		myJuror[id].setActive(false);
-	}
-	
-	//method to remove a dancer, will be used when we beat another dancer
-	void removeDancer(int id){
-		myDancer[id].setActive(false);
-	}
-	
-	/*  */
-	
 	private void initCells () {
     	    this.cells = new Cell[y_dim][x_dim];
 
@@ -142,7 +122,7 @@ public class Grid extends JPanel {
         	}
         
        	    this.cells[0][0].setPlayer(true);
-    	}
+    }
 	
 	public void newGame () {
         	Random random;
@@ -150,10 +130,8 @@ public class Grid extends JPanel {
         	random = new Random();
 
         	this.inGame = true;
-        	//this.remainderMines = totalMines;
 
         	this.initCells();
-        	//this.statusBar.setText(Integer.toString(this.remainderMines));
 
         	int randX, randY;
         	int remainder = 1; //1 trophy
@@ -220,28 +198,15 @@ public class Grid extends JPanel {
                 remainderJuror--;
             }
         }
-
-        //this.setMineCounts();
     }
 	
 	public void paint(Graphics g) {
-        int coveredCells = 0;
 
         for (int i = 0; i < this.y_dim; i++) {
             for (int j = 0; j < this.x_dim; j++) {
                 Cell cell = this.cells[i][j];
                 int imageType;
                 int xPosition, yPosition;
-
-                /*if (cell.isCovered()) {
-                    coveredCells++;
-                }*/
-
-                /*if (inGame) {
-                    if (cell.isMine() && !cell.isCovered()) {
-                        inGame = false;
-                    }
-                }*/
 
                 imageType = this.decideImageType(cell);
 
@@ -251,17 +216,11 @@ public class Grid extends JPanel {
                 g.drawImage(img[imageType], xPosition, yPosition, this);
             }
         }
-
-        /*if (coveredCells == 0 && inGame) {
-            inGame = false;
-            statusBar.setText("Game Won");
-        } else if (!inGame) {
-            statusBar.setText("Game Lost");
-        }*/
+        
     }
 	
 	private int decideImageType(Cell cell) {
-        int imageType = cell.getValue();
+        int imageType;
 
         if (!inGame) {
             
@@ -310,21 +269,21 @@ public class Grid extends JPanel {
     }
 	
 
-	public int getTrophy_x() {
+	/*public int getTrophy_x() {
 		return trophy_x;
-	}
+	}*/
 	
-	public void setTrophy_x(int trophy_x) {
+	/*public void setTrophy_x(int trophy_x) {
 		this.trophy_x = trophy_x;
-	}
+	}*/
 	
-	public int getTrophy_y() {
+	/*public int getTrophy_y() {
 		return trophy_y;
-	}
+	}*/
 	
-	public void setTrophy_y(int trophy_y) {
+	/*public void setTrophy_y(int trophy_y) {
 		this.trophy_y = trophy_y;
-	}
+	}*/
 	
 	public void setX_dim(int x_dim) {
 		this.x_dim = x_dim;
@@ -397,7 +356,7 @@ public class Grid extends JPanel {
             	return;
 
             } else {
-            	 int energy, danceSkills, looksSkills;
+            	int energy, danceSkills, looksSkills;
             	
                 if (pressedCell.isBlindSpot() || pressedCell.isSlipTile() || !pressedCell.isReachable(myPlayer)) {
                 	
@@ -502,15 +461,7 @@ public class Grid extends JPanel {
                 	statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills);
 
                 	doRepaint = true;
-                }  
-                
-                /*pressedCell.uncover();
-                if (pressedCell.isMine()) {
-                    inGame = false;
-                } else if (pressedCell.isEmpty()) {
-                    findEmptyCells(pressedRow, pressedCol, 0);
-                }*/
-                
+                }    
                 
             }
 

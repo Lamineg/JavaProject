@@ -145,19 +145,22 @@ public class Program {
 			//the "battle" between juror and dancer starts using the judgeWon method of the class Win. If the player
 			//wins, he takes the position of the juror and the juror disappears. If the juror wins, the player goes back to
 			//its old spot but regains its energy.
-			for (int j = 0; j < myGrid.getN_Juror(); j++) {
 
-				if (myGrid.myJuror[j].isActive()) {
-					if (myGrid.myJuror[j].getX() == player1.getX_pos() && myGrid.myJuror[j].getY() == player1.getY_pos()) {
+
 						System.out.println("You play against a juror !");
+						
 						if (Win.judgeWon(player1, myGrid.myJuror[j], temp_looks)) {
+							
 							System.out.println("You convinced a juror !");
 							//looks gains depending on the difficulty
+							
 							player1.gainLooks(11-difficulty);
+							
 							System.out.println("looks skills = " + player1.getLooks());
+							
 							// remove the juror from grid;
 							myGrid.removeJuror(j);
-						} else {
+					
 							System.out.println("The juror was not convinced !");
 							//if we don't convince the juror we got back to our previous position
 							player1.setX_pos(player1.getX_old());
@@ -165,45 +168,27 @@ public class Program {
 							//the player should not gain back its energy after losing against a juror
 							//player1.energy++;
 
-						}
-					}
-				}
-			}
 
-			for (int j = 0; j < myGrid.getN_Dancer(); j++) {
-
-				if (myGrid.myDancer[j].isActive()) {
-					if (myGrid.myDancer[j].getX() == player1.getX_pos() && myGrid.myDancer[j].getY() == player1.getY_pos()) {
-						System.out.println("You play against a dancer !");
-						if (Win.danceWon(player1, myGrid.myDancer[j], n_s)) {
 							System.out.println("You won the dance battle !");
 							// update looks, skills; CHOICE SCANNER
+							
 							player1.gainDancingSkills(11-difficulty);
+							
 							System.out.println("dance skills = " + player1.getDance_skills());
 							// remove the juror from grid;
 							myGrid.removeDancer(j);
-						} else {
+						
 							System.out.println("You lost the dance battle !");
 							//if we don't convince the juror we got back to our previous position
 							player1.setX_pos(player1.getX_old());
 							player1.setY_pos(player1.getY_old());
 							//the player should not gain back its energy after losing against a juror
 							//player1.energy++;
-						}
-					}
-				}
-
-			}
 			
 
-			}
+
 			if (player1.energy <= 0) {
 				System.out.println("You run out of energy :'( ");
-			}
-
-			// i++;
-			System.out.println("energy = " + player1.energy);
-		}
 
 		*/
 		
@@ -270,10 +255,6 @@ public class Program {
 			for (int z = 0; z < score.length; z++) {
 				writer.println(score[z].username + " " + score[z].hs);
 			}
-		
-
-		
-
 
 		}writer.close();
 		

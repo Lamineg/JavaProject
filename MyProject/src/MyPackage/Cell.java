@@ -10,14 +10,8 @@ public class Cell {
     
     private int x;
     private int y;
-    
-    private boolean visible;
-
-    private int value;
 
     public Cell(int x, int y) {
-    	
-        this.visible = false;
         
         this.dancer  = false;
         this.juror  = false;
@@ -29,66 +23,7 @@ public class Cell {
         this.x = x;
         this.y = y;
         
-        this.value = 0;
     }
-
-    public int getValue() {
-        return this.value;
-    }
-
-    /*public void uncover() {
-        this.cover = false;
-    }
-
-    public void setMark(boolean mark) {
-        this.mark = mark;
-    }
-
-    public boolean isEmpty() {
-        return this.value == 0;
-    }
-
-    public boolean isMine() {
-        return this.mine;
-    }
-
-    public void setMine(boolean b) {
-        this.mine = b;
-    }
-
-    public boolean isMarked() {
-        return this.mark;
-    }
-
-    public boolean isCovered() {
-        return this.cover;
-    }
-
-    public boolean isChecked() {
-        return this.checked;
-    }
-
-    public boolean isCoveredMine() {
-        return this.cover && this.mine;
-    }
-
-    public void checked() {
-        this.checked = true;
-    }
-
-    public void clearChecked() {
-        this.checked = false;
-    }*/
-
-    public void setAroundMines(int count) {
-        this.value = count;
-    }
-
-    public int getAroundMines() {
-        return this.value;
-    }
-    
-    /**/
     
     public boolean isBlindSpot() {
         return this.blindSpot;
@@ -181,10 +116,6 @@ public class Cell {
         this.player = player;
     }
     
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-    
     public int countSlipTile(SlipperyTile mySlipTile[], int n_Slip) {
 		
 		int n_s = 0;
@@ -196,7 +127,6 @@ public class Cell {
 			int slipY = mySlipTile[j].getY();
 			
 			if (Math.abs(slipX - x) <= radius && Math.abs(slipY - y) <= radius) {
-				//System.out.println("You are in a slip tile area!");
 				n_s++;
 			}
 			
@@ -216,7 +146,6 @@ public class Cell {
 			int blindY = myBlindSpot[j].getY();
 			
 			if (Math.abs(blindX - x) <= radius && Math.abs(blindY - y) <= radius) {
-				//System.out.println("You are in a blind spot zone!");
 				n_b++;
 			}	
 		}
