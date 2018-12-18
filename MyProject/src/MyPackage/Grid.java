@@ -33,27 +33,33 @@ public class Grid extends JPanel {
 	private Cell[][] cells;
 	private Image[] img;
 	
+
 	private boolean inGame;
 
-	int x_dim;// = 5;
-	int y_dim;// = 5;
+	//dimensions of the grid
+	private int x_dim;
+	private int y_dim;
 	
-	int trophy_x;// = 3;
-	int trophy_y;// = 3;
+	//position of the trophy
+	private int trophy_x;
+	private int trophy_y;
 	
-	int n_Blind;
-	int n_Juror;
-	int n_Slip;
-	int n_Dancer;
+	//number of objects for the penalties and bonuses
+	private int n_Blind;
+	private int n_Juror;
+	private int n_Slip;
+	private int n_Dancer;
 	
+	//lists of objects
 	BlindSpot [] myBlindSpot;
 	Juror [] myJuror;
 	SlipperyTile [] mySlipTile;
 	Dancer [] myDancer;
 	
+
 	Player myPlayer;
 	
-	Grid(int x_dim, int y_dim, int n_Blind, int n_Juror, int n_Slip, int n_Dancer, JLabel statusBar){
+	Grid(int difficulty, int x_dim, int y_dim, int n_Blind, int n_Juror, int n_Slip, int n_Dancer, JLabel statusBar){
 		
 		
 		
@@ -66,11 +72,34 @@ public class Grid extends JPanel {
 		this.n_Slip = n_Slip;
 		this.n_Dancer = n_Dancer;
 		
+
+	//method to construct the grid using the difficulty chosen by the player. 
+	//Grid(int difficulty){
+		
+		//set the dimensions at 15, whatever the difficulty
+		this.x_dim = 15;
+		this.y_dim = 15;
+		
+		//set the number of blinding spotlights at difficulty + 1
+		this.n_Blind = difficulty+1;
+		
+		//set the number of jurors at difficulty + 1
+		this.n_Juror = difficulty+1;
+		
+		//set the number of slippery tiles at difficulty +1
+		this.n_Slip = difficulty+1;
+		
+		//set the number of dancers at difficulty + 1
+		this.n_Dancer = difficulty+1;
+		
+		//create list of objects of size equal to the number of objects of that class
+
 		myBlindSpot = new BlindSpot[n_Blind];
 		myJuror = new Juror[n_Juror];
 		mySlipTile = new SlipperyTile[n_Slip];
 		myDancer = new Dancer[n_Dancer];
 		
+
 		myPlayer = new Player(0,0);
 		
 		/*  */
@@ -81,56 +110,68 @@ public class Grid extends JPanel {
 		this.statusBar.setFont(new Font("Arial", Font.ITALIC, 30));
 		
 		for (int i = 0; i < NUM_IMAGES; i++) {
-            String path = "img/m" + i + ".gif";
-            img[i] = new ImageIcon(path).getImage();
-        }
+	            String path = "img/m" + i + ".gif";
+        	    img[i] = new ImageIcon(path).getImage();
+        	}
 		
-		this.setDoubleBuffered(true);
+		
+	this.setDoubleBuffered(true);
         this.addMouseListener(new GameAdapter());
         
         this.newGame();
 		
 	}
 	
-	void removeJuror(int id){
-		myJuror[id].active = false;
+	//getter for x_dim
+	public int getX_dim() {
+		return x_dim;
 	}
 	
-	void removeDancer(int id){
-		myDancer[id].active = false;
+	//getter for y_dim
+	public int getY_dim() {
+		return y_dim;
 	}
-
+	
+	//method to remove the juror, will be used after a confrontation succeeds with a juror
+	void removeJuror(int id){
+		myJuror[id].setActive(false);
+	}
+	
+	//method to remove a dancer, will be used when we beat another dancer
+	void removeDancer(int id){
+		myDancer[id].setActive(false);
+	}
 	
 	/*  */
 	
 	private void initCells () {
-        this.cells = new Cell[y_dim][x_dim];
+    	    this.cells = new Cell[y_dim][x_dim];
 
-        for (int i = 0; i < this.y_dim; ++i) {
-            for (int j = 0; j < this.x_dim; ++j) {
-                this.cells[i][j] = new Cell(j,i);
-            }
-        }
+        	for (int i = 0; i < this.y_dim; ++i) {
+            		for (int j = 0; j < this.x_dim; ++j) {
+                		this.cells[i][j] = new Cell(j,i);
+            		}
+        	}
         
-        this.cells[0][0].setPlayer(true);
-    }
+       	    this.cells[0][0].setPlayer(true);
+    	}
 	
 	public void newGame () {
-        Random random;
+        	Random random;
 
-        random = new Random();
+        	random = new Random();
 
-        this.inGame = true;
-        //this.remainderMines = totalMines;
+        	this.inGame = true;
+        	//this.remainderMines = totalMines;
 
-        this.initCells();
-        //this.statusBar.setText(Integer.toString(this.remainderMines));
+        	this.initCells();
+        	//this.statusBar.setText(Integer.toString(this.remainderMines));
 
-        int randX, randY;
-        int remainder = 1; //1 trophy
-        while(remainder > 0) {
-        	randY = random.nextInt(this.y_dim);
-        	randX = random.nextInt(this.x_dim);
+        	int randX, randY;
+        	int remainder = 1; //1 trophy
+        	while(remainder > 0) {
+        		randY = random.nextInt(this.y_dim);
+        		randX = random.nextInt(this.x_dim);
         	
         	Cell cell = this.cells[randY][randX];
         	if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy() && !cell.isPlayer()) {
@@ -441,4 +482,62 @@ public class Grid extends JPanel {
             }
         }
     }
+
+
+public int getTrophy_x() {
+	return trophy_x;
 }
+
+public void setTrophy_x(int trophy_x) {
+	this.trophy_x = trophy_x;
+}
+
+public int getTrophy_y() {
+	return trophy_y;
+}
+
+public void setTrophy_y(int trophy_y) {
+	this.trophy_y = trophy_y;
+}
+
+public void setX_dim(int x_dim) {
+	this.x_dim = x_dim;
+}
+
+public void setY_dim(int y_dim) {
+	this.y_dim = y_dim;
+}
+
+public int getN_Blind() {
+	return n_Blind;
+}
+
+public void setN_Blind(int n_Blind) {
+	this.n_Blind = n_Blind;
+}
+
+public int getN_Juror() {
+	return n_Juror;
+}
+
+public void setN_Juror(int n_Juror) {
+	this.n_Juror = n_Juror;
+}
+
+public int getN_Slip() {
+	return n_Slip;
+}
+
+public void setN_Slip(int n_Slip) {
+	this.n_Slip = n_Slip;
+}
+
+public int getN_Dancer() {
+	return n_Dancer;
+}
+
+public void setN_Dancer(int n_Dancer) {
+	this.n_Dancer = n_Dancer;
+
+}
+
