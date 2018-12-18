@@ -14,8 +14,8 @@ import java.util.*;
 
 public class Grid extends JPanel {
 	
-	private final int CELL_SIZE  = 15;//to fix
-    private final int NUM_IMAGES = 13;// to fix
+	private final int CELL_SIZE  = 15*2;//to fix
+    private final int NUM_IMAGES = 8;// to fix
     
     private final int IMAGE_BLINDSPOT       = 1;
     private final int IMAGE_SLIPTILE      = 2;
@@ -25,7 +25,7 @@ public class Grid extends JPanel {
     private final int IMAGE_JUROR       = 5;
     private final int IMAGE_TROPHY      = 6;
     private final int IMAGE_WHITE       = 7;
-    private final int IMAGE_BLACK = 8;
+    private final int IMAGE_BLACK = 0;
     
 	private JLabel statusBar;
 	
@@ -78,7 +78,7 @@ public class Grid extends JPanel {
 		this.img = new Image[NUM_IMAGES];
 		
 		for (int i = 0; i < NUM_IMAGES; i++) {
-            String path = "img/j" + i + ".gif";
+            String path = "img/m" + i + ".gif";
             img[i] = new ImageIcon(path).getImage();
         }
 		

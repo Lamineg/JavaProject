@@ -7,8 +7,8 @@ import javax.swing.JLabel;
 
 public class Game extends JFrame{
 	
-	private final int WIDTH = 250;
-    private final int HEIGHT = 290;
+	private final int WIDTH = 250*2;
+    private final int HEIGHT = 290*2;
 
     private JLabel statusbar;
 
@@ -22,7 +22,7 @@ public class Game extends JFrame{
         statusbar = new JLabel("");
         add(statusbar, BorderLayout.SOUTH);
 
-        add(new Grid(10,10,2,2,2,2,statusbar));
+        add(new Grid(16,16,5,5,5,5,statusbar));
 
         setResizable(false);
         setVisible(true);
