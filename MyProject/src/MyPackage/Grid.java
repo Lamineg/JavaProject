@@ -14,7 +14,7 @@ import java.util.*;
 
 public class Grid extends JPanel {
 	
-	private final int CELL_SIZE  = 15*2;//to fix
+	private final int CELL_SIZE  = 50;//to fix
     private final int NUM_IMAGES = 8;// to fix
     
     private final int IMAGE_BLINDSPOT       = 1;

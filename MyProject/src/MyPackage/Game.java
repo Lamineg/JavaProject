@@ -7,8 +7,8 @@ import javax.swing.JLabel;
 
 public class Game extends JFrame{
 	
-	private final int WIDTH = 250*2;
-    private final int HEIGHT = 290*2;
+	private final int WIDTH = 834;
+    private final int HEIGHT = 967;
 
     private JLabel statusbar;
 
