@@ -59,7 +59,7 @@ public class Player {
 	}
 	
 	//method to move the player in any direction but maximum of 1 step
-	 void move(int x1, int y1) {
+	 void move2(int x1, int y1) {
 		 
 		 if(Math.abs(x1)>1 || (Math.abs(y1)>1)) {
 				System.out.println("Unreachable");
@@ -120,6 +120,15 @@ public class Player {
 		loseEnergy(1);
 	}
 	
+	void move(int x_new, int y_new) {
+		x_old = x_pos;
+		y_old = y_pos;
+
+		x_pos = x_new;
+		y_pos = y_new;
+		loseEnergy(1);
+	}
+	
 	void loseEnergy1(int x, int y) {
 		
 		energy = energy - x - y ;
@@ -130,10 +139,43 @@ public class Player {
 		return looksSkills;
 	}
 	
+
 	void currentScore() {
 		hs = energy + looks + danceSkills;
 	}
 	
+
+	public boolean judgeWon(Juror myJuror, int n_blind) { 
+		// add number of blindspots
+		
+		int random;
+		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
+		
+		if(looksSkills - n_blind >= myJuror.looksThreshold + random) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean danceWon(Dancer myDancer, int n_spot) {
+		//add number of slips
+		
+		int random;
+		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
+		
+		if(danceSkills - n_spot >= myDancer.danceThreshold + random) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
 }	
 
 

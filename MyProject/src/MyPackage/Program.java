@@ -8,10 +8,11 @@ import java.util.Scanner;
 
 public class Program {
 
+
 	// main method is the first method that the program will run
 	public static void main(String[] args) throws IOException {
 
-		Player player1 = new Player("Aymeric", 0, 0);
+		//Player player1 = new Player("Aymeric", 0, 0);
 
 		// player1.move(2, 1);
 
@@ -24,10 +25,10 @@ public class Program {
 
 		// TEST FOR GRID PART ;
 
-		Grid myGrid = new Grid(5, 5, 2, 2, 2, 2);
+		//Grid myGrid = new Grid(5, 5, 2, 2, 2, 2);
 
-		int[] positions_x = { 2, 2, -1 };// new int [4];
-		int[] positions_y = { 3, -1, 1 };// new int [4];
+		//int[] positions_x = { 2, 2, -1 };// new int [4];
+		//int[] positions_y = { 3, -1, 1 };// new int [4];
 
 		// System.out.println("blind x = "+myGrid.myBlindSpot.x+", blind y = "+
 		// myGrid.myBlindSpot.y);
@@ -35,6 +36,31 @@ public class Program {
 
 
 		// int i = 0;
+
+	
+	//main method is the first method that the program will run
+	//public static void main(String[] args) {
+		
+		new Game();
+
+		/*
+		Player player1 = new Player(0,0);
+		
+
+		// TEST FOR GRID PART ;
+
+		
+		Grid myGrid = new Grid(5,5,2,2,2,2);
+		 
+
+		int [] positions_x = {2,2,-1};//new int [4];
+		int [] positions_y = {3,-1,1};//new int [4];
+		
+		
+		System.out.println("energy = "+player1.energy);
+		
+		//int i = 0;
+		//
 		int movX, movY;
 
 		while (player1.energy > 0 && (myGrid.trophy_x != player1.x_pos || myGrid.trophy_y != player1.y_pos)) {
@@ -42,61 +68,36 @@ public class Program {
 			// player1.move(positionsx[i], positions_y[i]);
 			visibility(myGrid, player1);
 
-			/* Replace this part by a scanner or GUI */
-			// movX = (int) (Math.random()*(4 + 4 + 1)) - 4;
-			// movY = (int) (Math.random()*(4 + 4 + 1)) - 4;
-
-			movX = (int) (Math.random() * (1 + 1 + 1)) - 1;
-			movY = (int) (Math.random() * (1 + 1 + 1)) - 1;
-
-			player1.move1(movX, movY);// LOST ENERGY ALREADY
-
-			if (player1.x_pos >= myGrid.x_dim)
-				player1.x_pos = myGrid.x_dim - 1;
-			if (player1.x_pos < 0)
-				player1.x_pos = 0;
-			if (player1.y_pos >= myGrid.y_dim)
-				player1.y_pos = myGrid.y_dim - 1;
-			if (player1.y_pos < 0)
-				player1.y_pos = 0;
-
 			if (!isValidMove(player1, myGrid)) {
+			
+			
+			movX = (int) (Math.random()*(1 + 1 + 1)) - 1;
+			movY = (int) (Math.random()*(1 + 1 + 1)) - 1;
+			
+			player1.move1(movX, movY);//LOST ENERGY ALREADY
+			
+			if(player1.x_pos >= myGrid.x_dim) player1.x_pos = myGrid.x_dim - 1;
+			if(player1.x_pos < 0) player1.x_pos = 0;
+			if(player1.y_pos >= myGrid.y_dim) player1.y_pos = myGrid.y_dim - 1;
+			if(player1.y_pos < 0) player1.y_pos = 0;
+			
+			if(!isValidMove(player1,myGrid)) {
+
 				player1.x_pos = player1.x_old;
 				player1.y_pos = player1.y_old;
 				player1.energy++;// SHOULD REGAIN ENERGY
 			}
 
-			/*                        */
 
 
-			System.out.println("x = "+player1.x_pos+", y = "+ player1.y_pos);
+
+
+
 			
-			//MODIFY THAT PART TO CHECK NUMBER OF BLIND AND SLIP in area
 			
-			/*for(int j = 0; j < myGrid.n_Blind ; j++) {
-				
-
-
-			System.out.println("x = " + player1.x_pos + ", y = " + player1.y_pos);
-
-			for (int j = 0; j < myGrid.n_Blind; j++) {
-
-
-				if (myGrid.myBlindSpot[j].x == player1.x_pos && myGrid.myBlindSpot[j].y == player1.y_pos) {
-					System.out.println("You are on a blind spot !");
-				}
-
-			}
-
-			for (int j = 0; j < myGrid.n_Slip; j++) {
-
-				if (myGrid.mySlipTile[j].x == player1.x_pos && myGrid.mySlipTile[j].y == player1.y_pos) {
-					System.out.println("You are on a slip tile !");
-				}
-
-				
-			}*/
 			
+
+
 			int n_b = 0; 
 			int n_s = 0;
 			for(int j = 0; j < myGrid.n_Blind ; j++) {
@@ -110,7 +111,7 @@ public class Program {
 			
 			for(int j = 0; j < myGrid.n_Slip ; j++) {
 				
-				if (Math.abs(myGrid.mySlipTile[j].x - player1.x_pos) <= myGrid.mySlipTile[j].influenceRadius && Math.abs(myGrid.mySlipTile[j].x - player1.x_pos) <= myGrid.mySlipTile[j].influenceRadius) {
+				if (Math.abs(myGrid.mySlipTile[j].x - player1.x_pos) <= myGrid.mySlipTile[j].influenceRadius && Math.abs(myGrid.mySlipTile[j].y - player1.y_pos) <= myGrid.mySlipTile[j].influenceRadius) {
 					//System.out.println("You are in a slip tile area!");
 					n_s++;
 				}
@@ -188,6 +189,8 @@ public class Program {
 			// i++;
 			System.out.println("energy = " + player1.energy);
 		}
+
+		*/
 		
 		//calculate the current score of the player
 		player1.currentScore();
@@ -244,12 +247,16 @@ public class Program {
 			}
 		}
 
+
 		else
 		{
 			for (int z = 0; z < score.length; z++) {
 				writer.println(score[z].username + " " + score[z].hs);
 			}
 		
+
+		
+
 
 		}writer.close();
 	}
@@ -374,7 +381,7 @@ public class Program {
 	}
 
 	
-	public static boolean judgeWon(Player myPlayer, Juror myJuror, int n_blind) { 
+	/*public static boolean judgeWon(Player myPlayer, Juror myJuror, int n_blind) { 
 		// add number of blindspots
 		
 		int random;
@@ -387,10 +394,14 @@ public class Program {
 		} else {
 			return false;
 		}
+
 	}
 
+
+	}*/
+
 	
-	public static boolean danceWon(Player myPlayer, Dancer myDancer, int n_spot) {
+	/*public static boolean danceWon(Player myPlayer, Dancer myDancer, int n_spot) {
 		//add number of slips
 		
 		int random;
@@ -403,7 +414,10 @@ public class Program {
 		} else {
 			return false;
 		}
-	}
+
+	}*/
+
+
 }
 	
 	
