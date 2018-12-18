@@ -141,7 +141,7 @@ public class Cell {
     
     public boolean isReachable(Player myPlayer) {
 		
-		if(Math.abs(x - myPlayer.x_pos) <= 1 && Math.abs(y - myPlayer.x_pos) <= 1) {
+		if(Math.abs(x - myPlayer.x_pos) <= 1 && Math.abs(y - myPlayer.y_pos) <= 1) {
 			return true;
 		}
 		else
@@ -177,6 +177,72 @@ public class Cell {
     
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+    
+    public int countSlipTile(SlipperyTile mySlipTile[], int n_Slip) {
+		
+		int n_s = 0;
+		
+		for(int j = 0; j < n_Slip ; j++) {
+			
+			if (Math.abs(mySlipTile[j].x - x) <= mySlipTile[j].influenceRadius && Math.abs(mySlipTile[j].y - y) <= mySlipTile[j].influenceRadius) {
+				//System.out.println("You are in a slip tile area!");
+				n_s++;
+			}
+			
+		}
+		
+		return n_s;
+	}
+    
+    public int countBlindSpot(BlindSpot myBlindSpot[], int n_Blind) {
+		
+		int n_b = 0; 
+		
+		for(int j = 0; j < n_Blind ; j++) {
+			
+			if (Math.abs(myBlindSpot[j].x - x) <= myBlindSpot[j].influenceRadius && Math.abs(myBlindSpot[j].y - y) <= myBlindSpot[j].influenceRadius) {
+				//System.out.println("You are in a blind spot zone!");
+				n_b++;
+			}	
+		}
+		
+		return n_b;
+	}
+    
+    public int getJurorId(Juror myJuror[], int n_Juror) {
+    	
+    	int id = 0;
+    	
+    	for(int j = 0; j < n_Juror ; j++) {
+				
+    			id = j;
+				if (myJuror[j].x == x && myJuror[j].y == y) {
+
+						return id;		
+					
+				}
+				
+		}
+    	
+    	return id;
+    }
+    
+    public int getDancerId(Dancer myDancer[], int n_Dancer) {
+    	
+    	int id = 0;
+    	
+    	for(int j = 0; j < n_Dancer ; j++) {
+				
+    		id = j;
+				if (myDancer[j].x == x && myDancer[j].y == y) {
+
+						return id;		
+					
+				}
+		}
+    	
+    	return id;
     }
     
 }

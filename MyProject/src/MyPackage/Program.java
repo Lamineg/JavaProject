@@ -9,12 +9,15 @@ public class Program {
 		
 		new Game();
 
+		/*
 		Player player1 = new Player(0,0);
 		
 
 		// TEST FOR GRID PART ;
 
+		
 		Grid myGrid = new Grid(5,5,2,2,2,2);
+		 
 
 		int [] positions_x = {2,2,-1};//new int [4];
 		int [] positions_y = {3,-1,1};//new int [4];
@@ -30,7 +33,7 @@ public class Program {
 			//player1.move(positionsx[i], positions_y[i]);
 			visibility(myGrid, player1);
 			
-			/* Replace this part by a scanner  or GUI*/
+			
 			
 			movX = (int) (Math.random()*(1 + 1 + 1)) - 1;
 			movY = (int) (Math.random()*(1 + 1 + 1)) - 1;
@@ -48,27 +51,12 @@ public class Program {
 				player1.energy++;// SHOULD REGAIN ENERGY
 			}
 			
-			/*                        */
+			
 			
 			System.out.println("x = "+player1.x_pos+", y = "+ player1.y_pos);
 			
 			//MODIFY THAT PART TO CHECK NUMBER OF BLIND AND SLIP in area
 			
-			/*for(int j = 0; j < myGrid.n_Blind ; j++) {
-				
-				if (myGrid.myBlindSpot[j].x == player1.x_pos && myGrid.myBlindSpot[j].y == player1.y_pos) {
-					System.out.println("You are on a blind spot !");
-				}
-				
-			}
-			
-			for(int j = 0; j < myGrid.n_Slip ; j++) {
-				
-				if (myGrid.mySlipTile[j].x == player1.x_pos && myGrid.mySlipTile[j].y == player1.y_pos) {
-					System.out.println("You are on a slip tile !");
-				}
-				
-			}*/
 			int n_b = 0; 
 			int n_s = 0;
 			for(int j = 0; j < myGrid.n_Blind ; j++) {
@@ -156,7 +144,7 @@ public class Program {
 			
 			//i++;
 		}
-		
+		*/
 
 	}
 	
@@ -285,7 +273,7 @@ public class Program {
 		return true;
 	}
 	
-	public static boolean judgeWon(Player myPlayer, Juror myJuror, int n_blind) { 
+	/*public static boolean judgeWon(Player myPlayer, Juror myJuror, int n_blind) { 
 		// add number of blindspots
 		
 		int random;
@@ -298,9 +286,9 @@ public class Program {
 		{
 			return false;
 		}
-	}
+	}*/
 	
-	public static boolean danceWon(Player myPlayer, Dancer myDancer, int n_spot) {
+	/*public static boolean danceWon(Player myPlayer, Dancer myDancer, int n_spot) {
 		//add number of slips
 		
 		int random;
@@ -313,6 +301,6 @@ public class Program {
 		{
 			return false;
 		}
-	}
+	}*/
 
 }

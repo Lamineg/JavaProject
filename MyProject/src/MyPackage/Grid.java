@@ -46,14 +46,13 @@ public class Grid extends JPanel {
 	int n_Dancer;
 	
 	BlindSpot [] myBlindSpot;
-	
 	Juror [] myJuror;
 	SlipperyTile [] mySlipTile;
 	Dancer [] myDancer;
 	
 	Player myPlayer;
 	
-	Grid(int x_dim, int y_dim, int n_Blind, int n_Juror, int n_Slip, int n_Dancer){
+	Grid(int x_dim, int y_dim, int n_Blind, int n_Juror, int n_Slip, int n_Dancer, JLabel statusBar){
 		
 		
 		
@@ -75,6 +74,7 @@ public class Grid extends JPanel {
 		
 		/*  */
 		
+		this.statusBar = statusBar;
 		this.img = new Image[NUM_IMAGES];
 		
 		for (int i = 0; i < NUM_IMAGES; i++) {
@@ -87,39 +87,6 @@ public class Grid extends JPanel {
         
         this.newGame();
 		
-		//List<Integer> listOfRandom = new ArrayList<Integer>();
-		
-		/*int posX, posY;
-		for(int i = 0; i < n_Blind ; i++) {
-			
-			//do {
-				posX = (int) (Math.random()*(x_dim + 1));
-				posY = (int) (Math.random()*(y_dim + 1));
-			//}
-			//while(listOfRandom.contains(posX));
-			
-			myBlindSpot[i] = new BlindSpot(posX,posY,1);
-		}
-		for(int i = 0; i < n_Juror ; i++) {
-			
-			posX = (int) (Math.random()*(x_dim + 1));
-			posY = (int) (Math.random()*(y_dim + 1));
-			myJuror[i] = new Juror(posX,posY,i,10);
-		}
-		for(int i = 0; i < n_Slip ; i++) {
-	
-			posX = (int) (Math.random()*(x_dim + 1));
-			posY = (int) (Math.random()*(y_dim + 1));
-			mySlipTile[i] = new SlipperyTile(posX,posY,1);
-		}
-		for(int i = 0; i < n_Dancer ; i++) {
-			
-			posX = (int) (Math.random()*(x_dim + 1));
-			posY = (int) (Math.random()*(y_dim + 1));
-			myDancer[i] = new Dancer(posX,posY,i,10);
-		}*/
-		
-		
 	}
 	
 	void removeJuror(int id){
@@ -129,8 +96,7 @@ public class Grid extends JPanel {
 	void removeDancer(int id){
 		myDancer[id].active = false;
 	}
-	
-	
+
 	
 	/*  */
 	
@@ -159,7 +125,7 @@ public class Grid extends JPanel {
 
         int randX, randY;
         int remainder = 1; //1 trophy
-        while(remainder >= 1) {
+        while(remainder > 0) {
         	randY = random.nextInt(this.y_dim);
         	randX = random.nextInt(this.x_dim);
         	
@@ -169,54 +135,56 @@ public class Grid extends JPanel {
                 remainder--;
             }
         }
-        
 
         
-        
         int remainderBlind = n_Blind;
-        while (remainderBlind >= 0) {
+        while (remainderBlind > 0) {
             randY = random.nextInt(this.y_dim);
             randX = random.nextInt(this.x_dim);
 
             Cell cell = this.cells[randY][randX];
             if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy() && !cell.isPlayer()) {
                 cell.setBlindSpot(true);
+                myBlindSpot[n_Blind - remainderBlind] = new BlindSpot(randX,randY,1);
                 remainderBlind--;
             }
         }
         
         int remainderSlip = n_Slip;
-        while (remainderSlip >= 0) {
+        while (remainderSlip > 0) {
             randY = random.nextInt(this.y_dim);
             randX = random.nextInt(this.x_dim);
 
             Cell cell = this.cells[randY][randX];
             if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy() && !cell.isPlayer()) {
                 cell.setSlipTile(true);
+                mySlipTile[n_Slip - remainderSlip] = new SlipperyTile(randX,randY,1);
                 remainderSlip--;
             }
         }
         
         int remainderDancer = n_Dancer;
-        while (remainderDancer >= 0) {
+        while (remainderDancer > 0) {
             randY = random.nextInt(this.y_dim);
             randX = random.nextInt(this.x_dim);
 
             Cell cell = this.cells[randY][randX];
             if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy() && !cell.isPlayer()) {
                 cell.setDancer(true);
+                myDancer[n_Dancer - remainderDancer] = new Dancer(randX,randY,n_Dancer - remainderDancer,10);
                 remainderDancer--;
             }
         }
         
         int remainderJuror = n_Juror;
-        while (remainderJuror >= 0) {
+        while (remainderJuror > 0) {
             randY = random.nextInt(this.y_dim);
             randX = random.nextInt(this.x_dim);
 
             Cell cell = this.cells[randY][randX];
             if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy() && !cell.isPlayer()) {
                 cell.setJuror(true);
+                myJuror[n_Juror - remainderJuror] = new Juror(randX,randY,n_Juror - remainderJuror,10);
                 remainderJuror--;
             }
         }
@@ -224,7 +192,6 @@ public class Grid extends JPanel {
         //this.setMineCounts();
     }
 	
-
 	public void paint(Graphics g) {
         int coveredCells = 0;
 
@@ -318,6 +285,7 @@ public class Grid extends JPanel {
 
             boolean doRepaint = false;
             Cell pressedCell;
+            Cell currentCell;
 
             if (!inGame) {
                 newGame();
@@ -330,6 +298,7 @@ public class Grid extends JPanel {
             }
 
             pressedCell = cells[pressedRow][pressedCol];
+            currentCell = cells[myPlayer.y_pos][myPlayer.x_pos];
 
             if (e.getButton() == MouseEvent.BUTTON3) {
                 
@@ -353,10 +322,104 @@ public class Grid extends JPanel {
                 */
             } else {
                 if (pressedCell.isBlindSpot() || pressedCell.isSlipTile() || !pressedCell.isReachable(myPlayer)) {
-                    return;
-                }
+                	
+                	if(pressedCell.isBlindSpot()) {
+                		statusBar.setText("Invalid move : blindspot");      
+                	} else if(pressedCell.isSlipTile()) {
+                		statusBar.setText("Invalid move : SlipTile");
+                	} else {
+                		statusBar.setText("Invalid move : unreachable");
+                	}
+                	//statusBar.setText("Invalid move");
+                	return;
+                
+                } else if(pressedCell.equals(currentCell)) {
+                	
+                	statusBar.setText("energy = " + myPlayer.energy + "; looks = " + myPlayer.looksSkills + "; dance = " + myPlayer.danceSkills);
+                	return;
+                	
+                } else if(pressedCell.isJuror()) {
+                	
+                	int id = pressedCell.getJurorId(myJuror, n_Juror);
+                	int n_b = currentCell.countBlindSpot(myBlindSpot, n_Blind);
+                	
+                	if(myPlayer.judgeWon(myJuror[id],n_b)) {
+                		
+                		myPlayer.gainLooks();
+                		pressedCell.setJuror(false);
+                		
+                		pressedCell.setPlayer(true);
+                    	currentCell.setPlayer(false);
+                    	myPlayer.move(pressedCol, pressedRow);
+                    	
+                    	statusBar.setText("You convinced a juror");
+                    	
+                    	doRepaint = true;
+                    	
+                    	
+                	} else {
+                		
+                		statusBar.setText("You did not convinced a juror");
+                		
+                		myPlayer.loseEnergy();//or not ?
+                		return;
+                		
+                	}
+                		
+                } else if(pressedCell.isDancer()) {
+                	
+                	int id = pressedCell.getDancerId(myDancer, n_Dancer);
+                	int n_s = currentCell.countSlipTile(mySlipTile, n_Slip);
+                	
+                	if(myPlayer.danceWon(myDancer[id],n_s)) {
+                		
+                		myPlayer.gainDancingSkills();
+                		pressedCell.setDancer(false);
+                		
+                		pressedCell.setPlayer(true);
+                    	currentCell.setPlayer(false);
+                    	myPlayer.move(pressedCol, pressedRow);
+                    	
+                    	statusBar.setText("You won a dance battle");
+                    	
+                    	doRepaint = true;
+                    	
+                	} else {
+                		
+                		statusBar.setText("You lost a dance battle");
+                		
+                		myPlayer.loseEnergy();//or not ?
+                		return;
+                		
+                		
+                	}
+                	
+                } else if(pressedCell.isTrophy()) { //add condition to access trophy
+                	
+                	inGame = false;
+                	pressedCell.setTrophy(false);
+                	
+                	pressedCell.setPlayer(true);
+                	currentCell.setPlayer(false);
+                	myPlayer.move(pressedCol, pressedRow);
+                	
+                	statusBar.setText("You won !");
+                	
+                	doRepaint = true;
+                	
+                } else {
+                	
+                	pressedCell.setPlayer(true);
+                	currentCell.setPlayer(false);
+                	myPlayer.move(pressedCol, pressedRow);
+                	
+                	statusBar.setText("energy = " + myPlayer.energy + "; looks = " + myPlayer.looksSkills + "; dance = " + myPlayer.danceSkills);
 
-                doRepaint = true;
+                	doRepaint = true;
+                }
+                
+                
+                
 
                 
                 

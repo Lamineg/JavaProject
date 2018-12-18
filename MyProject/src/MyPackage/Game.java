@@ -22,7 +22,7 @@ public class Game extends JFrame{
         statusbar = new JLabel("");
         add(statusbar, BorderLayout.SOUTH);
 
-        add(new Grid(5,5,2,2,2,2));
+        add(new Grid(10,10,2,2,2,2,statusbar));
 
         setResizable(false);
         setVisible(true);
