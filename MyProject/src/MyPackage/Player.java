@@ -12,9 +12,6 @@ public class Player {
 	//position of the player in t and in (t-1)
 	private int x_pos;
 	private int y_pos;
-
-	private int x_old;
-	private int y_old;
 	
 	// the skills of the player 
 	private int looksSkills;
@@ -23,8 +20,6 @@ public class Player {
 	// energy
 	private int energy;
 	
-
-
 	//amount that will be lost or gain when encountering a penalty/bonus
 	int amount;
 	
@@ -38,9 +33,6 @@ public class Player {
 		//initial position of the player
 		x_pos = 0;
 		y_pos = 0;
-		setX_old(0);
-		setY_old(0);
-		
 
 		//The neutral value for looks and dancing skills is set to 20 and the value changes
 		//with the value that the player inputs on a scale that goes from looks to dancing skills.
@@ -57,6 +49,23 @@ public class Player {
 		energy = 30 - (2*difficulty) ;
 	}
 	
+
+	//method to move the player in any direction but maximum of 1 step
+	 void move2(int x1, int y1) {
+		 
+		 if(Math.abs(x1)>1 || (Math.abs(y1)>1)) {
+				System.out.println("Unreachable");
+			}
+		else {
+			x_pos = x_pos + x1;
+			y_pos = y_pos + y1;
+			
+		}
+		 loseEnergy(1);
+		
+	 }
+			
+
 	
 	//method that makes the player gain a certain amount of energy
 	void gainEnergy(int amount) {
@@ -102,8 +111,6 @@ public class Player {
 	//method that takes two distances as argument to make the player move. It first updates the old position as the current position
 	//before moving and then updates the new current position by summing the distances x1 and y1. Finally, the player looses energy
 	void move1(int x1, int y1) {
-		setX_old(x_pos);
-		setY_old(y_pos);
 
 		x_pos = x_pos + x1;
 		y_pos = y_pos + y1;
@@ -112,12 +119,30 @@ public class Player {
 		loseEnergy(1);
 	}
 	
+	void move(int x_new, int y_new) {
+
+		x_pos = x_new;
+		y_pos = y_new;
+		loseEnergy(1);
+	}
+	
+	void loseEnergy1(int x, int y) {
+		
+		energy = energy - x - y ;
+
+	}
+
+
 	//getter for looks
+
 	int getLooks() {
 		return looksSkills;
 	}
 	
+
+
 	//method to calculate the current score
+
 	void currentScore() {
 		setHs(energy + looksSkills + danceSkills);
 	}
@@ -131,26 +156,7 @@ public class Player {
 	public void setHs(int hs) {
 		this.hs = hs;
 	}
-
-
-	public int getX_old() {
-		return x_old;
-	}
-
-
-	public void setX_old(int x_old) {
-		this.x_old = x_old;
-	}
-
-
-	public int getY_old() {
-		return y_old;
-	}
-
-
-	public void setY_old(int y_old) {
-		this.y_old = y_old;
-	}
+	
 	public int getX_pos() {
 		return x_pos;
 	}
@@ -162,7 +168,41 @@ public class Player {
 	public int getY_pos() {
 		return y_pos;
 	}
+
+	public boolean judgeWon(Juror myJuror, int n_blind) { 
+		// add number of blindspots
+		
+		int random;
+		int looksThreshold = myJuror.getLooksThreshold();
+		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
+		
+		if(looksSkills - n_blind >= looksThreshold + random) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	
+	public boolean danceWon(Dancer myDancer, int n_spot) {
+		//add number of slips
+		
+		int random;
+		int danceThreshold = myDancer.getDanceThreshold();
+		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
+		
+		if(danceSkills - n_spot >= danceThreshold + random) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+
 	
 	public void setY_pos(int y_pos) {
 		this.y_pos = y_pos;
@@ -175,6 +215,7 @@ public class Player {
 	public void setEnergy(int energy) {
 		this.energy = energy;
 	}
+
 }	
 
 

@@ -3,7 +3,6 @@ package MyPackage;
 public class Juror {
 	
 	private int id;
-	private boolean active;
 	private int x;
 	private int y;
 	private int looksThreshold;
@@ -13,7 +12,6 @@ public class Juror {
 		this.setY(y);
 		this.setId(id);
 		this.setLooksThreshold(looksThreshold);
-		setActive(true);
 	}
 
 	public int getId() {
@@ -22,14 +20,6 @@ public class Juror {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
 	}
 
 	public int getX() {

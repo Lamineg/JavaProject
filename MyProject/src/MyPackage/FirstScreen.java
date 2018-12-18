@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 public class FirstScreen {
 
 	private Object lock = new Object();
-	private String username;
+	private static String username;
 	private int difficulty;
 	private int input_skills;
 	JFrame frame = new JFrame();
@@ -138,7 +138,7 @@ public class FirstScreen {
 	
 	//getters and setters
 	
-	public String getUsername() {
+	public static String getUsername() {
 		return username;
 	}
 

@@ -3,7 +3,6 @@ package MyPackage;
 public class Dancer {
 	
 	private int id;
-	private boolean active;
 	private int x;
 	private int y;
 	private int danceThreshold;
@@ -13,7 +12,6 @@ public class Dancer {
 		this.setY(y);
 		this.setId(id);
 		this.setDanceThreshold(danceThreshold);
-		setActive(true);
 	}
 
 	public int getId() {
@@ -47,14 +45,5 @@ public class Dancer {
 	public void setDanceThreshold(int danceThreshold) {
 		this.danceThreshold = danceThreshold;
 	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
 	
-
 }

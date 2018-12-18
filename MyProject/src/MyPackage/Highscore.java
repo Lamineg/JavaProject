@@ -6,9 +6,12 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 public class Highscore {
 	
 	private String username;
+
 	private int hs;
 	
 
@@ -40,34 +43,27 @@ public class Highscore {
 
 		scanner.close();
 
-		score[countLines] = new Highscore(player1.username, player1.getHs());
-		/*
-		 * for (int x = 0; x < countLines + 1; x++) {
-		 * System.out.println(score[x].username + score[x].hs); }
-		 */
-		Arrays.sort(score, new SortByScore());
-
-		/*
-		 * for (int x = 0; x < countLines + 1; x++) {
-		 * System.out.println(score[x].username + score[x].hs); }
-		 */
-
+		score[countLines] = new Highscore(player1.username, Grid.getHs());
+		
 		PrintWriter writer = new PrintWriter("High Scores.txt");
-
-		if (score.length > 10) {
+		
+		if(score.length>10)
+		{
 			for (int z = 0; z < 10; z++) {
-				writer.println(score[z].username + " " + score[z].hs);
+				writer.println(score[z].getUsername() + " " + score[z].getHs());
 			}
 		}
-
+		
 		else {
-			for (int z = 0; z < score.length; z++) {
-				writer.println(score[z].username + " " + score[z].hs);
+			
+			{
+				for (int z = 0; z < score.length; z++) {
+					writer.println(score[z].getUsername() + " " + score[z].getHs());
+				}
+				
 			}
-
 		}
 		writer.close();
-
 	}
 	
 	public int getHs() {
@@ -79,4 +75,11 @@ public class Highscore {
 	}
 	
 	
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

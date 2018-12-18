@@ -1,7 +1,10 @@
 package MyPackage;
 
+<<<<<<< HEAD
+public class Game {
 	
 	
+=======
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
@@ -19,7 +22,7 @@ public class Game extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
-        setTitle("Dance Battle 2D");
+        setTitle("Become a Star");
 
         statusbar = new JLabel("");
         add(statusbar, BorderLayout.SOUTH);
@@ -29,4 +32,5 @@ public class Game extends JFrame{
         setResizable(false);
         setVisible(true);
     }
+>>>>>>> 2b0d393c8decd921ea5b2dcb648be566ffa62158
 }
