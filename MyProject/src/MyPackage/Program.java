@@ -3,58 +3,39 @@ package MyPackage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Program {
 
 	// main method is the first method that the program will run
-	public static void main(String[] args) throws IOException {
-
+	public static void main(String[] args) throws IOException, InterruptedException {
+		
+		FirstScreen first = new FirstScreen();
+		
+		first.run();
+		
+		FirstScreen.Wait(first);
+		
+		System.out.println(first.getUsername());
+		
 		// Initialization of a scanner to get the username, the difficulty and the
 		// skills of the player
+		
+		Player player1 = new Player(first.getUsername(), first.getInput_skills(), first.getDifficulty());
+		
+
+		Grid myGrid = new Grid(first.getDifficulty());
+
 		Scanner question = new Scanner(System.in);
-		System.out.println("Username: ");
-		String username = question.nextLine();
-		System.out.println("Level of difficulty (from 0 to 10): ");
-		int difficulty = question.nextInt();
-		System.out.println(
-				"Balance between Looks and Dance (0 favors Looks, " + "5 is same for both and 10 favors Dance: ");
-		int input_skills = question.nextInt();
 
-		Player player1 = new Player(username, input_skills, difficulty);
-
-		// player1.move(2, 1);
-
-		// create new player
-
-		// TEST FOR GRID PART ;
-
-		Grid myGrid = new Grid(difficulty);
-
-		// Grid myGrid = new Grid();
-
-		// int[] positions_x = { 2, 2, -1 };// new int [4];
-		// int[] positions_y = { 3, -1, 1 };// new int [4];
-
-		// System.out.println("blind x = "+myGrid.myBlindSpot.x+", blind y = "+
-		// myGrid.myBlindSpot.y);
-
-		// int i = 0;
 		int movX;
 		int movY;
+		
 		while (player1.energy > 0 && (myGrid.trophy_x != player1.x_pos || myGrid.trophy_y != player1.y_pos)) {
 
 			// player1.move(positionsx[i], positions_y[i]);
 			visibility(myGrid, player1);
-
-			/* Replace this part by a scanner or GUI */
-			// movX = (int) (Math.random()*(4 + 4 + 1)) - 4;
-			// movY = (int) (Math.random()*(4 + 4 + 1)) - 4;
-
-			// movX = (int) (Math.random() * (1 + 1 + 1)) - 1;
-			// movY = (int) (Math.random() * (1 + 1 + 1)) - 1;
 
 			// Ask the player for the next move
 			System.out.println("What is your next move?");
@@ -185,6 +166,7 @@ public class Program {
 		 * System.out.println(score[x].username + score[x].hs); }
 		 */
 		// Arrays.sort(score, new SortbyScore());
+		
 		Arrays.sort(score, new SortByScore());
 
 		/*
