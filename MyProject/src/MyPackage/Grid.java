@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -76,6 +77,8 @@ public class Grid extends JPanel {
 		
 		this.statusBar = statusBar;
 		this.img = new Image[NUM_IMAGES];
+		
+		this.statusBar.setFont(new Font("Arial", Font.ITALIC, 30));
 		
 		for (int i = 0; i < NUM_IMAGES; i++) {
             String path = "img/m" + i + ".gif";
