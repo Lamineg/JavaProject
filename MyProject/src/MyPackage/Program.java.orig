@@ -1,8 +1,11 @@
 package MyPackage;
 
 import java.io.IOException;
+<<<<<<< HEAD
+=======
 import java.io.PrintWriter;
 import java.util.Arrays;
+>>>>>>> aymericGUI
 import java.util.Scanner;
 
 public class Program {
@@ -20,6 +23,7 @@ public class Program {
 		
 		// Initialization of a scanner to get the username, the difficulty and the
 		// skills of the player
+<<<<<<< HEAD
 		Scanner question = new Scanner(System.in);
 		System.out.println("Username: ");
 		String username = question.nextLine();
@@ -31,7 +35,7 @@ public class Program {
 		
 		
 		
-		/*//use the player's inputs for username, input_skills and difficulty to determine to instantiate a new player object.
+		//use the player's inputs for username, input_skills and difficulty to determine to instantiate a new player object.
 		Player player1 = new Player(username, input_skills, difficulty);
 
 		//use the player's inputs for the difficulty to instantiate a new object grid. 
@@ -39,15 +43,16 @@ public class Program {
 
 		//instantiate the variables that will take in the player's desired move
 		int movX;
-		int movY;*/
+		int movY;
 
 		//the while loop that makes the game running, the game continues running until the player has either lost its energy or
 		//found the trophy
-		/*while (player1.getEnergy() > 0 && (myGrid.getTrophy_x() != player1.getX_pos() || myGrid.getTrophy_y() != player1.getY_pos())) {
+		while (player1.getEnergy() > 0 && (myGrid.getTrophy_x() != player1.getX_pos() || myGrid.getTrophy_y() != player1.getY_pos())) {
 
 			// call method to check visibility (see class visibility)
 			Visibility.vis(myGrid, player1);
 			
+=======
 		
 		Player player1 = new Player(first.getUsername(), first.getInput_skills(), first.getDifficulty());
 		
@@ -57,14 +62,14 @@ public class Program {
 		Scanner question = new Scanner(System.in);
 
 		int movX;
-		int movY;*/
+		int movY;
 		
-		/*while (player1.energy > 0 && (myGrid.trophy_x != player1.x_pos || myGrid.trophy_y != player1.y_pos)) {
+		while (player1.energy > 0 && (myGrid.trophy_x != player1.x_pos || myGrid.trophy_y != player1.y_pos)) {
 
 			// player1.move(positionsx[i], positions_y[i]);
 			visibility(myGrid, player1);
 
-
+>>>>>>> aymericGUI
 			// Ask the player for the next move
 			System.out.println("What is your next move?");
 			System.out.print("x: ");
@@ -218,8 +223,9 @@ public class Program {
 
 		question.close();
 
+<<<<<<< HEAD
 		Highscore.UpdateHighScore(player1);
-
+=======
 		// File test = new File("High Scores.txt");
 
 		// count the lines
@@ -244,21 +250,21 @@ public class Program {
 
 		scanner.close();
 
-		score[countLines] = new Highscore(player1.username, player1.hs);*/
+		score[countLines] = new Highscore(player1.username, player1.hs);
 		/*
 		 * for (int x = 0; x < countLines + 1; x++) {
 		 * System.out.println(score[x].username + score[x].hs); }
 		 */
 		// Arrays.sort(score, new SortbyScore());
 		
-		//Arrays.sort(score, new SortByScore());
+		Arrays.sort(score, new SortByScore());
 
 		/*
 		 * for (int x = 0; x < countLines + 1; x++) {
 		 * System.out.println(score[x].username + score[x].hs); }
 		 */
 
-		/*PrintWriter writer = new PrintWriter("High Scores.txt");
+		PrintWriter writer = new PrintWriter("High Scores.txt");
 
 		if (score.length > 10) {
 			for (int z = 0; z < 10; z++) {
@@ -272,7 +278,13 @@ public class Program {
 			}
 
 		}
-		writer.close();*/
+		writer.close();
 	}
 
+	public static void visibility(Grid myGrid, Player myPlayer) {
+
+		for (int j = 0; j < myGrid.n_Dancer; j++) {
+>>>>>>> aymericGUI
+
+	}
 }
