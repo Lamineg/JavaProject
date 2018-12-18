@@ -9,85 +9,10 @@ public class Program {
 	// main method is the first method that the program will run
 	public static void main(String[] args) throws IOException {
 
-
-		//Player player1 = new Player("Aymeric", 0, 0);
-
-		// player1.move(2, 1);
-
-		// System.out.println(player1.x_pos + ", " + player1.y_pos);
-
-		// create new player
-		// Player player1 = new Player();
-
-		// System.out.println("x = "+player1.x_pos+", y = "+ player1.y_pos);
-
-		// TEST FOR GRID PART ;
-
-		//Grid myGrid = new Grid(5, 5, 2, 2, 2, 2);
-
-		//int[] positions_x = { 2, 2, -1 };// new int [4];
-		//int[] positions_y = { 3, -1, 1 };// new int [4];
-
-		// System.out.println("blind x = "+myGrid.myBlindSpot.x+", blind y = "+
-		// myGrid.myBlindSpot.y);
-
-
-
-		// int i = 0;
-
-	
-	//main method is the first method that the program will run
-	//public static void main(String[] args) {
 		
-		new Game();
+		new Game(0,"Guillaume",0);
 
 		/*
-		Player player1 = new Player(0,0);
-		
-
-		// TEST FOR GRID PART ;
-
-		
-		Grid myGrid = new Grid(5,5,2,2,2,2);
-		 
-
-		int [] positions_x = {2,2,-1};//new int [4];
-		int [] positions_y = {3,-1,1};//new int [4];
-		
-		
-		System.out.println("energy = "+player1.energy);
-		
-		//int i = 0;
-		//
-		int movX, movY;
-
-		while (player1.energy > 0 && (myGrid.trophy_x != player1.x_pos || myGrid.trophy_y != player1.y_pos)) {
-
-			// player1.move(positionsx[i], positions_y[i]);
-			visibility(myGrid, player1);
-
-			if (!isValidMove(player1, myGrid)) {
-			
-			
-			movX = (int) (Math.random()*(1 + 1 + 1)) - 1;
-			movY = (int) (Math.random()*(1 + 1 + 1)) - 1;
-			
-			player1.move1(movX, movY);//LOST ENERGY ALREADY
-			
-			if(player1.x_pos >= myGrid.x_dim) player1.x_pos = myGrid.x_dim - 1;
-			if(player1.x_pos < 0) player1.x_pos = 0;
-			if(player1.y_pos >= myGrid.y_dim) player1.y_pos = myGrid.y_dim - 1;
-			if(player1.y_pos < 0) player1.y_pos = 0;
-			
-			if(!isValidMove(player1,myGrid)) {
-
-				player1.x_pos = player1.x_old;
-				player1.y_pos = player1.y_old;
-				player1.energy++;// SHOULD REGAIN ENERGY
-			}
-		
-		*/
-
 		// Initialization of a scanner to get the username, the difficulty and the
 		// skills of the player
 		Scanner question = new Scanner(System.in);
@@ -99,8 +24,9 @@ public class Program {
 							+ "5 is same for both and 10 favors Dance: "		);
 		int input_skills = question.nextInt();
 		
+		*/
 		
-		
+    	/*
 		//use the player's inputs for username, input_skills and difficulty to determine to instantiate a new player object.
 		Player player1 = new Player(username, input_skills, difficulty);
 
@@ -108,7 +34,7 @@ public class Program {
 		Grid myGrid = new Grid(difficulty);
 
 		//instantiate the variables that will take in the player's desired move
-		/*
+		
 
 		int movX;
 		int movY;
@@ -281,6 +207,8 @@ public class Program {
 
 		*/
 		
+		
+		/*
 		//calculate the current score of the player
 		player1.currentScore();
 
@@ -348,134 +276,9 @@ public class Program {
 
 
 		}writer.close();
+		
+		*/
 	}
 
-
-	
-
-	public static void visibility(Grid myGrid, Player myPlayer) {
-
-		
-		for(int j = 0; j < myGrid.n_Dancer ; j++) {
-
-			//if the player stands on the same position as the trophy, a message appears
-			if (myGrid.getTrophy_x() == player1.getX_pos() && myGrid.getTrophy_y() == player1.getY_pos()) {
-				// Add condition to take the trophy
-				System.out.println("You found the trophy !");
-				// calculate the current score of the player
-				player1.currentScore();
-				System.out.println("Score = " + player1.getHs());
-
-			}
-
-			
-			//if the player runs out of energy, a message appears
-			if (player1.getEnergy() <= 0) {
-				System.out.println("You run out of energy :'( ");
-				// calculate the current score of the player
-				player1.setHs(0);
-				System.out.println("Score = " + player1.getHs());
-			}
-
-			System.out.println("energy = " + player1.getEnergy());
-			System.out.println("looks = "+ player1.getLooks());
-			System.out.println("dancing skills = "+ player1.getDance_skills());
-			
-		}
-
-		question.close();
-
-		Highscore.UpdateHighScore(player1);
-
-
-		}
-
-		if (myGrid.trophy_x == myPlayer.x_pos && myGrid.trophy_y == myPlayer.y_pos + 1) {
-			System.out.print("Trophee en haut; ");
-		} else if (myGrid.trophy_x == myPlayer.x_pos && myGrid.trophy_y == myPlayer.y_pos - 1) {
-			System.out.print("Trophee en bas; ");
-		} else if (myGrid.trophy_x == myPlayer.x_pos + 1 && myGrid.trophy_y == myPlayer.y_pos) {
-			System.out.print("Trophee a droite; ");
-		} else if (myGrid.trophy_x == myPlayer.x_pos - 1 && myGrid.trophy_y == myPlayer.y_pos) {
-			System.out.print("Trophee a gauche; ");
-		}
-
-		System.out.println(" ");
-
-	}
-
-	public static boolean isValidMove(Player myPlayer, Grid myGrid) {
-
-		if (myPlayer.x_pos > myPlayer.x_old + 1 || myPlayer.x_pos < myPlayer.x_old - 1) {
-			System.out.println("Invalid move");
-			return false;
-		}
-
-		if (myPlayer.y_pos > myPlayer.y_old + 1 || myPlayer.y_pos < myPlayer.y_old - 1) {
-			System.out.println("Invalid move");
-			return false;
-		}
-
-		for (int j = 0; j < myGrid.n_Slip; j++) {
-
-			if (myGrid.mySlipTile[j].x == myPlayer.x_pos && myGrid.mySlipTile[j].y == myPlayer.y_pos) {
-				System.out.println("Invalid move");
-				return false;
-			}
-
-		}
-
-		for (int j = 0; j < myGrid.n_Blind; j++) {
-
-			if (myGrid.myBlindSpot[j].x == myPlayer.x_pos && myGrid.myBlindSpot[j].y == myPlayer.y_pos) {
-				System.out.println("Invalid move");
-				return false;
-			}
-
-		}
-
-		return true;
-	}
-
-	
-	/*public static boolean judgeWon(Player myPlayer, Juror myJuror, int n_blind) { 
-		// add number of blindspots
-		
-		int random;
-		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
-		
-		if(myPlayer.looksSkills - n_blind >= myJuror.looksThreshold + random) {
-
-			return true;
-		
-		} else {
-			return false;
-		}
-
-	}
-
-
-	}*/
-
-	
-	/*public static boolean danceWon(Player myPlayer, Dancer myDancer, int n_spot) {
-		//add number of slips
-		
-		int random;
-		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
-		
-		if(myPlayer.danceSkills - n_spot >= myDancer.danceThreshold + random) {
-
-			return true;
-		
-		} else {
-			return false;
-		}
-
-	}*/
-
-
-
-	}
 
 }

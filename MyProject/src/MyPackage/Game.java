@@ -12,7 +12,7 @@ public class Game extends JFrame{
 
     private JLabel statusbar;
 
-	public Game() {
+	public Game(int difficulty, String username, int input_skills) {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
@@ -22,7 +22,7 @@ public class Game extends JFrame{
         statusbar = new JLabel("");
         add(statusbar, BorderLayout.SOUTH);
 
-        add(new Grid(16,16,5,5,5,5,statusbar));
+        add(new Grid(difficulty,username,input_skills,statusbar));
 
         setResizable(false);
         setVisible(true);

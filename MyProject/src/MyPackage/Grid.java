@@ -59,27 +59,15 @@ public class Grid extends JPanel {
 
 	Player myPlayer;
 	
-	Grid(int difficulty, int x_dim, int y_dim, int n_Blind, int n_Juror, int n_Slip, int n_Dancer, JLabel statusBar){
-		
-		
-		
-        /*   */
-        
-		this.x_dim = x_dim;
-		this.y_dim = y_dim;
-		this.n_Blind = n_Blind;
-		this.n_Juror = n_Juror;
-		this.n_Slip = n_Slip;
-		this.n_Dancer = n_Dancer;
-		
-
 	//method to construct the grid using the difficulty chosen by the player. 
-	//Grid(int difficulty){
+	Grid(int difficulty, String username, int input_skills, JLabel statusBar){
+
+        /*   */
 		
-		//set the dimensions at 15, whatever the difficulty
-		this.x_dim = 15;
-		this.y_dim = 15;
-		
+        //set the dimensions at 15, whatever the difficulty
+		this.x_dim = 16;
+		this.y_dim = 16;
+			
 		//set the number of blinding spotlights at difficulty + 1
 		this.n_Blind = difficulty+1;
 		
@@ -100,7 +88,7 @@ public class Grid extends JPanel {
 		myDancer = new Dancer[n_Dancer];
 		
 
-		myPlayer = new Player(0,0);
+		myPlayer = new Player(username,input_skills,difficulty);
 		
 		/*  */
 		
@@ -321,11 +309,71 @@ public class Grid extends JPanel {
         return imageType;
     }
 	
+
+	public int getTrophy_x() {
+		return trophy_x;
+	}
+	
+	public void setTrophy_x(int trophy_x) {
+		this.trophy_x = trophy_x;
+	}
+	
+	public int getTrophy_y() {
+		return trophy_y;
+	}
+	
+	public void setTrophy_y(int trophy_y) {
+		this.trophy_y = trophy_y;
+	}
+	
+	public void setX_dim(int x_dim) {
+		this.x_dim = x_dim;
+	}
+	
+	public void setY_dim(int y_dim) {
+		this.y_dim = y_dim;
+	}
+	
+	public int getN_Blind() {
+		return n_Blind;
+	}
+	
+	public void setN_Blind(int n_Blind) {
+		this.n_Blind = n_Blind;
+	}
+	
+	public int getN_Juror() {
+		return n_Juror;
+	}
+	
+	public void setN_Juror(int n_Juror) {
+		this.n_Juror = n_Juror;
+	}
+	
+	public int getN_Slip() {
+		return n_Slip;
+	}
+	
+	public void setN_Slip(int n_Slip) {
+		this.n_Slip = n_Slip;
+	}
+	
+	public int getN_Dancer() {
+		return n_Dancer;
+	}
+	
+	public void setN_Dancer(int n_Dancer) {
+		this.n_Dancer = n_Dancer;
+	
+	}
+	
 	class GameAdapter extends MouseAdapter {
         
 		public void mousePressed(MouseEvent e) {
             int pressedCol = e.getX() / CELL_SIZE;
             int pressedRow = e.getY() / CELL_SIZE;
+            int x = myPlayer.getX_pos();
+            int y = myPlayer.getY_pos();
 
             boolean doRepaint = false;
             Cell pressedCell;
@@ -342,29 +390,15 @@ public class Grid extends JPanel {
             }
 
             pressedCell = cells[pressedRow][pressedCol];
-            currentCell = cells[myPlayer.y_pos][myPlayer.x_pos];
+            currentCell = cells[y][x];
 
             if (e.getButton() == MouseEvent.BUTTON3) {
                 
             	return;
-            	/*doRepaint = true;
 
-                if (!pressedCell.isCovered()) {
-                    return;
-                }
-
-                String str;
-                if (!pressedCell.isMarked()) {
-                    pressedCell.setMark(true);
-                    remainderMines--;
-                } else {
-                    pressedCell.setMark(false);
-                    remainderMines++;
-                }
-
-                statusBar.setText(Integer.toString(remainderMines));
-                */
             } else {
+            	 int energy, danceSkills, looksSkills;
+            	
                 if (pressedCell.isBlindSpot() || pressedCell.isSlipTile() || !pressedCell.isReachable(myPlayer)) {
                 	
                 	if(pressedCell.isBlindSpot()) {
@@ -379,7 +413,11 @@ public class Grid extends JPanel {
                 
                 } else if(pressedCell.equals(currentCell)) {
                 	
-                	statusBar.setText("energy = " + myPlayer.energy + "; looks = " + myPlayer.looksSkills + "; dance = " + myPlayer.danceSkills);
+                	energy = myPlayer.getEnergy();
+                	looksSkills = myPlayer.getLooks();
+                	danceSkills = myPlayer.getDance_skills();
+                	
+                	statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills);
                 	return;
                 	
                 } else if(pressedCell.isJuror()) {
@@ -389,7 +427,7 @@ public class Grid extends JPanel {
                 	
                 	if(myPlayer.judgeWon(myJuror[id],n_b)) {
                 		
-                		myPlayer.gainLooks();
+                		myPlayer.gainLooks(1);
                 		pressedCell.setJuror(false);
                 		
                 		pressedCell.setPlayer(true);
@@ -405,7 +443,7 @@ public class Grid extends JPanel {
                 		
                 		statusBar.setText("You did not convinced a juror");
                 		
-                		myPlayer.loseEnergy();//or not ?
+                		myPlayer.loseEnergy(1);//or not ?
                 		return;
                 		
                 	}
@@ -417,7 +455,7 @@ public class Grid extends JPanel {
                 	
                 	if(myPlayer.danceWon(myDancer[id],n_s)) {
                 		
-                		myPlayer.gainDancingSkills();
+                		myPlayer.gainDancingSkills(1);
                 		pressedCell.setDancer(false);
                 		
                 		pressedCell.setPlayer(true);
@@ -432,7 +470,7 @@ public class Grid extends JPanel {
                 		
                 		statusBar.setText("You lost a dance battle");
                 		
-                		myPlayer.loseEnergy();//or not ?
+                		myPlayer.loseEnergy(1);//or not ?
                 		return;
                 		
                 		
@@ -457,15 +495,14 @@ public class Grid extends JPanel {
                 	currentCell.setPlayer(false);
                 	myPlayer.move(pressedCol, pressedRow);
                 	
-                	statusBar.setText("energy = " + myPlayer.energy + "; looks = " + myPlayer.looksSkills + "; dance = " + myPlayer.danceSkills);
+                	energy = myPlayer.getEnergy();
+                	looksSkills = myPlayer.getLooks();
+                	danceSkills = myPlayer.getDance_skills();
+                	
+                	statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills);
 
                 	doRepaint = true;
-                }
-                
-                
-                
-
-                
+                }  
                 
                 /*pressedCell.uncover();
                 if (pressedCell.isMine()) {
@@ -482,62 +519,6 @@ public class Grid extends JPanel {
             }
         }
     }
-
-
-public int getTrophy_x() {
-	return trophy_x;
-}
-
-public void setTrophy_x(int trophy_x) {
-	this.trophy_x = trophy_x;
-}
-
-public int getTrophy_y() {
-	return trophy_y;
-}
-
-public void setTrophy_y(int trophy_y) {
-	this.trophy_y = trophy_y;
-}
-
-public void setX_dim(int x_dim) {
-	this.x_dim = x_dim;
-}
-
-public void setY_dim(int y_dim) {
-	this.y_dim = y_dim;
-}
-
-public int getN_Blind() {
-	return n_Blind;
-}
-
-public void setN_Blind(int n_Blind) {
-	this.n_Blind = n_Blind;
-}
-
-public int getN_Juror() {
-	return n_Juror;
-}
-
-public void setN_Juror(int n_Juror) {
-	this.n_Juror = n_Juror;
-}
-
-public int getN_Slip() {
-	return n_Slip;
-}
-
-public void setN_Slip(int n_Slip) {
-	this.n_Slip = n_Slip;
-}
-
-public int getN_Dancer() {
-	return n_Dancer;
-}
-
-public void setN_Dancer(int n_Dancer) {
-	this.n_Dancer = n_Dancer;
 
 }
 

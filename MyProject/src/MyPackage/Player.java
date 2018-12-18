@@ -38,8 +38,8 @@ public class Player {
 		//initial position of the player
 		x_pos = 0;
 		y_pos = 0;
-		//setX_old(0);
-		//setY_old(0);
+		x_old = 0;
+		y_old = 0;
 		
 
 		//The neutral value for looks and dancing skills is set to 20 and the value changes
@@ -204,9 +204,10 @@ public class Player {
 		// add number of blindspots
 		
 		int random;
+		int looksThreshold = myJuror.getLooksThreshold();
 		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
 		
-		if(looksSkills - n_blind >= myJuror.looksThreshold + random) {
+		if(looksSkills - n_blind >= looksThreshold + random) {
 			return true;
 		}
 		else
@@ -219,9 +220,10 @@ public class Player {
 		//add number of slips
 		
 		int random;
+		int danceThreshold = myDancer.getDanceThreshold();
 		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
 		
-		if(danceSkills - n_spot >= myDancer.danceThreshold + random) {
+		if(danceSkills - n_spot >= danceThreshold + random) {
 			return true;
 		}
 		else

@@ -116,19 +116,22 @@ public class Cell {
     
     public boolean isVisible(Player myPlayer) {
         
-    	if (x == myPlayer.x_pos && y == myPlayer.y_pos + 1) {
+    	int playerX = myPlayer.getX_pos();
+    	int playerY = myPlayer.getY_pos();
+    	
+    	if (x == playerX && y == playerY + 1) {
 			
     		return true;
     		
-		} else if(x == myPlayer.x_pos && y == myPlayer.y_pos - 1){
+		} else if(x == playerX && y == playerY - 1){
 			
 			return true;
 			
-		} else if(x == myPlayer.x_pos + 1 && y == myPlayer.y_pos){
+		} else if(x == playerX + 1 && y == playerY){
 			
 			return true;
 			
-		} else if(x == myPlayer.x_pos - 1 && y == myPlayer.y_pos){
+		} else if(x == playerX - 1 && y == playerY){
 			
 			return true;
 			
@@ -141,7 +144,10 @@ public class Cell {
     
     public boolean isReachable(Player myPlayer) {
 		
-		if(Math.abs(x - myPlayer.x_pos) <= 1 && Math.abs(y - myPlayer.y_pos) <= 1) {
+    	int playerX = myPlayer.getX_pos();
+    	int playerY = myPlayer.getY_pos();
+    	
+		if(Math.abs(x - playerX) <= 1 && Math.abs(y - playerY) <= 1) {
 			return true;
 		}
 		else
@@ -185,7 +191,11 @@ public class Cell {
 		
 		for(int j = 0; j < n_Slip ; j++) {
 			
-			if (Math.abs(mySlipTile[j].x - x) <= mySlipTile[j].influenceRadius && Math.abs(mySlipTile[j].y - y) <= mySlipTile[j].influenceRadius) {
+			int radius = mySlipTile[j].getInfluenceRadius();
+			int slipX = mySlipTile[j].getX();
+			int slipY = mySlipTile[j].getY();
+			
+			if (Math.abs(slipX - x) <= radius && Math.abs(slipY - y) <= radius) {
 				//System.out.println("You are in a slip tile area!");
 				n_s++;
 			}
@@ -201,7 +211,11 @@ public class Cell {
 		
 		for(int j = 0; j < n_Blind ; j++) {
 			
-			if (Math.abs(myBlindSpot[j].x - x) <= myBlindSpot[j].influenceRadius && Math.abs(myBlindSpot[j].y - y) <= myBlindSpot[j].influenceRadius) {
+			int radius = myBlindSpot[j].getInfluenceRadius();
+			int blindX = myBlindSpot[j].getX();
+			int blindY = myBlindSpot[j].getY();
+			
+			if (Math.abs(blindX - x) <= radius && Math.abs(blindY - y) <= radius) {
 				//System.out.println("You are in a blind spot zone!");
 				n_b++;
 			}	
@@ -217,7 +231,10 @@ public class Cell {
     	for(int j = 0; j < n_Juror ; j++) {
 				
     			id = j;
-				if (myJuror[j].x == x && myJuror[j].y == y) {
+    			int jurorX = myJuror[j].getX();
+    			int jurorY = myJuror[j].getY();
+    			
+				if (jurorX == x && jurorY == y) {
 
 						return id;		
 					
@@ -235,7 +252,10 @@ public class Cell {
     	for(int j = 0; j < n_Dancer ; j++) {
 				
     		id = j;
-				if (myDancer[j].x == x && myDancer[j].y == y) {
+    		int dancerX = myDancer[j].getX();
+			int dancerY = myDancer[j].getY();
+			
+				if (dancerX == x && dancerY == y) {
 
 						return id;		
 					
