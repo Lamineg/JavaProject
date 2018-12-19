@@ -12,7 +12,7 @@ public class Program {
 
 		first.run();
 
-		FirstScreen.Wait(first);
+		first.waitScreen();
 
 		new Game(first.getDifficulty(), first.getUsername(), first.getInput_skills());
 

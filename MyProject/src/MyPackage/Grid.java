@@ -278,8 +278,6 @@ public class Grid extends JPanel {
 		return imageType;
 	}
 
-
-
 	public void setX_dim(int x_dim) {
 		this.x_dim = x_dim;
 	}
@@ -475,7 +473,7 @@ public class Grid extends JPanel {
 
 							myPlayer.loseEnergy(1);// or not ?
 							return;
-							
+
 						}
 
 					} else {

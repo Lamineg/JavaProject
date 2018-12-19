@@ -127,31 +127,29 @@ public class Player {
 
 		int random;
 		int looksThreshold = myJuror.getLooksThreshold();
-		random = (int) (Math.random()*difficulty*10);
-		if (random<20) {
+		random = (int) (Math.random() * difficulty * 10);
+		if (random < 20) {
 			random = 20;
 		}
-		
-		if (looksSkills - n_blind*10 >= looksThreshold + random) {
+
+		if (looksSkills - n_blind * 10 >= looksThreshold + random) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-		
 
 	public boolean danceWon(Dancer myDancer, int n_spot) {
 		// add number of slips
 
 		int random;
 		int danceThreshold = myDancer.getDanceThreshold();
-		random = (int) (Math.random()*difficulty*10);
-		if (random<20) {
+		random = (int) (Math.random() * difficulty * 10);
+		if (random < 20) {
 			random = 20;
 		}
-		
 
-		if (danceSkills - n_spot*10 >= danceThreshold + random) {
+		if (danceSkills - n_spot * 10 >= danceThreshold + random) {
 			return true;
 		} else {
 			return false;
@@ -177,10 +175,10 @@ public class Player {
 	public void resetDanceSkills() {
 		this.danceSkills = 20 + 2 * input_skills;
 	}
-	
+
 	public boolean canCatchTrophy() {
 		int score = getScore();
-		if(score > 100 + 2*difficulty) {
+		if (score > 100 + 2 * difficulty) {
 			return true;
 		} else {
 			return false;
