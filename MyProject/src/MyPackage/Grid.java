@@ -336,28 +336,45 @@ public class Grid extends JPanel {
 
 	class GameAdapter extends MouseAdapter {
 
+		/*
+		 * (non-Javadoc)
+		 * @see java.awt.event.MouseAdapter#mousePressed(java.awt.event.MouseEvent)
+		 * Overrides a method of the java library
+		 * The method tells the game how to react to the clicks of mouse.
+		 * Hence, this is where the main body of the rules of the game is placed.
+		 */
 		public void mousePressed(MouseEvent e) {
+			
+			// get the position of the pressed cell
 			int pressedCol = e.getX() / CELL_SIZE;
 			int pressedRow = e.getY() / CELL_SIZE;
+			
+			// position of the cell of the player
 			int x = myPlayer.getX_pos();
 			int y = myPlayer.getY_pos();
 
+			// init of a boolean, that will specify if the panel needs to be repainted, i.e. if positions of elements have changed
 			boolean doRepaint = false;
+			
 			Cell pressedCell;
 			Cell currentCell;
 
+			// if not in a game, begin a new game and refresh => typically at the end of a previous game (won or lost)
 			if (!inGame) {
 				newGame();
 				repaint();
 			}
 
+			// if out of bounds, do not do anything, return directly
 			if ((pressedCol < 0 || pressedCol >= x_dim) || (pressedRow < 0 || pressedRow >= y_dim)) {
 				return;
 			}
 
+			// init of the objects cell
 			pressedCell = cells[pressedRow][pressedCol];
 			currentCell = cells[y][x];
 
+			// if right click, no impact
 			if (e.getButton() == MouseEvent.BUTTON3) {
 
 				return;
@@ -365,6 +382,7 @@ public class Grid extends JPanel {
 			} else {
 				int energy, danceSkills, looksSkills, score;
 
+				// if no more energy to move => end of game, and refresh, to reveal all the map
 				if (myPlayer.getEnergy() <= 0) {
 					inGame = false;
 
@@ -374,8 +392,12 @@ public class Grid extends JPanel {
 
 				} else {
 
+					// if invalid move, because of 1. blindspot position, 2. sliptile position 3. unreachable cell
+					// does not do anything, return directly
+					// Message displaying invalid move
 					if (pressedCell.isBlindSpot() || pressedCell.isSlipTile() || !pressedCell.isReachable(myPlayer)) {
 
+						// possibility of varying the message depending on the object
 						if (pressedCell.isBlindSpot()) {
 							statusBar.setText("Invalid move");
 						} else if (pressedCell.isSlipTile()) {
@@ -386,6 +408,8 @@ public class Grid extends JPanel {
 						
 						return;
 
+					// if pressedCell is the same as the currentCell, does not do anything.
+					// Display message of the score of the player
 					} else if (pressedCell.equals(currentCell)) {
 
 						energy = myPlayer.getEnergy();
@@ -397,24 +421,37 @@ public class Grid extends JPanel {
 								+ "=> score : " + score);
 						return;
 
+					// if juror on pressedCell, 
 					} else if (pressedCell.isJuror()) {
 
+						// find the juror id, to find its features
 						int id = pressedCell.getJurorId(myJuror, n_Juror);
+						// count the blind spots, that could influence the looks of the player
 						int n_b = currentCell.countBlindSpot(myBlindSpot, n_Blind);
 
+						// if judge is convinced (Depending on the threshold of the juror, the number of blinding spots, and some randomness)
 						if (myPlayer.judgeWon(myJuror[id], n_b)) {
 
+							// Win 10 points of looks : fixed for all games, independent of difficulty
 							myPlayer.gainLooks(10);
+							
+							// Juror disapear from the map, as it has been convinced by the player's looks
 							pressedCell.setJuror(false);
 
+							// place the player on the cell where the juror was before
 							pressedCell.setPlayer(true);
+							// withdraw the player from the previous cell
 							currentCell.setPlayer(false);
+							// update position in object player
 							myPlayer.move(pressedCol, pressedRow);
 
 							statusBar.setText("You convinced a juror");
 
+							// the panel needs repainting
+							// no return, in order to access "repaint();" at the end of the method
 							doRepaint = true;
 
+						// if lost battle, still lose 1 point energy, and return, without refreshing
 						} else {
 
 							statusBar.setText("You did not convinced a juror");
@@ -424,6 +461,7 @@ public class Grid extends JPanel {
 
 						}
 
+					// if dancer, same as juror
 					} else if (pressedCell.isDancer()) {
 
 						int id = pressedCell.getDancerId(myDancer, n_Dancer);
@@ -451,39 +489,54 @@ public class Grid extends JPanel {
 
 						}
 
+					// if trophy, 
 					} else if (pressedCell.isTrophy()) { 
 
+						// if enough points to catch the trophy : end of game and win 
+						// Depends on the difficulty level and the current score of the player
 						if (myPlayer.canCatchTrophy()) {
 
+							// end of game
 							inGame = false;
+							
+							// remove trophy from cell
 							pressedCell.setTrophy(false);
+							
 							score = myPlayer.getScore();
 
+							// put the player where the trophy was
 							pressedCell.setPlayer(true);
 							currentCell.setPlayer(false);
 							myPlayer.move(pressedCol, pressedRow);
 
+							// display message + score of the game
 							statusBar.setText("You won ! Score : " + score);
 
+							// set the score of the player
 							myPlayer.setHs();
 
+							// update highscore in the .txt file
 							try {
 								Highscore.UpdateHighScore(myPlayer);
 							} catch (FileNotFoundException e1) {
 								e1.printStackTrace();
 							}
 
+							// needs repainting, revealing all the map when won
 							doRepaint = true;
 
+						// if not enough points, can not take the trophy
 						} else {
 
 							statusBar.setText("Invalid move");
 
+							// still lose 1 point of energy
 							myPlayer.loseEnergy(1);
 							return;
 
 						}
 
+					// if not any obstacle or opponent on the cell, just update position
 					} else {
 
 						pressedCell.setPlayer(true);
@@ -495,14 +548,17 @@ public class Grid extends JPanel {
 						danceSkills = myPlayer.getDance_skills();
 						score = myPlayer.getScore();
 
+						// display message of the current score
 						statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills + "=> score : " + score);
 
+						// needs refreshing
 						doRepaint = true;
 					}
 				}
 
 			}
 
+			// block that will be entered if the panel needs refreshing : repaint(); the panel.
 			if (doRepaint) {
 				repaint();
 			}
