@@ -43,7 +43,7 @@ public class Highscore {
 
 		scanner.close();
 
-		score[countLines] = new Highscore(player1.username, Grid.getHs());
+		score[countLines] = new Highscore(player1.getUsername(), Grid.getHs());
 		
 		PrintWriter writer = new PrintWriter("High Scores.txt");
 		

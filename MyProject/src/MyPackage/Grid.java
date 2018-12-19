@@ -332,7 +332,7 @@ public class Grid extends JPanel {
 	}
 
 	public void setHs(int hs) {
-		this.hs = hs;
+		Grid.hs = hs;
 	}
 
 	class GameAdapter extends MouseAdapter {
@@ -465,6 +465,11 @@ public class Grid extends JPanel {
 					}
                 	
                 	doRepaint = true;
+                	
+                	
+                	
+                	//new Game(FirstScreen.getDifficulty(),FirstScreen.getUsername(),FirstScreen.getInput_skills());
+                	
                 	
                 	
                 	

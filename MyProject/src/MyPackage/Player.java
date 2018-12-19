@@ -4,7 +4,7 @@ package MyPackage;
 public class Player {
 	
 	//username of the player, can be used later when we display the highscores
-	final String username;
+	private String username;
 	
 	//variable high score
 	private int hs;
@@ -28,7 +28,7 @@ public class Player {
 	Player(String username, int input_skills, int difficulty){
 		
 		//adds a ":" to the username to correctly display it one the score board afterwards
-		this.username = username + ":";
+		this.setUsername(username + ":");
 		
 		//initial position of the player
 		x_pos = 0;
@@ -214,6 +214,16 @@ public class Player {
 	
 	public void setEnergy(int energy) {
 		this.energy = energy;
+	}
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }	

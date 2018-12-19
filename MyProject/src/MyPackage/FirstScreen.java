@@ -18,8 +18,8 @@ public class FirstScreen {
 
 	private Object lock = new Object();
 	private static String username;
-	private int difficulty;
-	private int input_skills;
+	private static int difficulty;
+	private static int input_skills;
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	
@@ -143,23 +143,23 @@ public class FirstScreen {
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		FirstScreen.username = username;
 	}
 
-	public int getDifficulty() {
+	public static int getDifficulty() {
 		return difficulty;
 	}
 
 	public void setDifficulty(int difficulty) {
-		this.difficulty = difficulty;
+		FirstScreen.difficulty = difficulty;
 	}
 
-	public int getInput_skills() {
+	public static int getInput_skills() {
 		return input_skills;
 	}
 
 	public void setInput_skills(int input_skills) {
-		this.input_skills = input_skills;
+		FirstScreen.input_skills = input_skills;
 	}
 	public Object getLock() {
 		return lock;
