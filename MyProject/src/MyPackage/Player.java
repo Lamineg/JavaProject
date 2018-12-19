@@ -234,7 +234,7 @@ public class Player {
 	}
 
 	public void resetEnergy() {
-		this.energy = 30 - (2 * difficulty);
+		this.energy = 100 - (5 * difficulty);
 	}
 
 	public void resetLooksSkills() {

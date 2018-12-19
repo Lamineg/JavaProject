@@ -3,6 +3,7 @@ package MyPackage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Highscore {
@@ -40,7 +41,9 @@ public class Highscore {
 
 		scanner.close();
 
-		score[countLines] = new Highscore(player1.getUsername(), Grid.getHs());
+		score[countLines] = new Highscore(player1.getUsername(), player1.getHs());
+		
+		Arrays.sort(score, new SortByScore());
 		
 		PrintWriter writer = new PrintWriter("High Scores.txt");
 		
