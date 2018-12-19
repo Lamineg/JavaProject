@@ -54,7 +54,9 @@ public class Player {
 		// The neutral value for the energy is set to 30 and decreases as we increase
 		// the difficulty
 		// times two
-		energy = 140 - (2 * difficulty);
+
+		energy = 100 - (5 * difficulty);
+
 		hs = 0;
 
 		this.difficulty = difficulty;
@@ -179,28 +181,37 @@ public class Player {
 
 		int random;
 		int looksThreshold = myJuror.getLooksThreshold();
-		random = (int) (Math.random() * (3)) - 1; // -1, 0 ou 1
-
-		if (looksSkills - n_blind >= looksThreshold + random) {
+		random = (int) (Math.random()*difficulty*10);
+		if (random<20) {
+			random = 20;
+		}
+		
+		if (looksSkills - n_blind*10 >= looksThreshold + random) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+		
 
 	public boolean danceWon(Dancer myDancer, int n_spot) {
 		// add number of slips
 
 		int random;
 		int danceThreshold = myDancer.getDanceThreshold();
-		random = (int) (Math.random() * (3)) - 1; // -1, 0 ou 1
+		random = (int) (Math.random()*difficulty*10);
+		if (random<20) {
+			random = 20;
+		}
+		
 
-		if (danceSkills - n_spot >= danceThreshold + random) {
+		if (danceSkills - n_spot*10 >= danceThreshold + random) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+	
 
 	public void setY_pos(int y_pos) {
 		this.y_pos = y_pos;
