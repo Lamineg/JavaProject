@@ -1,3 +1,11 @@
+aymeric: 78
+hello: 45
+test3: 87
+try: 0
+: 0
+guigui: 0
+guigui: 0
 aymeriic: 0
 helllo: 0
 hrllo: 0
+

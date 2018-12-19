@@ -54,7 +54,9 @@ public class Player {
 		// The neutral value for the energy is set to 30 and decreases as we increase
 		// the difficulty
 		// times two
+
 		energy = 100 - (5 * difficulty);
+
 		hs = 0;
 
 		this.difficulty = difficulty;
@@ -179,7 +181,7 @@ public class Player {
 
 		int random;
 		int looksThreshold = myJuror.getLooksThreshold();
-		random = (int) (Math.random()*(FirstScreen.getDifficulty())*10);
+		random = (int) (Math.random()*difficulty*10);
 		if (random<20) {
 			random = 20;
 		}
@@ -197,7 +199,7 @@ public class Player {
 
 		int random;
 		int danceThreshold = myDancer.getDanceThreshold();
-		random = (int) (Math.random()*(FirstScreen.getDifficulty())*10);
+		random = (int) (Math.random()*difficulty*10);
 		if (random<20) {
 			random = 20;
 		}
@@ -241,6 +243,15 @@ public class Player {
 
 	public void resetDanceSkills() {
 		this.danceSkills = 20 + 2 * input_skills;
+	}
+	
+	public boolean canCatchTrophy() {
+		int score = getScore();
+		if(score > 100 + 2*difficulty) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/*
