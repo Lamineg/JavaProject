@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
@@ -96,6 +97,9 @@ public class FirstScreen {
 			public void actionPerformed(ActionEvent e) {
 
 				setUsername(text.getText().toString());
+				if (validUserName(username)==true) {
+					JOptionPane.showMessageDialog(frame, "Invalid username: at least 3 characters and no spaces!");
+				}
 				setDifficulty(diff.getValue());
 				setInput_skills(skill.getValue());
 			}
@@ -134,7 +138,22 @@ public class FirstScreen {
 
 	    t.join();
 			
-	}			
+	}	
+	
+	public static boolean validUserName(String username){
+	    if(username != null){
+	        for(int i = 0; i < username.length(); i++){
+	            if(Character.isWhitespace(username.charAt(i))){
+	                return true;
+	            }
+	        }
+	        if(username.length()<3) {
+	        	return true;
+	        }
+	        	
+	    }
+	    return false;
+	}
 	
 	//getters and setters
 	
