@@ -54,7 +54,7 @@ public class Player {
 		// The neutral value for the energy is set to 30 and decreases as we increase
 		// the difficulty
 		// times two
-		energy = 30 - (2 * difficulty);
+		energy = 100 - (5 * difficulty);
 		hs = 0;
 
 		this.difficulty = difficulty;
@@ -184,7 +184,7 @@ public class Player {
 			random = 20;
 		}
 		
-		if (looksSkills - n_blind >= looksThreshold + random) {
+		if (looksSkills - n_blind*10 >= looksThreshold + random) {
 			return true;
 		} else {
 			return false;
@@ -203,7 +203,7 @@ public class Player {
 		}
 		
 
-		if (danceSkills - n_spot >= danceThreshold + random) {
+		if (danceSkills - n_spot*10 >= danceThreshold + random) {
 			return true;
 		} else {
 			return false;

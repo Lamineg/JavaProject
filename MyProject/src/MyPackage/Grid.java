@@ -69,13 +69,13 @@ public class Grid extends JPanel {
 		this.n_Blind = difficulty + 1;
 
 		// set the number of jurors at difficulty + 1
-		this.n_Juror = difficulty + 1;
+		this.n_Juror = 10;
 
 		// set the number of slippery tiles at difficulty +1
 		this.n_Slip = difficulty + 1;
 
 		// set the number of dancers at difficulty + 1
-		this.n_Dancer = difficulty + 1;
+		this.n_Dancer = 10;
 
 		// create list of objects of size equal to the number of objects of that class
 		myBlindSpot = new BlindSpot[n_Blind];
@@ -410,7 +410,7 @@ public class Grid extends JPanel {
 
 					if (myPlayer.judgeWon(myJuror[id], n_b)) {
 
-						myPlayer.gainLooks(1);
+						myPlayer.gainLooks(10);
 						pressedCell.setJuror(false);
 
 						pressedCell.setPlayer(true);
@@ -437,7 +437,7 @@ public class Grid extends JPanel {
 
 					if (myPlayer.danceWon(myDancer[id], n_s)) {
 
-						myPlayer.gainDancingSkills(1);
+						myPlayer.gainDancingSkills(10);
 						pressedCell.setDancer(false);
 
 						pressedCell.setPlayer(true);
@@ -474,10 +474,8 @@ public class Grid extends JPanel {
 						Highscore.UpdateHighScore(myPlayer);
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
-					} catch (InputMismatchException e2) {
-						e2.printStackTrace();
-					}
-
+					} 
+					
 					doRepaint = true;
 
 				} else {
