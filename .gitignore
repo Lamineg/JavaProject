@@ -16,6 +16,8 @@ MyProject/.settings/
 MyProject/.classpath
 MyProject/.project
 
+MyProject/*.txt
+
 MyProject/bin/MyPackage/*.class
 MyProject/bin/MyPackage/Program.class
 #MyProject/bin/MyPackage/Program.class
