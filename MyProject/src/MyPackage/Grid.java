@@ -14,8 +14,10 @@ import javax.swing.JPanel;
 
 public class Grid extends JPanel {
 
+	// initialization of the graphical constants
 	private static final int CELL_SIZE = 50;
 	private static final int NUM_IMAGES = 8;
+	private static final int GRID_SIZE = 10;
 
 	private static final int IMAGE_BLINDSPOT = 1;
 	private static final int IMAGE_SLIPTILE = 2;
@@ -29,50 +31,51 @@ public class Grid extends JPanel {
 
 	private JLabel statusBar;
 
+	// matrix of Cells to represent the grid
 	private Cell[][] cells;
+	// array of images to store for the display of the GUI
 	private Image[] img;
 
+	// boolean value to inform if we are currently in a game
 	private boolean inGame;
 
 	// dimensions of the grid
 	private int x_dim;
 	private int y_dim;
 
+	// high score value, stored at the end of game if won, zero else
 	private int hs;
 
-	// number of objects for the penalties and bonuses
+	// number of blinding spots, jurors, slippery tiles and dancers 
 	private int n_Blind;
 	private int n_Juror;
 	private int n_Slip;
 	private int n_Dancer;
 
-	// lists of objects
+	// storage of arrays of objects BlindSpots, etc.. 
 	BlindSpot[] myBlindSpot;
 	Juror[] myJuror;
 	SlipperyTile[] mySlipTile;
 	Dancer[] myDancer;
 
+	// storage of the Player object
 	Player myPlayer;
 
 	// method to construct the grid using the difficulty chosen by the player.
 	Grid(int difficulty, String username, int input_skills, JLabel statusBar) {
 
 		// set the dimensions at 15, whatever the difficulty
-		this.x_dim = 10;
-		this.y_dim = 10;
+		this.x_dim = GRID_SIZE;
+		this.y_dim = GRID_SIZE;
 
 		// set the number of blinding spotlights at difficulty + 1
 		this.n_Blind = difficulty + 1;
-
-		// set the number of jurors at difficulty + 1
-		this.n_Juror = 10;
-
-		// set the number of slippery tiles at difficulty +1
 		this.n_Slip = difficulty + 1;
 
 		// set the number of dancers at difficulty + 1
 		this.n_Dancer = 10;
-
+		this.n_Juror = 10;
+		
 		// create list of objects of size equal to the number of objects of that class
 		myBlindSpot = new BlindSpot[n_Blind];
 		myJuror = new Juror[n_Juror];
