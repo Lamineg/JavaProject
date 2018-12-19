@@ -123,7 +123,6 @@ public class Player {
 	}
 
 	public boolean judgeWon(Juror myJuror, int n_blind) {
-		// add number of blindspots
 
 		int random;
 		int looksThreshold = myJuror.getLooksThreshold();
@@ -140,7 +139,6 @@ public class Player {
 	}
 
 	public boolean danceWon(Dancer myDancer, int n_spot) {
-		// add number of slips
 
 		int random;
 		int danceThreshold = myDancer.getDanceThreshold();

@@ -8,10 +8,10 @@ public class Dancer {
 	private int danceThreshold;
 
 	Dancer(int x, int y, int id, int danceThreshold) {
-		this.setX(x);
-		this.setY(y);
-		this.setId(id);
-		this.setDanceThreshold(danceThreshold);
+		this.x = x;
+		this.y = y;
+		this.id = id;
+		this.danceThreshold = danceThreshold;
 	}
 
 	public int getId() {

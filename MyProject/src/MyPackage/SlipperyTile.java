@@ -10,9 +10,9 @@ public class SlipperyTile {
 
 	// constructor, instantiates the object SlipperyTile
 	SlipperyTile(int x, int y, int radius) {
-		this.setX(x);
-		this.setY(y);
-		setInfluenceRadius(radius);
+		this.x = x;
+		this.y = y;
+		this.influenceRadius = radius;
 	}
 
 	public int getX() {

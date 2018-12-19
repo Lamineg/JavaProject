@@ -38,10 +38,6 @@ public class Grid extends JPanel {
 	private int x_dim;
 	private int y_dim;
 
-	// position of the trophy
-	// private int trophy_x;
-	// private int trophy_y;
-
 	private static int hs;
 
 	// number of objects for the penalties and bonuses
@@ -62,8 +58,8 @@ public class Grid extends JPanel {
 	Grid(int difficulty, String username, int input_skills, JLabel statusBar) {
 
 		// set the dimensions at 15, whatever the difficulty
-		this.x_dim = 10;// 16
-		this.y_dim = 10;// 16
+		this.x_dim = 10;
+		this.y_dim = 10;
 
 		// set the number of blinding spotlights at difficulty + 1
 		this.n_Blind = difficulty + 1;
@@ -140,7 +136,7 @@ public class Grid extends JPanel {
 		this.statusBar.setText("NEW GAME");
 
 		int randX, randY;
-		int remainder = 1; // 1 trophy
+		int remainder = 1;
 		while (remainder > 0) {
 			randY = random.nextInt(this.y_dim);
 			randX = random.nextInt(this.x_dim);
@@ -234,7 +230,7 @@ public class Grid extends JPanel {
 
 		if (!inGame) {
 
-			if (cell.isBlindSpot()) { // replace by a case ?
+			if (cell.isBlindSpot()) { 
 				imageType = IMAGE_BLINDSPOT;
 			} else if (cell.isSlipTile()) {
 				imageType = IMAGE_SLIPTILE;
@@ -256,7 +252,7 @@ public class Grid extends JPanel {
 				imageType = IMAGE_PLAYER;
 			} else if (cell.isVisible(myPlayer)) {
 
-				if (cell.isBlindSpot()) { // replace by a case ?
+				if (cell.isBlindSpot()) { 
 					imageType = IMAGE_BLINDSPOT;
 				} else if (cell.isSlipTile()) {
 					imageType = IMAGE_SLIPTILE;
@@ -376,7 +372,7 @@ public class Grid extends JPanel {
 						} else {
 							statusBar.setText("Invalid move : unreachable");
 						}
-						// statusBar.setText("Invalid move");
+						
 						return;
 
 					} else if (pressedCell.equals(currentCell)) {
@@ -412,7 +408,7 @@ public class Grid extends JPanel {
 
 							statusBar.setText("You did not convinced a juror");
 
-							myPlayer.loseEnergy(1);// or not ?
+							myPlayer.loseEnergy(1);
 							return;
 
 						}
@@ -439,25 +435,26 @@ public class Grid extends JPanel {
 
 							statusBar.setText("You lost a dance battle");
 
-							myPlayer.loseEnergy(1);// or not ?
+							myPlayer.loseEnergy(1);
 							return;
 
 						}
 
-					} else if (pressedCell.isTrophy()) { // add condition to access trophy
+					} else if (pressedCell.isTrophy()) { 
 
 						if (myPlayer.canCatchTrophy()) {
 
 							inGame = false;
 							pressedCell.setTrophy(false);
+							score = myPlayer.getScore();
 
 							pressedCell.setPlayer(true);
 							currentCell.setPlayer(false);
 							myPlayer.move(pressedCol, pressedRow);
 
-							statusBar.setText("You won !");
+							statusBar.setText("You won ! Score : " + score);
 
-							myPlayer.setHs();// myPlayer.getEnergy()+myPlayer.getDance_skills()+myPlayer.getLooks());
+							myPlayer.setHs();
 
 							try {
 								Highscore.UpdateHighScore(myPlayer);
@@ -471,14 +468,10 @@ public class Grid extends JPanel {
 
 							statusBar.setText("Invalid move");
 
-							myPlayer.loseEnergy(1);// or not ?
+							myPlayer.loseEnergy(1);
 							return;
 
 						}
-
-
-
-		
 
 					} else {
 
@@ -491,11 +484,7 @@ public class Grid extends JPanel {
 						danceSkills = myPlayer.getDance_skills();
 						score = myPlayer.getScore();
 
-						statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills
-								+ "=> score : " + score);
-
-						// statusBar.setText("energy = " + energy + "; looks = " + looksSkills + ";
-						// dance = " + danceSkills);
+						statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills + "=> score : " + score);
 
 						doRepaint = true;
 					}

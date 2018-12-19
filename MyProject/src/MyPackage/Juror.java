@@ -8,10 +8,9 @@ public class Juror {
 	private int looksThreshold;
 
 	Juror(int x, int y, int id, int looksThreshold) {
-		this.setX(x);
-		this.setY(y);
-		this.setId(id);
-		// this.setLooksThreshold(looksThreshold);
+		this.x = x;
+		this.y = y;
+		this.id = id;
 		this.looksThreshold = looksThreshold;
 	}
 
