@@ -478,9 +478,7 @@ public class Grid extends JPanel {
 							Highscore.UpdateHighScore(myPlayer);
 						} catch (FileNotFoundException e1) {
 							e1.printStackTrace();
-						} catch (InputMismatchException e2) {
-							e2.printStackTrace();
-						}
+						} 
 	
 						doRepaint = true;
 						
