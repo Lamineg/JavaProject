@@ -61,25 +61,25 @@ public class Player {
 	}
 
 	// method that makes the player loose a certain amount of energy
-	void loseEnergy(int amount) {
+	public void loseEnergy(int amount) {
 
 		energy = energy - amount;
 	}
 
 	// method that makes the player gain a certain amount of dancing skills
-	void gainDancingSkills(int amount) {
+	public void gainDancingSkills(int amount) {
 
 		danceSkills = danceSkills + amount;
 	}
 
 	// method that makes the player gain a certain amount of looks
-	void gainLooks(int amount) {
+	public void gainLooks(int amount) {
 
-		looksSkills = looksSkills + amount;
+		this.looksSkills = this.looksSkills + amount;
 	}
 
 	// getter for dancing skills
-	int getDance_skills() {
+	public int getDance_skills() {
 		return danceSkills;
 	}
 
@@ -87,7 +87,7 @@ public class Player {
 	// updates the old position as the current position
 	// before moving and then updates the new current position by summing the
 	// distances x1 and y1. Finally, the player looses energy
-	void move(int x_new, int y_new) {
+	public void move(int x_new, int y_new) {
 
 		x_pos = x_new;
 		y_pos = y_new;
@@ -96,7 +96,7 @@ public class Player {
 
 	// getter for looks
 
-	int getLooks() {
+	public int getLooks() {
 		return looksSkills;
 	}
 
