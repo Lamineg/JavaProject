@@ -16,7 +16,7 @@ MyProject/.settings/
 MyProject/.classpath
 MyProject/.project
 
-MyProject/High\_Scores.txt
+MyProject/*.txt
 
 MyProject/bin/MyPackage/*.class
 MyProject/bin/MyPackage/Program.class
