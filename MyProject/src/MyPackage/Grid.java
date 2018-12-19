@@ -12,6 +12,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/*
+ *  Class grid extends JPanel because a panel will be dedicated to the grid in the GUI
+ */
+
 public class Grid extends JPanel {
 
 	// initialization of the graphical constants
@@ -68,35 +72,43 @@ public class Grid extends JPanel {
 		this.x_dim = GRID_SIZE;
 		this.y_dim = GRID_SIZE;
 
-		// set the number of blinding spotlights at difficulty + 1
+		// the number of blinding spots and slippery tiles depends on the difficulty level
 		this.n_Blind = difficulty + 1;
 		this.n_Slip = difficulty + 1;
 
-		// set the number of dancers at difficulty + 1
+		// the number of opponents, aka dancers and jurors, is fixed to 10
 		this.n_Dancer = 10;
 		this.n_Juror = 10;
 		
-		// create list of objects of size equal to the number of objects of that class
+		// init of the arrays of objects, following the sizes necessary
 		myBlindSpot = new BlindSpot[n_Blind];
 		myJuror = new Juror[n_Juror];
 		mySlipTile = new SlipperyTile[n_Slip];
 		myDancer = new Dancer[n_Dancer];
 
+		// creation of the player
 		myPlayer = new Player(username, input_skills, difficulty);
 
+		// statusbar will be useful to display messages on the GUI during the game
 		this.statusBar = statusBar;
+		// init of the array of images
 		this.img = new Image[NUM_IMAGES];
 
+		// set font to statusbar
 		this.statusBar.setFont(new Font("Arial", Font.ITALIC, 20));
 
+		// assign each graphical image to the array of images, with a number attributed
 		for (int i = 0; i < NUM_IMAGES; i++) {
 			String path = "img/m" + i + ".gif";
 			img[i] = new ImageIcon(path).getImage();
 		}
 
 		this.setDoubleBuffered(true);
+		
+		// add a mouselistener to the panel in order to react to clicks of the mouse
 		this.addMouseListener(new GameAdapter());
 
+		// creation a new game
 		this.newGame();
 
 	}
@@ -111,6 +123,10 @@ public class Grid extends JPanel {
 		return y_dim;
 	}
 
+	/*
+	 *  Method to initialize the matrix of cells and create an object Cell for all tiles of the grid.
+	 *  
+	 */
 	private void initCells() {
 		this.cells = new Cell[y_dim][x_dim];
 
@@ -121,23 +137,29 @@ public class Grid extends JPanel {
 		}
 
 		this.cells[0][0].setPlayer(true);
+		// player position is set to (0,0) => upper left corner
 	}
 
 	public void newGame() {
 		Random random;
 
+		// use of a random number for the assignment of all the positions of the objects of interest
+		// => blinding spots, slippery tiles, trophy, jurors, dancers
 		random = new Random();
 
 		this.inGame = true;
 
 		this.initCells();
 
+		// characteristics of the player are reset, in case it is the second game with the same user
 		this.myPlayer.resetEnergy();
 		this.myPlayer.resetDanceSkills();
 		this.myPlayer.resetLooksSkills();
 		this.myPlayer.move(0, 0);
 		this.statusBar.setText("NEW GAME");
 
+		
+		// positioning of the 1 trophy, assure that position is not yet assigned
 		int randX, randY;
 		int remainder = 1;
 		while (remainder > 0) {
@@ -152,6 +174,7 @@ public class Grid extends JPanel {
 			}
 		}
 
+		// positioning of the n_blind blind spots, assure that position is not yet assigned
 		int remainderBlind = n_Blind;
 		while (remainderBlind > 0) {
 			randY = random.nextInt(this.y_dim);
@@ -161,11 +184,13 @@ public class Grid extends JPanel {
 			if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy()
 					&& !cell.isPlayer()) {
 				cell.setBlindSpot(true);
-				myBlindSpot[n_Blind - remainderBlind] = new BlindSpot(randX, randY, 1);
+				myBlindSpot[n_Blind - remainderBlind] = new BlindSpot(randX, randY, 1); 
+				// the objects blindspot are created, with position as input, influence radius is only put to one, in all games
 				remainderBlind--;
 			}
 		}
 
+		// positioning of the n_slip sliptiles, assure that position is not yet assigned
 		int remainderSlip = n_Slip;
 		while (remainderSlip > 0) {
 			randY = random.nextInt(this.y_dim);
@@ -176,10 +201,12 @@ public class Grid extends JPanel {
 					&& !cell.isPlayer()) {
 				cell.setSlipTile(true);
 				mySlipTile[n_Slip - remainderSlip] = new SlipperyTile(randX, randY, 1);
+				// the objects sliptiles are created, with position as input, influence radius is only put to one, in all games
 				remainderSlip--;
 			}
 		}
 
+		// positioning of the n_dancers, assure that position is not yet assigned
 		int remainderDancer = n_Dancer;
 		while (remainderDancer > 0) {
 			randY = random.nextInt(this.y_dim);
@@ -190,10 +217,12 @@ public class Grid extends JPanel {
 					&& !cell.isPlayer()) {
 				cell.setDancer(true);
 				myDancer[n_Dancer - remainderDancer] = new Dancer(randX, randY, n_Dancer - remainderDancer, 10);
+				// the objects dancers are created, with position as input, dance threshold is only put to 10, in all games
 				remainderDancer--;
 			}
 		}
 
+		// positioning of the n_jurors, assure that position is not yet assigned
 		int remainderJuror = n_Juror;
 		while (remainderJuror > 0) {
 			randY = random.nextInt(this.y_dim);
@@ -204,11 +233,19 @@ public class Grid extends JPanel {
 					&& !cell.isPlayer()) {
 				cell.setJuror(true);
 				myJuror[n_Juror - remainderJuror] = new Juror(randX, randY, n_Juror - remainderJuror, 10);
+				// the objects jurors are created, with position as input, dance threshold is only put to 10, in all games
 				remainderJuror--;
 			}
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
+	 * 
+	 * Override of the paint method, called whenever the panel is paint of repaint
+	 * Tells how to paint the GUI panel
+	 */
 	public void paint(Graphics g) {
 
 		for (int i = 0; i < this.y_dim; i++) {
@@ -217,22 +254,31 @@ public class Grid extends JPanel {
 				int imageType;
 				int xPosition, yPosition;
 
+				// define the image type, only depending on the cell state
 				imageType = this.decideImageType(cell);
 
+				// tell the place on the panel to drax the image
 				xPosition = (j * CELL_SIZE);
 				yPosition = (i * CELL_SIZE);
 
+				// method defined in the java library
 				g.drawImage(img[imageType], xPosition, yPosition, this);
 			}
 		}
 
 	}
 
+	/*
+	 * Method used to decide the image type, depending on the state of a cell
+	 */
 	private int decideImageType(Cell cell) {
 		int imageType;
 
+		// if not in game, i.d. when end of game because lost or won, you make everything visible
 		if (!inGame) {
 
+			// Whether a cell has a blind spot, slip tile, player, dancer, juror, trophy or nothing on it, the index of the right image is chosen
+			// Note that only one type of image is possible on each cell
 			if (cell.isBlindSpot()) { 
 				imageType = IMAGE_BLINDSPOT;
 			} else if (cell.isSlipTile()) {
@@ -249,6 +295,7 @@ public class Grid extends JPanel {
 				imageType = IMAGE_WHITE;
 			}
 
+		// if still in the game, there is a difference between tiles that are visible or not
 		} else {
 
 			if (cell.isPlayer()) {
@@ -277,51 +324,12 @@ public class Grid extends JPanel {
 		return imageType;
 	}
 
-	public void setX_dim(int x_dim) {
-		this.x_dim = x_dim;
-	}
-
-	public void setY_dim(int y_dim) {
-		this.y_dim = y_dim;
-	}
-
-	public int getN_Blind() {
-		return n_Blind;
-	}
-
-	public void setN_Blind(int n_Blind) {
-		this.n_Blind = n_Blind;
-	}
-
-	public int getN_Juror() {
-		return n_Juror;
-	}
-
-	public void setN_Juror(int n_Juror) {
-		this.n_Juror = n_Juror;
-	}
-
-	public int getN_Slip() {
-		return n_Slip;
-	}
-
-	public void setN_Slip(int n_Slip) {
-		this.n_Slip = n_Slip;
-	}
-
-	public int getN_Dancer() {
-		return n_Dancer;
-	}
-
-	public void setN_Dancer(int n_Dancer) {
-		this.n_Dancer = n_Dancer;
-
-	}
-
+	// access the high score value, for the writing of the .txt file
 	public int getHs() {
 		return hs;
 	}
 
+	// write the high score at the end of a successful game
 	public void setHs(int hs) {
 		this.hs = hs;
 	}
