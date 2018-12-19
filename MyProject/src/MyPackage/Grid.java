@@ -14,18 +14,18 @@ import javax.swing.JPanel;
 
 public class Grid extends JPanel {
 
-	private final int CELL_SIZE = 50;
-	private final int NUM_IMAGES = 8;
+	private static final int CELL_SIZE = 50;
+	private static final int NUM_IMAGES = 8;
 
-	private final int IMAGE_BLINDSPOT = 1;
-	private final int IMAGE_SLIPTILE = 2;
-	private final int IMAGE_PLAYER = 3;
-	private final int IMAGE_DANCER = 4;
+	private static final int IMAGE_BLINDSPOT = 1;
+	private static final int IMAGE_SLIPTILE = 2;
+	private static final int IMAGE_PLAYER = 3;
+	private static final int IMAGE_DANCER = 4;
 
-	private final int IMAGE_JUROR = 5;
-	private final int IMAGE_TROPHY = 6;
-	private final int IMAGE_WHITE = 7;
-	private final int IMAGE_BLACK = 0;
+	private static final int IMAGE_JUROR = 5;
+	private static final int IMAGE_TROPHY = 6;
+	private static final int IMAGE_WHITE = 7;
+	private static final int IMAGE_BLACK = 0;
 
 	private JLabel statusBar;
 
@@ -38,7 +38,7 @@ public class Grid extends JPanel {
 	private int x_dim;
 	private int y_dim;
 
-	private static int hs;
+	private int hs;
 
 	// number of objects for the penalties and bonuses
 	private int n_Blind;
@@ -315,12 +315,12 @@ public class Grid extends JPanel {
 
 	}
 
-	public static int getHs() {
+	public int getHs() {
 		return hs;
 	}
 
 	public void setHs(int hs) {
-		Grid.hs = hs;
+		this.hs = hs;
 	}
 
 	class GameAdapter extends MouseAdapter {
