@@ -19,24 +19,12 @@ public class SlipperyTile {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public int getY() {
 		return y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
-	}
-
 	public int getInfluenceRadius() {
 		return influenceRadius;
-	}
-
-	public void setInfluenceRadius(int influenceRadius) {
-		this.influenceRadius = influenceRadius;
 	}
 
 }
