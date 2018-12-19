@@ -62,8 +62,8 @@ public class Grid extends JPanel {
 	Grid(int difficulty, String username, int input_skills, JLabel statusBar) {
 
 		// set the dimensions at 15, whatever the difficulty
-		this.x_dim = 16;
-		this.y_dim = 16;
+		this.x_dim = 10;//16
+		this.y_dim = 10;//16
 
 		// set the number of blinding spotlights at difficulty + 1
 		this.n_Blind = difficulty + 1;
@@ -88,7 +88,7 @@ public class Grid extends JPanel {
 		this.statusBar = statusBar;
 		this.img = new Image[NUM_IMAGES];
 
-		this.statusBar.setFont(new Font("Arial", Font.ITALIC, 30));
+		this.statusBar.setFont(new Font("Arial", Font.ITALIC, 20));
 
 		for (int i = 0; i < NUM_IMAGES; i++) {
 			String path = "img/m" + i + ".gif";
@@ -478,8 +478,6 @@ public class Grid extends JPanel {
 							Highscore.UpdateHighScore(myPlayer);
 						} catch (FileNotFoundException e1) {
 							e1.printStackTrace();
-						} catch (InputMismatchException e2) {
-							e2.printStackTrace();
 						}
 	
 						doRepaint = true;
