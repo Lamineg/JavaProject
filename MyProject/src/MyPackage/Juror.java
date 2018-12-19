@@ -1,17 +1,18 @@
 package MyPackage;
 
 public class Juror {
-	
+
 	private int id;
 	private int x;
 	private int y;
 	private int looksThreshold;
-	
-	Juror(int x, int y, int id, int looksThreshold){
+
+	Juror(int x, int y, int id, int looksThreshold) {
 		this.setX(x);
 		this.setY(y);
 		this.setId(id);
-		this.setLooksThreshold(looksThreshold);
+		// this.setLooksThreshold(looksThreshold);
+		this.looksThreshold = looksThreshold;
 	}
 
 	public int getId() {
