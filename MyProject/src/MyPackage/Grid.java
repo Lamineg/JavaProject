@@ -134,6 +134,9 @@ public class Grid extends JPanel {
 
 		this.initCells();
 		
+		this.myPlayer.resetEnergy();
+		this.myPlayer.resetDanceSkills();
+		this.myPlayer.resetLooksSkills();
 		this.myPlayer.move(0,0);
 		this.statusBar.setText("NEW GAME");
 
@@ -370,13 +373,10 @@ public class Grid extends JPanel {
 				return;
 
 			} else {
-				int energy, danceSkills, looksSkills;
+				int energy, danceSkills, looksSkills, score;
 
 				if (myPlayer.getEnergy() <= 0) {
 					inGame = false;
-					myPlayer.resetEnergy();
-					myPlayer.resetDanceSkills();
-					myPlayer.resetLooksSkills();
 
 					statusBar.setText("You ran out of energy !");
 					return;
@@ -386,9 +386,9 @@ public class Grid extends JPanel {
 				if (pressedCell.isBlindSpot() || pressedCell.isSlipTile() || !pressedCell.isReachable(myPlayer)) {
 
 					if (pressedCell.isBlindSpot()) {
-						statusBar.setText("Invalid move : blindspot");
+						statusBar.setText("Invalid move");
 					} else if (pressedCell.isSlipTile()) {
-						statusBar.setText("Invalid move : SlipTile");
+						statusBar.setText("Invalid move");
 					} else {
 						statusBar.setText("Invalid move : unreachable");
 					}
@@ -400,8 +400,9 @@ public class Grid extends JPanel {
 					energy = myPlayer.getEnergy();
 					looksSkills = myPlayer.getLooks();
 					danceSkills = myPlayer.getDance_skills();
+					score = myPlayer.getScore();
 
-					statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills);
+					statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills + "=> score : " + score);
 					return;
 
 				} else if (pressedCell.isJuror()) {
@@ -460,26 +461,37 @@ public class Grid extends JPanel {
 
 				} else if (pressedCell.isTrophy()) { // add condition to access trophy
 
-					inGame = false;
-					pressedCell.setTrophy(false);
-
-					pressedCell.setPlayer(true);
-					currentCell.setPlayer(false);
-					myPlayer.move(pressedCol, pressedRow);
-
-					statusBar.setText("You won !");
-
-					myPlayer.setHs();// myPlayer.getEnergy()+myPlayer.getDance_skills()+myPlayer.getLooks());
-
-					try {
-						Highscore.UpdateHighScore(myPlayer);
-					} catch (FileNotFoundException e1) {
-						e1.printStackTrace();
-					} catch (InputMismatchException e2) {
-						e2.printStackTrace();
-					}
-
-					doRepaint = true;
+					if(myPlayer.canCatchTrophy()) {
+						
+						inGame = false;
+						pressedCell.setTrophy(false);
+	
+						pressedCell.setPlayer(true);
+						currentCell.setPlayer(false);
+						myPlayer.move(pressedCol, pressedRow);
+	
+						statusBar.setText("You won !");
+	
+						myPlayer.setHs();// myPlayer.getEnergy()+myPlayer.getDance_skills()+myPlayer.getLooks());
+	
+						try {
+							Highscore.UpdateHighScore(myPlayer);
+						} catch (FileNotFoundException e1) {
+							e1.printStackTrace();
+						} catch (InputMismatchException e2) {
+							e2.printStackTrace();
+						}
+	
+						doRepaint = true;
+						
+					} else {
+						
+						statusBar.setText("Invalid move");
+						
+						myPlayer.loseEnergy(1);// or not ?
+						return;
+						
+					}	
 
 				} else {
 
@@ -490,8 +502,11 @@ public class Grid extends JPanel {
 					energy = myPlayer.getEnergy();
 					looksSkills = myPlayer.getLooks();
 					danceSkills = myPlayer.getDance_skills();
+					score = myPlayer.getScore();
 
-					statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills);
+					statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills + "=> score : " + score);
+
+					//statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills);
 
 					doRepaint = true;
 				}
