@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -460,15 +461,13 @@ public class Grid extends JPanel {
                 	try {
 						Highscore.UpdateHighScore(myPlayer);
 					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}
+                	}
                 	
                 	doRepaint = true;
                 	
                 	
                 	
-                	//new Game(FirstScreen.getDifficulty(),FirstScreen.getUsername(),FirstScreen.getInput_skills());
                 	
                 	
                 	
