@@ -278,21 +278,7 @@ public class Grid extends JPanel {
 		return imageType;
 	}
 
-	/*
-	 * public int getTrophy_x() { return trophy_x; }
-	 */
 
-	/*
-	 * public void setTrophy_x(int trophy_x) { this.trophy_x = trophy_x; }
-	 */
-
-	/*
-	 * public int getTrophy_y() { return trophy_y; }
-	 */
-
-	/*
-	 * public void setTrophy_y(int trophy_y) { this.trophy_y = trophy_y; }
-	 */
 
 	public void setX_dim(int x_dim) {
 		this.x_dim = x_dim;
