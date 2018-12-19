@@ -1,13 +1,13 @@
 package MyPackage;
 
 public class Dancer {
-	
+
 	private int id;
 	private int x;
 	private int y;
 	private int danceThreshold;
-	
-	Dancer(int x, int y, int id, int danceThreshold){
+
+	Dancer(int x, int y, int id, int danceThreshold) {
 		this.setX(x);
 		this.setY(y);
 		this.setId(id);
@@ -45,5 +45,5 @@ public class Dancer {
 	public void setDanceThreshold(int danceThreshold) {
 		this.danceThreshold = danceThreshold;
 	}
-	
+
 }
