@@ -133,6 +133,9 @@ public class Grid extends JPanel {
 		this.inGame = true;
 
 		this.initCells();
+		
+		this.myPlayer.move(0,0);
+		this.statusBar.setText("NEW GAME");
 
 		int randX, randY;
 		int remainder = 1; // 1 trophy
@@ -375,7 +378,7 @@ public class Grid extends JPanel {
 					myPlayer.resetDanceSkills();
 					myPlayer.resetLooksSkills();
 
-					statusBar.setText("You lost !");
+					statusBar.setText("You ran out of energy !");
 					return;
 
 				}
