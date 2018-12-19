@@ -489,28 +489,7 @@ public class Grid extends JPanel {
 
 							myPlayer.loseEnergy(1);// or not ?
 							return;
-
-
-
-					if(myPlayer.canCatchTrophy()) {
-						
-						inGame = false;
-						pressedCell.setTrophy(false);
-	
-						pressedCell.setPlayer(true);
-						currentCell.setPlayer(false);
-						myPlayer.move(pressedCol, pressedRow);
-	
-						statusBar.setText("You won !");
-	
-						myPlayer.setHs();// myPlayer.getEnergy()+myPlayer.getDance_skills()+myPlayer.getLooks());
-	
-						try {
-							Highscore.UpdateHighScore(myPlayer);
-						} catch (FileNotFoundException e1) {
-							e1.printStackTrace();
-						
-
+							
 						}
 
 					} else {

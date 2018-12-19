@@ -19,9 +19,6 @@ public class Player {
 	// energy
 	private int energy;
 
-	// amount that will be lost or gain when encountering a penalty/bonus
-	int amount;
-
 	private int difficulty;
 	private int input_skills;
 
@@ -32,7 +29,7 @@ public class Player {
 
 		// adds a ":" to the username to correctly display it one the score board
 		// afterwards
-		this.setUsername(username + ":");
+		this.username = username + ":";
 
 		// initial position of the player
 		x_pos = 0;
@@ -63,47 +60,16 @@ public class Player {
 		this.input_skills = input_skills;
 	}
 
-	// method to move the player in any direction but maximum of 1 step
-	void move2(int x1, int y1) {
-
-		if (Math.abs(x1) > 1 || (Math.abs(y1) > 1)) {
-			System.out.println("Unreachable");
-		} else {
-			x_pos = x_pos + x1;
-			y_pos = y_pos + y1;
-
-		}
-		loseEnergy(1);
-
-	}
-
-	// method that makes the player gain a certain amount of energy
-	void gainEnergy(int amount) {
-		energy = energy + amount;
-	}
-
 	// method that makes the player loose a certain amount of energy
 	void loseEnergy(int amount) {
 
 		energy = energy - amount;
 	}
 
-	// method that makes the player loose a certain amount of dancing skills
-	void loseDancingSkills(int amount) {
-
-		danceSkills = danceSkills + amount;
-	}
-
 	// method that makes the player gain a certain amount of dancing skills
 	void gainDancingSkills(int amount) {
 
 		danceSkills = danceSkills + amount;
-	}
-
-	// method that makes the player loose a certain amount of looks
-	void loseLooks(int amount) {
-
-		looksSkills = looksSkills - amount;
 	}
 
 	// method that makes the player gain a certain amount of looks
@@ -121,27 +87,11 @@ public class Player {
 	// updates the old position as the current position
 	// before moving and then updates the new current position by summing the
 	// distances x1 and y1. Finally, the player looses energy
-	void move1(int x1, int y1) {
-
-		x_pos = x_pos + x1;
-		y_pos = y_pos + y1;
-		// the player looses energy, elsewhere we have implemented a way for the player
-		// to regain its energy if the move
-		// is not valid
-		loseEnergy(1);
-	}
-
 	void move(int x_new, int y_new) {
 
 		x_pos = x_new;
 		y_pos = y_new;
 		loseEnergy(1);
-	}
-
-	void loseEnergy1(int x, int y) {
-
-		energy = energy - x - y;
-
 	}
 
 	// getter for looks
@@ -166,10 +116,6 @@ public class Player {
 
 	public int getX_pos() {
 		return x_pos;
-	}
-
-	public void setX_pos(int x_pos) {
-		this.x_pos = x_pos;
 	}
 
 	public int getY_pos() {
@@ -211,26 +157,13 @@ public class Player {
 			return false;
 		}
 	}
-	
-
-	public void setY_pos(int y_pos) {
-		this.y_pos = y_pos;
-	}
 
 	public int getEnergy() {
 		return energy;
 	}
 
-	public void setEnergy(int energy) {
-		this.energy = energy;
-	}
-
 	public String getUsername() {
 		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public void resetEnergy() {
@@ -253,11 +186,5 @@ public class Player {
 			return false;
 		}
 	}
-
-	/*
-	 * public int getInputSkills() { return input_skills; }
-	 * 
-	 * public int getDifficulty() { return difficulty; }
-	 */
 
 }
