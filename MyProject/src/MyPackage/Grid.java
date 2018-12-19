@@ -476,6 +476,10 @@ public class Grid extends JPanel {
 
 						}
 
+
+
+		
+
 					} else {
 
 						pressedCell.setPlayer(true);

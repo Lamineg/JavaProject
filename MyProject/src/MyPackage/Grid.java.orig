@@ -62,8 +62,8 @@ public class Grid extends JPanel {
 	Grid(int difficulty, String username, int input_skills, JLabel statusBar) {
 
 		// set the dimensions at 15, whatever the difficulty
-		this.x_dim = 10;//16
-		this.y_dim = 10;//16
+		this.x_dim = 10;// 16
+		this.y_dim = 10;// 16
 
 		// set the number of blinding spotlights at difficulty + 1
 		this.n_Blind = difficulty + 1;
@@ -132,11 +132,11 @@ public class Grid extends JPanel {
 		this.inGame = true;
 
 		this.initCells();
-		
+
 		this.myPlayer.resetEnergy();
 		this.myPlayer.resetDanceSkills();
 		this.myPlayer.resetLooksSkills();
-		this.myPlayer.move(0,0);
+		this.myPlayer.move(0, 0);
 		this.statusBar.setText("NEW GAME");
 
 		int randX, randY;
@@ -278,21 +278,7 @@ public class Grid extends JPanel {
 		return imageType;
 	}
 
-	/*
-	 * public int getTrophy_x() { return trophy_x; }
-	 */
 
-	/*
-	 * public void setTrophy_x(int trophy_x) { this.trophy_x = trophy_x; }
-	 */
-
-	/*
-	 * public int getTrophy_y() { return trophy_y; }
-	 */
-
-	/*
-	 * public void setTrophy_y(int trophy_y) { this.trophy_y = trophy_y; }
-	 */
 
 	public void setX_dim(int x_dim) {
 		this.x_dim = x_dim;
@@ -378,139 +364,146 @@ public class Grid extends JPanel {
 					inGame = false;
 
 					statusBar.setText("You ran out of energy !");
-					return;
 
-				}
-
-				if (pressedCell.isBlindSpot() || pressedCell.isSlipTile() || !pressedCell.isReachable(myPlayer)) {
-
-					if (pressedCell.isBlindSpot()) {
-						statusBar.setText("Invalid move");
-					} else if (pressedCell.isSlipTile()) {
-						statusBar.setText("Invalid move");
-					} else {
-						statusBar.setText("Invalid move : unreachable");
-					}
-					// statusBar.setText("Invalid move");
-					return;
-
-				} else if (pressedCell.equals(currentCell)) {
-
-					energy = myPlayer.getEnergy();
-					looksSkills = myPlayer.getLooks();
-					danceSkills = myPlayer.getDance_skills();
-					score = myPlayer.getScore();
-
-					statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills + "=> score : " + score);
-					return;
-
-				} else if (pressedCell.isJuror()) {
-
-					int id = pressedCell.getJurorId(myJuror, n_Juror);
-					int n_b = currentCell.countBlindSpot(myBlindSpot, n_Blind);
-
-					if (myPlayer.judgeWon(myJuror[id], n_b)) {
-
-						myPlayer.gainLooks(10);
-						pressedCell.setJuror(false);
-
-						pressedCell.setPlayer(true);
-						currentCell.setPlayer(false);
-						myPlayer.move(pressedCol, pressedRow);
-
-						statusBar.setText("You convinced a juror");
-
-						doRepaint = true;
-
-					} else {
-
-						statusBar.setText("You did not convinced a juror");
-
-						myPlayer.loseEnergy(1);// or not ?
-						return;
-
-					}
-
-				} else if (pressedCell.isDancer()) {
-
-					int id = pressedCell.getDancerId(myDancer, n_Dancer);
-					int n_s = currentCell.countSlipTile(mySlipTile, n_Slip);
-
-					if (myPlayer.danceWon(myDancer[id], n_s)) {
-
-						myPlayer.gainDancingSkills(10);
-						pressedCell.setDancer(false);
-
-						pressedCell.setPlayer(true);
-						currentCell.setPlayer(false);
-						myPlayer.move(pressedCol, pressedRow);
-
-						statusBar.setText("You won a dance battle");
-
-						doRepaint = true;
-
-					} else {
-
-						statusBar.setText("You lost a dance battle");
-
-						myPlayer.loseEnergy(1);// or not ?
-						return;
-
-					}
-
-				} else if (pressedCell.isTrophy()) { // add condition to access trophy
-
-
-					if(myPlayer.canCatchTrophy()) {
-						
-						inGame = false;
-						pressedCell.setTrophy(false);
-	
-						pressedCell.setPlayer(true);
-						currentCell.setPlayer(false);
-						myPlayer.move(pressedCol, pressedRow);
-	
-						statusBar.setText("You won !");
-	
-						myPlayer.setHs();// myPlayer.getEnergy()+myPlayer.getDance_skills()+myPlayer.getLooks());
-	
-						try {
-							Highscore.UpdateHighScore(myPlayer);
-						} catch (FileNotFoundException e1) {
-							e1.printStackTrace();
-<<<<<<< HEAD
-						} 
-=======
-						}
->>>>>>> 107c48a8b6c02bc341f9646e2c3326aed4187469
-	
-						doRepaint = true;
-						
-					} else {
-						
-						statusBar.setText("Invalid move");
-						
-						myPlayer.loseEnergy(1);// or not ?
-						return;
-						
-					}	
+					doRepaint = true;
 
 				} else {
 
-					pressedCell.setPlayer(true);
-					currentCell.setPlayer(false);
-					myPlayer.move(pressedCol, pressedRow);
+					if (pressedCell.isBlindSpot() || pressedCell.isSlipTile() || !pressedCell.isReachable(myPlayer)) {
 
-					energy = myPlayer.getEnergy();
-					looksSkills = myPlayer.getLooks();
-					danceSkills = myPlayer.getDance_skills();
-					score = myPlayer.getScore();
+						if (pressedCell.isBlindSpot()) {
+							statusBar.setText("Invalid move");
+						} else if (pressedCell.isSlipTile()) {
+							statusBar.setText("Invalid move");
+						} else {
+							statusBar.setText("Invalid move : unreachable");
+						}
+						// statusBar.setText("Invalid move");
+						return;
 
-					statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills + "=> score : " + score);
+					} else if (pressedCell.equals(currentCell)) {
 
-					//statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills);
+						energy = myPlayer.getEnergy();
+						looksSkills = myPlayer.getLooks();
+						danceSkills = myPlayer.getDance_skills();
+						score = myPlayer.getScore();
 
-					doRepaint = true;
+						statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills
+								+ "=> score : " + score);
+						return;
+
+					} else if (pressedCell.isJuror()) {
+
+						int id = pressedCell.getJurorId(myJuror, n_Juror);
+						int n_b = currentCell.countBlindSpot(myBlindSpot, n_Blind);
+
+						if (myPlayer.judgeWon(myJuror[id], n_b)) {
+
+							myPlayer.gainLooks(10);
+							pressedCell.setJuror(false);
+
+							pressedCell.setPlayer(true);
+							currentCell.setPlayer(false);
+							myPlayer.move(pressedCol, pressedRow);
+
+							statusBar.setText("You convinced a juror");
+
+							doRepaint = true;
+
+						} else {
+
+							statusBar.setText("You did not convinced a juror");
+
+							myPlayer.loseEnergy(1);// or not ?
+							return;
+
+						}
+
+					} else if (pressedCell.isDancer()) {
+
+						int id = pressedCell.getDancerId(myDancer, n_Dancer);
+						int n_s = currentCell.countSlipTile(mySlipTile, n_Slip);
+
+						if (myPlayer.danceWon(myDancer[id], n_s)) {
+
+							myPlayer.gainDancingSkills(10);
+							pressedCell.setDancer(false);
+
+							pressedCell.setPlayer(true);
+							currentCell.setPlayer(false);
+							myPlayer.move(pressedCol, pressedRow);
+
+							statusBar.setText("You won a dance battle");
+
+							doRepaint = true;
+
+						} else {
+
+							statusBar.setText("You lost a dance battle");
+
+							myPlayer.loseEnergy(1);// or not ?
+							return;
+
+						}
+
+					} else if (pressedCell.isTrophy()) { // add condition to access trophy
+
+						if (myPlayer.canCatchTrophy()) {
+
+							inGame = false;
+							pressedCell.setTrophy(false);
+
+							pressedCell.setPlayer(true);
+							currentCell.setPlayer(false);
+							myPlayer.move(pressedCol, pressedRow);
+
+							statusBar.setText("You won !");
+
+							myPlayer.setHs();// myPlayer.getEnergy()+myPlayer.getDance_skills()+myPlayer.getLooks());
+
+							try {
+								Highscore.UpdateHighScore(myPlayer);
+							} catch (FileNotFoundException e1) {
+								e1.printStackTrace();
+							}
+
+							doRepaint = true;
+
+						} else {
+
+							statusBar.setText("Invalid move");
+
+							myPlayer.loseEnergy(1);// or not ?
+							return;
+							
+						}
+<<<<<<< HEAD
+
+
+
+		
+=======
+>>>>>>> fef4623ac7296207416f9c2360ba855db8fe77ab
+
+					} else {
+
+						pressedCell.setPlayer(true);
+						currentCell.setPlayer(false);
+						myPlayer.move(pressedCol, pressedRow);
+
+						energy = myPlayer.getEnergy();
+						looksSkills = myPlayer.getLooks();
+						danceSkills = myPlayer.getDance_skills();
+						score = myPlayer.getScore();
+
+						statusBar.setText("energy = " + energy + "; looks = " + looksSkills + "; dance = " + danceSkills
+								+ "=> score : " + score);
+
+						// statusBar.setText("energy = " + energy + "; looks = " + looksSkills + ";
+						// dance = " + danceSkills);
+
+						doRepaint = true;
+					}
 				}
 
 			}
