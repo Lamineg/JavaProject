@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
-import java.util.InputMismatchException;
 import java.util.Random;
 
 import javax.swing.ImageIcon;

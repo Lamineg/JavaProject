@@ -174,7 +174,10 @@ public class Player {
 		
 		int random;
 		int looksThreshold = myJuror.getLooksThreshold();
-		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
+		random = (int) (Math.random()*(FirstScreen.getDifficulty())*10);
+		if (random<20) {
+			random = 20;
+		}
 		
 		if(looksSkills - n_blind >= looksThreshold + random) {
 			return true;
@@ -190,7 +193,10 @@ public class Player {
 		
 		int random;
 		int danceThreshold = myDancer.getDanceThreshold();
-		random = (int) (Math.random()*(3)) - 1; //-1, 0 ou 1
+		random = (int) (Math.random()*(FirstScreen.getDifficulty())*10);
+		if (random<20) {
+			random = 20;
+		}
 		
 		if(danceSkills - n_spot >= danceThreshold + random) {
 			return true;

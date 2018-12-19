@@ -1,5 +1,1 @@
-aymeric: 78
-hello: 45
-test3: 87
-try: 0
-: 0
+aymeriic: 0
