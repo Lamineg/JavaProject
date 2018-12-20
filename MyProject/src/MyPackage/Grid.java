@@ -189,7 +189,8 @@ public class Grid extends JPanel {
 			if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy()
 					&& !cell.isPlayer()) {
 				cell.setDancer(true);
-				myDancer[n_Dancer - remainderDancer] = new Dancer(randX, randY, n_Dancer - remainderDancer, 10);
+				myDancer[n_Dancer - remainderDancer] = new Dancer(randX, randY, 10);
+				// the objects dancers are created, with position as input, dance threshold is only put to 10, in all games
 				remainderDancer--;
 			}
 		}
@@ -203,7 +204,8 @@ public class Grid extends JPanel {
 			if (!cell.isBlindSpot() && !cell.isJuror() && !cell.isDancer() && !cell.isBlindSpot() && !cell.isTrophy()
 					&& !cell.isPlayer()) {
 				cell.setJuror(true);
-				myJuror[n_Juror - remainderJuror] = new Juror(randX, randY, n_Juror - remainderJuror, 10);
+				myJuror[n_Juror - remainderJuror] = new Juror(randX, randY, 10);
+				// the objects jurors are created, with position as input, dance threshold is only put to 10, in all games
 				remainderJuror--;
 			}
 		}

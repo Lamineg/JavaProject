@@ -8,7 +8,7 @@ public class Dancer {
 	private int danceThreshold;
 
 	//creates an object dancer
-	Dancer(int x, int y, int id, int danceThreshold) {
+	Dancer(int x, int y, int danceThreshold) {
 		this.x = x;
 		this.y = y;
 		this.danceThreshold = danceThreshold;
