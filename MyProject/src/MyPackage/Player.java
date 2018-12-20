@@ -129,17 +129,13 @@ public class Player {
 		int random;
 		int looksThreshold = myJuror.getLooksThreshold();
 		
-		//the threshold will depend on the difficulty and on randomness but the higher 
-		//the difficulty the higher the variance
+		//The threshold is fixed for each juror and we add some randomness to it.
+		//The number of points that we add to the threshold will depend on the difficulty, 
+		//the higher the difficulty, the higher the variance of the randomness
 		random = (int) (Math.random() * difficulty * 10);
 		
-		//if the threshold is too low we put a minimum level at 20
-		if (random < 20) {
-			random = 20;
-		}
-		
 		//if the looks of the player - the points that are decreased by the blinding spots are 
-		//higher than the threshold of the juror, the player wins
+		//higher than the threshold of the juror + its randomness, the player wins
 		if (looksSkills - n_blind * 10 >= looksThreshold + random) {
 			return true;
 		} else {
@@ -154,17 +150,13 @@ public class Player {
 		int random;
 		int danceThreshold = myDancer.getDanceThreshold();
 		
-		//the threshold will depend on the difficulty and on randomness but the higher 
-		//the difficulty the higher the variance
+		//The threshold is fixed for each dancer and we add some randomness to it.
+		//The number of points that we add to the threshold will depend on the difficulty, 
+		//the higher the difficulty, the higher the variance of the randomness
 		random = (int) (Math.random() * difficulty * 10);
-
-		//if the threshold is too low we put a minimum level at 20
-		if (random < 20) {
-			random = 20;
-		}
 		
 		//if the dancing skills of the player minus the penalties of the number of spotlights
-		//is higher than the threshold of the dancer, the player wins
+		//is higher than the threshold + the randomness, the player wins
 		if (danceSkills - n_spot * 10 >= danceThreshold + random) {
 			return true;
 		} else {
