@@ -15,6 +15,7 @@ public class SlipperyTile {
 		this.influenceRadius = radius;
 	}
 
+	//getters
 	public int getX() {
 		return x;
 	}
