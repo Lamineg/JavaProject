@@ -68,11 +68,11 @@ public class Grid extends JPanel {
 		this.x_dim = GRID_SIZE;
 		this.y_dim = GRID_SIZE;
 
-		// set the number of blinding spotlights at difficulty + 1
+		// set the number of blinding spotlights and slippery tiles at difficulty + 1
 		this.n_Blind = difficulty + 1;
 		this.n_Slip = difficulty + 1;
 
-		// set the number of dancers at difficulty + 1
+		// set the number of dancers and jurors at 10
 		this.n_Dancer = 10;
 		this.n_Juror = 10;
 		
