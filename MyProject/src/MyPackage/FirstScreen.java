@@ -131,20 +131,25 @@ public class FirstScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				//saves the username written in the text field
+				//saves the username written in the text field 
 				setUsername(text.getText().toString());
+				//displays an error message if certain conditions are not met
 				if (validUserName(username) == true) {
 					JOptionPane.showMessageDialog(frame, "Invalid username: at least 3 characters and no spaces!");
 				}
+				//saves the difficulty
 				setDifficulty(diff.getValue());
+				//saves the skills
 				setInput_skills(skill.getValue());
 			}
 
 		}));
 	}
-
+	
+	//method to make the program wait until the Firstscreen window is closed
 	public void waitScreen() throws InterruptedException {
-
+		
+		//creates a new thread that waits as long as the window FirstScreen is open
 		Thread t = new Thread() {
 			public void run() {
 				synchronized (getLock()) {
@@ -157,12 +162,14 @@ public class FirstScreen {
 				}
 			}
 		};
+		//starts the thread
 		t.start();
-
+		
+		//sets the frame as 
 		frame.addWindowListener(new WindowAdapter() {
 
 			@Override
-			public void windowClosing(WindowEvent arg0) {
+			public void windowClosing(WindowEvent x) {
 				synchronized (getLock()) {
 					frame.setVisible(false);
 					getLock().notify();
@@ -170,11 +177,13 @@ public class FirstScreen {
 			}
 
 		});
-
+		
+		//waits for the thread to close
 		t.join();
 
 	}
-
+	
+	//determines if the username is valid, returns true if invalid, false if valid
 	public boolean validUserName(String username) {
 		if (username != null) {
 			for (int i = 0; i < username.length(); i++) {

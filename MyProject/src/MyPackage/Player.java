@@ -100,12 +100,12 @@ public class Player {
 		return looksSkills;
 	}
 
-	// method to calculate the current score
-
+	//calculates the current score
 	public int getScore() {
 		return energy + looksSkills + danceSkills;
 	}
 
+	//getters and setters
 	public int getHs() {
 		return hs;
 	}
@@ -121,39 +121,59 @@ public class Player {
 	public int getY_pos() {
 		return y_pos;
 	}
-
+	
+	
+	//method to decide if the judge is impressed or not
 	public boolean judgeWon(Juror myJuror, int n_blind) {
-
+		
 		int random;
 		int looksThreshold = myJuror.getLooksThreshold();
+		
+		//the threshold will depend on the difficulty and on randomness but the higher 
+		//the difficulty the higher the variance
 		random = (int) (Math.random() * difficulty * 10);
+		
+		//if the threshold is too low we put a minimum level at 20
 		if (random < 20) {
 			random = 20;
 		}
-
+		
+		//if the looks of the player - the points that are decreased by the blinding spots are 
+		//higher than the threshold of the juror, the player wins
 		if (looksSkills - n_blind * 10 >= looksThreshold + random) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
+	
+	//method to decide if the dancer is beaten or not
 	public boolean danceWon(Dancer myDancer, int n_spot) {
-
+		
+		
 		int random;
 		int danceThreshold = myDancer.getDanceThreshold();
+		
+		//the threshold will depend on the difficulty and on randomness but the higher 
+		//the difficulty the higher the variance
 		random = (int) (Math.random() * difficulty * 10);
+
+		//if the threshold is too low we put a minimum level at 20
 		if (random < 20) {
 			random = 20;
 		}
-
+		
+		//if the dancing skills of the player minus the penalties of the number of spotlights
+		//is higher than the threshold of the dancer, the player wins
 		if (danceSkills - n_spot * 10 >= danceThreshold + random) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
+	
+	
+	//getters
 	public int getEnergy() {
 		return energy;
 	}
@@ -162,18 +182,22 @@ public class Player {
 		return username;
 	}
 
+	//to reset when the game restarts
 	public void resetEnergy() {
 		this.energy = 100 - (5 * difficulty);
 	}
 
+	//to reset when the game restarts
 	public void resetLooksSkills() {
 		this.looksSkills = 20 + 2 * (10 - input_skills);
 	}
 
+	//to reset when the game restarts
 	public void resetDanceSkills() {
 		this.danceSkills = 20 + 2 * input_skills;
 	}
-
+	
+	//condition to catch the trophy
 	public boolean canCatchTrophy() {
 		int score = getScore();
 		if (score > 100 + 2 * difficulty) {
