@@ -6,7 +6,7 @@ public class Dancer {
 	private int y;
 	private int danceThreshold;
 
-	Dancer(int x, int y, int id, int danceThreshold) {
+	Dancer(int x, int y, int danceThreshold) {
 		this.x = x;
 		this.y = y;
 		this.danceThreshold = danceThreshold;

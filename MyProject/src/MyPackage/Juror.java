@@ -6,7 +6,7 @@ public class Juror {
 	private int y;
 	private int looksThreshold;
 
-	Juror(int x, int y, int id, int looksThreshold) {
+	Juror(int x, int y, int looksThreshold) {
 		this.x = x;
 		this.y = y;
 		this.looksThreshold = looksThreshold;
